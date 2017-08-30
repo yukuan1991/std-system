@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>png/login-bg.png</file>
+        <file>LoginPanel.qml</file>
+        <file>LoginHeader.qml</file>
+        <file>NavigateButton.qml</file>
+        <file>NavigatorWindow.qml</file>
+        <file>LoginWindow.qml</file>
+        <file>TopBanner.qml</file>
+    </qresource>
+</RCC>
