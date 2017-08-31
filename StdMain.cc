@@ -7,6 +7,7 @@
 #include <QVariant>
 
 
+
 StdMain::StdMain(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::StdMain)
