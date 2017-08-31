@@ -6,6 +6,7 @@
 #include <base/lang/not_null.h>
 #include <QVariant>
 
+
 StdMain::StdMain(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::StdMain)
