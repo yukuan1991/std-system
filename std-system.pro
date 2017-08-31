@@ -1,10 +1,26 @@
-QT += qml quick widgets core gui quickwidgets
+QT += qml quick widgets core gui quickwidgets avwidgets charts xlsx
 
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 CONFIG -= c++11
 QMAKE_CXXFLAGS += -std=c++1z
 
 SOURCES += main.cc \
-    StdMain.cc
+    StdMain.cc \
+    video.cc \
+    video2.cc \
+    video/video_analysis.cc \
+    video/video_main.cc \
+    video/video_widget.cc \
+    video/form_widget.cpp \
+    video/video_delegate.cc \
+    video/video_form_model.cc \
+    video/model/json_model.cc \
+    video/view/table_view.cpp \
+    video/video_form_split.cc \
+    video/first_dlg.cpp \
+    video/whisker.cc \
+    video/progress_label.cpp \
+    utils/ribbon.cc
 
 RESOURCES += qml.qrc
 
@@ -33,7 +49,48 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 DISTFILES +=
 
 FORMS += \
-    StdMain.ui
+    StdMain.ui \
+    video.ui \
+    video2.ui \
+    video/video_analysis.ui \
+    video/video_main.ui \
+    video/video_widget.ui \
+    video/form_widget.ui \
+    video/first_dlg.ui
 
 HEADERS += \
-    StdMain.h
+    StdMain.h \
+    video.h \
+    video2.h \
+    video/video_analysis.h \
+    video/video_main.h \
+    video/video_widget.h \
+    video/form_widget.h \
+    video/video_delegate.h \
+    video/video_form_model.h \
+    video/model/json_model.h \
+    utils/json.hpp \
+    utils/utils.hpp \
+    video/view/table_view.h \
+    video/video_form_split.h \
+    video/first_dlg.h \
+    utils/video_player.hpp \
+    video/whisker.h \
+    video/progress_label.h \
+    utils/ribbon.h
+
+QMAKE_CXXFLAGS += -Wextra
+QMAKE_CXXFLAGS += -Wno-deprecated-declarations
+QMAKE_CXXFLAGS += -Werror=write-strings
+QMAKE_CXXFLAGS += -Werror=return-type
+QMAKE_CXXFLAGS += -Werror=parentheses
+QMAKE_CXXFLAGS += -Werror=maybe-uninitialized
+
+LIBS += -lboost_filesystem
+LIBS += -lboost_system
+LIBS += -lboost_regex
+LIBS += -lboost_thread
+LIBS += -lboost_locale
+LIBS += -liconv
+LIBS += -lwininet
+LIBS += -lws2_32

@@ -8,25 +8,34 @@ Rectangle
     width: 155
     color: "#DDDDDD"
     property int heightLimit: 10 * 50 + 6 * 4 + 20 + 200
+    signal stackChanged (string id)
 
     Rectangle
     {
         color: parent.color
         width: 150; height: 50 * 2 + 4 * 2
+
         id: videoAnalysis
+
+
         anchors.top: parent.top
         anchors.topMargin: 30
         anchors.horizontalCenter: parent.horizontalCenter
         NavigateButton
         {
             id:videoMassProduction
+            objectName: "videoMassProduction"
+
             text: "视频分析(量产)"
         }
 
         NavigateButton
         {
             id: videoTestProduction
+            objectName: "videoTestProduction"
+
             text: "视频分析(试产)"
+
             anchors.top: videoMassProduction.bottom
             anchors.topMargin: 4
             anchors.bottom: parent.bottom
@@ -132,7 +141,7 @@ Rectangle
     ButtonGroup
     {
         id: bgroup
-        onCheckedButtonChanged:  console.log(checkedButton.id)
+        onCheckedButtonChanged:  stackChanged(checkedButton.objectName)
     }
 
     Component.onCompleted:

@@ -17,7 +17,7 @@ public:
     ~StdMain();
 private slots:
     void onPosChanged (int x, int y);
-
+    void onstackChanged(QString name);
 private:
     Ui::StdMain *ui;
 };

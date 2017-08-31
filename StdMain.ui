@@ -84,8 +84,11 @@
      </item>
      <item>
       <widget class="QStackedWidget" name="mainStack">
-       <widget class="QWidget" name="video"/>
-       <widget class="QWidget" name="mtm"/>
+       <property name="currentIndex">
+        <number>0</number>
+       </property>
+       <widget class="video_main" name="vid"/>
+       <widget class="video2" name="mtm"/>
       </widget>
      </item>
     </layout>
@@ -97,6 +100,18 @@
    <class>QQuickWidget</class>
    <extends>QWidget</extends>
    <header>QtQuickWidgets/QQuickWidget</header>
+  </customwidget>
+  <customwidget>
+   <class>video2</class>
+   <extends>QWidget</extends>
+   <header>video2.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>video_main</class>
+   <extends>QWidget</extends>
+   <header location="global">video/video_main.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>
