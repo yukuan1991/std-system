@@ -40,8 +40,14 @@ mtm_main::~mtm_main()
 
 void mtm_main::init_conn()
 {
-    connect(ui->widget_ribbon, &ribbon_mtm::file_menu_triggered,
-            [this] (const QString & s) { file_operations(s); });
+//    connect(ui->widget_ribbon, &ribbon_mtm::file_menu_triggered,
+//            [this] (const QString & s) { file_operations(s); });
+
+    connect (ui->widget_ribbon, &ribbon::file_new, this, &mtm_main::file_new);
+    connect (ui->widget_ribbon, &ribbon::file_open, this, &mtm_main::file_open);
+    connect (ui->widget_ribbon, &ribbon::file_save, this, &mtm_main::file_save);
+    connect (ui->widget_ribbon, &ribbon::file_saveas, this, &mtm_main::file_save_as);
+    connect (ui->widget_ribbon, &ribbon::file_exit, this, &mtm_main::close);
 
     connect(ui->widget_ribbon, &ribbon_mtm::copy, this, &mtm_main::copy);
     connect(ui->widget_ribbon, &ribbon_mtm::cut, this, &mtm_main::cut);

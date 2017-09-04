@@ -1,4 +1,4 @@
-﻿#include "mtm/interface_control/ribbon.h"
+﻿#include "ribbon.h"
 #include <QHBoxLayout>
 #include <base/lang/scope.hpp>
 #include <base/lang/move.hpp>
@@ -25,7 +25,6 @@ ribbon::ribbon(QWidget *parent)
 
     setMaximumHeight (130);
     setMinimumHeight (130);
-
     setup_ui ();
 }
 
@@ -124,25 +123,23 @@ void ribbon::setup_menu()
     file->setMenu (menu);
 
     auto action =  make_action (QPixmap ("png/新建.png"), "新建");
-    connect (action.get (), &QAction::triggered, [this] { file_menu_triggered ("新建"); });
+    connect (action.get (), &QAction::triggered, this, &ribbon::file_new);
     menu->addAction (action.release ());
 
     action =  make_action (QPixmap ("png/打开.png"), "打开");
-    connect (action.get (), &QAction::triggered, [this] { file_menu_triggered ("打开"); });
+    connect (action.get (), &QAction::triggered, this, &ribbon::file_open);
     menu->addAction (action.release ());
 
     action =  make_action (QPixmap ("png/保存.png"), "保存");
-    connect (action.get (), &QAction::triggered, [this] { file_menu_triggered ("保存"); });
-    connect (this, &ribbon::set_enabled, action.get(), &QAction::setEnabled);
+    connect (action.get (), &QAction::triggered, this, &ribbon::file_save);
     menu->addAction (action.release ());
 
     action =  make_action (QPixmap ("png/另存为.png"), "另存为");
-    connect (action.get (), &QAction::triggered, [this] { file_menu_triggered ("另存为"); });
-    connect (this, &ribbon::set_enabled, action.get(), &QAction::setEnabled);
+    connect (action.get (), &QAction::triggered, this, &ribbon::file_saveas);
     menu->addAction (action.release ());
 
     action =  make_action (QPixmap ("png/退出.png"), "退出");
-    connect (action.get (), &QAction::triggered, [this] { file_menu_triggered ("退出"); });
+    connect (action.get (), &QAction::triggered, this, &ribbon::file_exit);
     menu->addAction (action.release ());
 
     menu->setContentsMargins(10, 0, 0, 0);
@@ -246,27 +243,3 @@ void ribbon::setup_icon_block(QWidget * ret, QBoxLayout * layout, frame_group g)
     line->setFrameShadow(QFrame::Sunken);
     layout->addWidget (line);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

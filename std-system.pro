@@ -6,7 +6,6 @@ QMAKE_CXXFLAGS += -std=c++1z
 
 SOURCES += main.cc \
     StdMain.cc \
-    video.cc \
     video/video_analysis.cc \
     video/video_main.cc \
     video/video_widget.cc \
@@ -26,14 +25,15 @@ SOURCES += main.cc \
     mtm/Qt-Utils/tinyxml2.cpp \
     mtm/interface_control/about_us_dlg.cc \
     mtm/interface_control/push_button.cpp \
-    mtm/interface_control/ribbon.cc \
     mtm/interface_control/ribbon_mtm.cc \
     mtm/pts/code_edit.cpp \
     mtm/pts/pts_delegate.cpp \
     mtm/pts/pts_model.cpp \
     utils/json_model.cpp \
     utils/table_view.cpp \
-    utils/VideoRibbonOld.cc
+    utils/VideoRibbonOld.cc \
+    utils/ribbon.cc \
+    video/video_ribbon.cc
 
 RESOURCES += qml.qrc
 
@@ -63,7 +63,6 @@ DISTFILES +=
 
 FORMS += \
     StdMain.ui \
-    video.ui \
     video/video_analysis.ui \
     video/video_main.ui \
     video/video_widget.ui \
@@ -76,7 +75,6 @@ FORMS += \
 
 HEADERS += \
     StdMain.h \
-    video.h \
     video/video_analysis.h \
     video/video_main.h \
     video/video_widget.h \
@@ -104,14 +102,15 @@ HEADERS += \
     mtm/Qt-Utils/tinyxml2.h \
     mtm/interface_control/about_us_dlg.h \
     mtm/interface_control/push_button.h \
-    mtm/interface_control/ribbon.h \
     mtm/interface_control/ribbon_mtm.h \
     mtm/pts/code_edit.h \
     mtm/pts/pts_delegate.h \
     mtm/pts/pts_model.h \
     utils/json_model.h \
     utils/table_view.h \
-    utils/VideoRibbonOld.h
+    utils/VideoRibbonOld.h \
+    utils/ribbon.h \
+    video/video_ribbon.h
 
 QMAKE_CXXFLAGS += -Wextra
 QMAKE_CXXFLAGS += -Wno-deprecated-declarations

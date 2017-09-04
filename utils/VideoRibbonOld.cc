@@ -21,7 +21,6 @@ VideoRibbonOld::VideoRibbonOld(QWidget *parent)
 
     setMaximumHeight (130);
     setMinimumHeight (130);
-
     setup_ui ();
 }
 
@@ -34,7 +33,6 @@ unique_ptr<QToolButton> VideoRibbonOld::make_button(const QPixmap &icon, const Q
     button->setText (text);
     button->setToolButtonStyle (Qt::ToolButtonTextUnderIcon);
     button->setAutoRaise (true);
-
     return button;
 }
 

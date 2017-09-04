@@ -22,8 +22,13 @@ class ribbon : public QTabWidget
 {
     Q_OBJECT
 signals:
-    void file_menu_triggered (const QString &);
+    void file_new ();
+    void file_open ();
+    void file_save ();
+    void file_saveas ();
+    void file_exit ();
     void set_enabled(bool);
+    void mdi_active (bool);
 protected:
     using button_init = std::function<void (ribbon_tool*)>;
 
