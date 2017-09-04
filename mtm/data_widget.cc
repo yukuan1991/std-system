@@ -1,6 +1,5 @@
 ﻿#include "data_widget.h"
 #include "ui_data_widget.h"
-#include "view/table_view.h"
 #include <QScrollBar>
 #include <QMessageBox>
 #include <QDebug>

@@ -30,7 +30,7 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="VideoRibbon" name="video_ribbon"/>
+    <widget class="VideoRibbonOld" name="video_ribbon"/>
    </item>
    <item>
     <widget class="QMdiArea" name="mdi"/>
@@ -39,9 +39,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>VideoRibbon</class>
+   <class>VideoRibbonOld</class>
    <extends>QTabWidget</extends>
-   <header location="global">utils/VideoRibbon.h</header>
+   <header location="global">utils/VideoRibbonOld.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

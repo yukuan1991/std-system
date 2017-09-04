@@ -42,7 +42,7 @@
   <customwidget>
    <class>ribbon_mtm</class>
    <extends>QWidget</extends>
-   <header>interface_control/ribbon_mtm.h</header>
+   <header>mtm/interface_control/ribbon_mtm.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

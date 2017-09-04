@@ -1,4 +1,4 @@
-﻿#include "utils/VideoRibbon.h"
+﻿#include "utils/VideoRibbonOld.h"
 #include <QHBoxLayout>
 #include <base/lang/scope.hpp>
 #include <QVBoxLayout>
@@ -14,10 +14,10 @@
 
 using namespace std;
 
-VideoRibbon::VideoRibbon(QWidget *parent)
+VideoRibbonOld::VideoRibbonOld(QWidget *parent)
     :QTabWidget (parent)
 {
-    this->setTabBar (new ribbon_bar (this));
+    this->setTabBar (new video_ribbon_bar (this));
 
     setMaximumHeight (130);
     setMinimumHeight (130);
@@ -25,9 +25,9 @@ VideoRibbon::VideoRibbon(QWidget *parent)
     setup_ui ();
 }
 
-unique_ptr<QToolButton> VideoRibbon::make_button(const QPixmap &icon, const QString &text)
+unique_ptr<QToolButton> VideoRibbonOld::make_button(const QPixmap &icon, const QString &text)
 {
-    auto button = make_unique<ribbon_tool> ();
+    auto button = make_unique<video_ribbon_tool> ();
 
     button->setIconSize (icon.size ());
     button->setIcon (icon);
@@ -38,7 +38,7 @@ unique_ptr<QToolButton> VideoRibbon::make_button(const QPixmap &icon, const QStr
     return button;
 }
 
-void VideoRibbon::setup_ui()
+void VideoRibbonOld::setup_ui()
 {
     setup_menu ();
     this->addTab (ui_edit ().release (), "编辑");
@@ -48,47 +48,47 @@ void VideoRibbon::setup_ui()
     mdi_active (false);
 }
 
-unique_ptr<QWidgetAction> VideoRibbon::make_action(const QPixmap & pix, const QString & text, QWidget * parent)
+unique_ptr<QWidgetAction> VideoRibbonOld::make_action(const QPixmap & pix, const QString & text, QWidget * parent)
 {
     auto action = make_unique<QWidgetAction> (parent);
-    action->setDefaultWidget (new ribbon_menu_item(pix, text, parent));
+    action->setDefaultWidget (new video_ribbon_menu_item(pix, text, parent));
 
     return action;
 }
 
-void VideoRibbon::setup_menu()
+void VideoRibbonOld::setup_menu()
 {
-    auto file = new ribbon_button ("  文件", this);
-    auto menu = new ribbon_menu (file);
+    auto file = new video_ribbon_button ("  文件", this);
+    auto menu = new video_ribbon_menu (file);
     file->setMenu (menu);
 
     auto action =  make_action (QPixmap ("png/新建.png"), "新建");
-    connect (action.get (), &QAction::triggered, this, &VideoRibbon::create_new);
+    connect (action.get (), &QAction::triggered, this, &VideoRibbonOld::create_new);
     menu->addAction (action.release ());
 
     action =  make_action (QPixmap ("png/打开.png"), "打开");
-    connect (action.get (), &QAction::triggered, this, &VideoRibbon::open);
+    connect (action.get (), &QAction::triggered, this, &VideoRibbonOld::open);
     menu->addAction (action.release ());
 
     action =  make_action (QPixmap ("png/保存.png"), "保存");
-    connect (this, &VideoRibbon::mdi_active, action.get (), &QAction::setEnabled);
+    connect (this, &VideoRibbonOld::mdi_active, action.get (), &QAction::setEnabled);
 
-    connect (action.get (), &QAction::triggered, this, &VideoRibbon::save);
+    connect (action.get (), &QAction::triggered, this, &VideoRibbonOld::save);
     menu->addAction (action.release ());
 
     action =  make_action (QPixmap ("png/另存为.png"), "另存为");
-    connect (this, &VideoRibbon::mdi_active, action.get (), &QAction::setEnabled);
-    connect (action.get (), &QAction::triggered, this, &VideoRibbon::save_as);
+    connect (this, &VideoRibbonOld::mdi_active, action.get (), &QAction::setEnabled);
+    connect (action.get (), &QAction::triggered, this, &VideoRibbonOld::save_as);
     menu->addAction (action.release ());
 
     action =  make_action (QPixmap ("png/退出.png"), "退出");
-    connect (action.get (), &QAction::triggered, this, &VideoRibbon::quit);
+    connect (action.get (), &QAction::triggered, this, &VideoRibbonOld::quit);
     menu->addAction (action.release ());
 
     menu->setContentsMargins(10, 0, 0, 0);
 }
 
-std::unique_ptr<QWidget> VideoRibbon::ui_edit ()
+std::unique_ptr<QWidget> VideoRibbonOld::ui_edit ()
 {
     auto widget = make_unique<QWidget> ();
     auto layout = make_unique<QHBoxLayout> ();
@@ -108,29 +108,29 @@ std::unique_ptr<QWidget> VideoRibbon::ui_edit ()
 
     {
         auto btn = make_button (QPixmap ("png/剪切.png").scaled (len, len), "剪切");
-        connect (btn.get (), &QToolButton::clicked, this, &VideoRibbon::cut);
-        connect (this, &VideoRibbon::mdi_active, btn.get (), &QToolButton::setEnabled);
+        connect (btn.get (), &QToolButton::clicked, this, &VideoRibbonOld::cut);
+        connect (this, &VideoRibbonOld::mdi_active, btn.get (), &QToolButton::setEnabled);
         upper_layout->addWidget (btn.release ());
     }
 
     {
         auto btn = make_button (QPixmap ("png/复制.png").scaled (len, len), "复制");
-        connect (btn.get (), &QToolButton::clicked, this, &VideoRibbon::copy);
-        connect (this, &VideoRibbon::mdi_active, btn.get (), &QToolButton::setEnabled);
+        connect (btn.get (), &QToolButton::clicked, this, &VideoRibbonOld::copy);
+        connect (this, &VideoRibbonOld::mdi_active, btn.get (), &QToolButton::setEnabled);
         upper_layout->addWidget (btn.release ());
     }
 
     {
         auto btn = make_button (QPixmap ("png/粘贴.png").scaled (len, len), "粘贴");
-        connect (btn.get (), &QToolButton::clicked, this, &VideoRibbon::paste);
-        connect (this, &VideoRibbon::mdi_active, btn.get (), &QToolButton::setEnabled);
+        connect (btn.get (), &QToolButton::clicked, this, &VideoRibbonOld::paste);
+        connect (this, &VideoRibbonOld::mdi_active, btn.get (), &QToolButton::setEnabled);
         upper_layout->addWidget (btn.release ());
     }
 
     {
         auto btn = make_button (QPixmap ("png/删除.png").scaled (len, len), "删除");
-        connect (btn.get (), &QToolButton::clicked, this, &VideoRibbon::del);
-        connect (this, &VideoRibbon::mdi_active, btn.get (), &QToolButton::setEnabled);
+        connect (btn.get (), &QToolButton::clicked, this, &VideoRibbonOld::del);
+        connect (this, &VideoRibbonOld::mdi_active, btn.get (), &QToolButton::setEnabled);
         upper_layout->addWidget (btn.release ());
     }
 
@@ -152,13 +152,13 @@ std::unique_ptr<QWidget> VideoRibbon::ui_edit ()
 
     {
         auto btn = make_button (QPixmap ("png/作业项数.png").scaled (len, len), "改变作业项数");
-        connect (this, &VideoRibbon::mdi_active, btn.get (), &QToolButton::setEnabled);
-        connect (btn.get (), &QToolButton::clicked, this, &VideoRibbon::change_task_count);
+        connect (this, &VideoRibbonOld::mdi_active, btn.get (), &QToolButton::setEnabled);
+        connect (btn.get (), &QToolButton::clicked, this, &VideoRibbonOld::change_task_count);
         upper_layout->addWidget (btn.release ());
 
         btn = make_button (QPixmap ("png/测量日期.png").scaled (len, len), "更改样例循环");
-        connect (this, &VideoRibbon::mdi_active, btn.get (), &QToolButton::setEnabled);
-        connect (btn.get (), &QToolButton::clicked, this, &VideoRibbon::change_example_cycle);
+        connect (this, &VideoRibbonOld::mdi_active, btn.get (), &QToolButton::setEnabled);
+        connect (btn.get (), &QToolButton::clicked, this, &VideoRibbonOld::change_example_cycle);
         upper_layout->addWidget (btn.release ());
     }
 
@@ -181,7 +181,7 @@ std::unique_ptr<QWidget> VideoRibbon::ui_edit ()
     return widget;
 }
 
-std::unique_ptr<QWidget> VideoRibbon::ui_video()
+std::unique_ptr<QWidget> VideoRibbonOld::ui_video()
 {
     auto ret = make_unique<QWidget> ();
 
@@ -201,8 +201,8 @@ std::unique_ptr<QWidget> VideoRibbon::ui_video()
     constexpr auto len = 39;
 
     auto btn = make_button (QPixmap ("png/导入").scaled (len, len), "导入");
-    connect (this, &VideoRibbon::mdi_active, btn.get (), &QToolButton::setEnabled);
-    connect (btn.get (), &QToolButton::clicked, this, &VideoRibbon::import_data);
+    connect (this, &VideoRibbonOld::mdi_active, btn.get (), &QToolButton::setEnabled);
+    connect (btn.get (), &QToolButton::clicked, this, &VideoRibbonOld::import_data);
     upper_layout->addWidget (btn.release ());
 
     block1_layout->addLayout (upper_layout.release ());
@@ -224,8 +224,8 @@ std::unique_ptr<QWidget> VideoRibbon::ui_video()
     upper_layout->setContentsMargins(10, 0, 10, 0);
 
     btn = make_button (QPixmap ("png/无效时间.png").scaled (len, len), "无效时间");
-    connect (this, &VideoRibbon::mdi_active, btn.get (), &QToolButton::setEnabled);
-    connect (btn.get (), &QToolButton::clicked, this, &VideoRibbon::invalid_timespan);
+    connect (this, &VideoRibbonOld::mdi_active, btn.get (), &QToolButton::setEnabled);
+    connect (btn.get (), &QToolButton::clicked, this, &VideoRibbonOld::invalid_timespan);
     upper_layout->addWidget (btn.release ());
 
     block2_layout->addLayout (upper_layout.release ());
@@ -244,7 +244,7 @@ std::unique_ptr<QWidget> VideoRibbon::ui_video()
     return ret;
 }
 
-std::unique_ptr<QWidget> VideoRibbon::ui_report()
+std::unique_ptr<QWidget> VideoRibbonOld::ui_report()
 {
     auto ret = make_unique<QWidget> ();
 
@@ -264,8 +264,8 @@ std::unique_ptr<QWidget> VideoRibbon::ui_report()
     constexpr auto len = 39;
 
     auto export_button = make_button (QPixmap ("png/导出.png").scaled (len - 5, len), "Excel文档");
-    connect (this, &VideoRibbon::mdi_active, export_button.get (), &QToolButton::setEnabled);
-    connect (export_button.get (), &QToolButton::clicked, this, &VideoRibbon::export_data);
+    connect (this, &VideoRibbonOld::mdi_active, export_button.get (), &QToolButton::setEnabled);
+    connect (export_button.get (), &QToolButton::clicked, this, &VideoRibbonOld::export_data);
     upper_layout->addWidget (export_button.release ());
 
     block1_layout->addLayout (upper_layout.release ());
@@ -284,7 +284,7 @@ std::unique_ptr<QWidget> VideoRibbon::ui_report()
     return ret;
 }
 
-std::unique_ptr<QWidget> VideoRibbon::ui_settings()
+std::unique_ptr<QWidget> VideoRibbonOld::ui_settings()
 {
     auto ret = make_unique<QWidget> ();
 
@@ -307,22 +307,22 @@ std::unique_ptr<QWidget> VideoRibbon::ui_settings()
 
         {
             auto btn = make_button (QPixmap ("png/测量日期.png").scaled (len, len), "测量日期");
-            connect (btn.get (), &QToolButton::clicked, this, &VideoRibbon::measure_date);
-            connect (this, &VideoRibbon::mdi_active, btn.get (), &QToolButton::setEnabled);
+            connect (btn.get (), &QToolButton::clicked, this, &VideoRibbonOld::measure_date);
+            connect (this, &VideoRibbonOld::mdi_active, btn.get (), &QToolButton::setEnabled);
             upper_layout->addWidget (btn.release ());
         }
 
         {
             auto btn = make_button (QPixmap ("png/测量人.png").scaled (len , len), "测量人");
-            connect (btn.get (), &QToolButton::clicked, this, &VideoRibbon::measure_man);
-            connect (this, &VideoRibbon::mdi_active, btn.get (), &QToolButton::setEnabled);
+            connect (btn.get (), &QToolButton::clicked, this, &VideoRibbonOld::measure_man);
+            connect (this, &VideoRibbonOld::mdi_active, btn.get (), &QToolButton::setEnabled);
             upper_layout->addWidget (btn.release ());
         }
 
         {
             auto btn = make_button (QPixmap ("png/作业员.png").scaled (len , len), "作业员");
-            connect (btn.get (), &QToolButton::clicked, this, &VideoRibbon::task_man);
-            connect (this, &VideoRibbon::mdi_active, btn.get (), &QToolButton::setEnabled);
+            connect (btn.get (), &QToolButton::clicked, this, &VideoRibbonOld::task_man);
+            connect (this, &VideoRibbonOld::mdi_active, btn.get (), &QToolButton::setEnabled);
             upper_layout->addWidget (btn.release ());
         }
 

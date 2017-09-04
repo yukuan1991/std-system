@@ -14,7 +14,7 @@
 
 class QWidgetAction;
 
-class VideoRibbon : public QTabWidget
+class VideoRibbonOld : public QTabWidget
 {
     Q_OBJECT
 signals:
@@ -41,7 +41,7 @@ signals:
     void task_man ();
     void mdi_active (bool);
 public:
-    VideoRibbon (QWidget * parent = nullptr);
+    VideoRibbonOld (QWidget * parent = nullptr);
 private:
     static std::unique_ptr<QToolButton> make_button (const QPixmap & icon, const QString & text);
     static std::unique_ptr<QWidgetAction> make_action (const QPixmap & pix, const QString & text, QWidget * parent = nullptr);
@@ -56,51 +56,51 @@ private:
 
 
 
-class ribbon_button : public QPushButton
+class video_ribbon_button : public QPushButton
 {
     Q_OBJECT
 public:
     template<typename ... Args>
-    ribbon_button (Args && ... p) : QPushButton (std::forward<Args> (p)...) {}
+    video_ribbon_button (Args && ... p) : QPushButton (std::forward<Args> (p)...) {}
 };
 
-class ribbon_menu : public QMenu
+class video_ribbon_menu : public QMenu
 {
     Q_OBJECT
 public:
     template<typename ... Args>
-    ribbon_menu (Args && ... p) : QMenu (std::forward<Args> (p)...) {}
+    video_ribbon_menu (Args && ... p) : QMenu (std::forward<Args> (p)...) {}
 };
 
-class ribbon_tool : public QToolButton
+class video_ribbon_tool : public QToolButton
 {
     Q_OBJECT
 public:
     template<typename ... Args>
-    ribbon_tool (Args && ... p) : QToolButton (std::forward<Args> (p)...) {}
+    video_ribbon_tool (Args && ... p) : QToolButton (std::forward<Args> (p)...) {}
 };
 
-class ribbon_bar : public QTabBar
+class video_ribbon_bar : public QTabBar
 {
     Q_OBJECT
 public:
-    ribbon_bar (QWidget * parent = nullptr) : QTabBar (parent) {}
+    video_ribbon_bar (QWidget * parent = nullptr) : QTabBar (parent) {}
 };
 
-class ribbon_edit : public QLineEdit
-{
-    Q_OBJECT
-public:
-    template<typename ... Args>
-    ribbon_edit (Args && ... p) : QLineEdit (std::forward<Args> (p)...) {}
-};
-
-class layout_horizontal : public QHBoxLayout
+class video_ribbon_edit : public QLineEdit
 {
     Q_OBJECT
 public:
     template<typename ... Args>
-    layout_horizontal (Args && ... p) : QHBoxLayout (std::forward<Args> (p)...) {}
+    video_ribbon_edit (Args && ... p) : QLineEdit (std::forward<Args> (p)...) {}
+};
+
+class video_layout_horizontal : public QHBoxLayout
+{
+    Q_OBJECT
+public:
+    template<typename ... Args>
+    video_layout_horizontal (Args && ... p) : QHBoxLayout (std::forward<Args> (p)...) {}
     void set_w (int w) { w_ = w; }
 protected:
     QSize maximumSize () const override
@@ -131,11 +131,11 @@ private:
 
 
 
-class ribbon_menu_item : public QWidget
+class video_ribbon_menu_item : public QWidget
 {
     Q_OBJECT
 public:
-    ribbon_menu_item(const QPixmap& pix, const QString& text, QWidget *parent = 0)
+    video_ribbon_menu_item(const QPixmap& pix, const QString& text, QWidget *parent = 0)
         :QWidget (parent)
     {
         QLabel* label_icon = new QLabel(this);
@@ -156,7 +156,7 @@ public:
         setFixedWidth(100);
         setFixedHeight (32);
     }
-    ~ribbon_menu_item()
+    ~video_ribbon_menu_item()
     {}
 
 protected:

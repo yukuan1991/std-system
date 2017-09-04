@@ -7,7 +7,6 @@ QMAKE_CXXFLAGS += -std=c++1z
 SOURCES += main.cc \
     StdMain.cc \
     video.cc \
-    video2.cc \
     video/video_analysis.cc \
     video/video_main.cc \
     video/video_widget.cc \
@@ -18,7 +17,6 @@ SOURCES += main.cc \
     video/first_dlg.cpp \
     video/whisker.cc \
     video/progress_label.cpp \
-    utils/VideoRibbon.cc \
     mtm/data_widget.cc \
     mtm/mtm_analysis.cc \
     mtm/mtm_main.cc \
@@ -34,8 +32,8 @@ SOURCES += main.cc \
     mtm/pts/pts_delegate.cpp \
     mtm/pts/pts_model.cpp \
     utils/json_model.cpp \
-    utils/json_model.cpp \
-    utils/table_view.cpp
+    utils/table_view.cpp \
+    utils/VideoRibbonOld.cc
 
 RESOURCES += qml.qrc
 
@@ -66,7 +64,6 @@ DISTFILES +=
 FORMS += \
     StdMain.ui \
     video.ui \
-    video2.ui \
     video/video_analysis.ui \
     video/video_main.ui \
     video/video_widget.ui \
@@ -80,7 +77,6 @@ FORMS += \
 HEADERS += \
     StdMain.h \
     video.h \
-    video2.h \
     video/video_analysis.h \
     video/video_main.h \
     video/video_widget.h \
@@ -94,7 +90,6 @@ HEADERS += \
     utils/video_player.hpp \
     video/whisker.h \
     video/progress_label.h \
-    utils/VideoRibbon.h \
     mtm/arithmetic_resource.hpp \
     mtm/data_widget.h \
     mtm/mtm_analysis.h \
@@ -115,8 +110,8 @@ HEADERS += \
     mtm/pts/pts_delegate.h \
     mtm/pts/pts_model.h \
     utils/json_model.h \
-    utils/json_model.h \
-    utils/table_view.h
+    utils/table_view.h \
+    utils/VideoRibbonOld.h
 
 QMAKE_CXXFLAGS += -Wextra
 QMAKE_CXXFLAGS += -Wno-deprecated-declarations

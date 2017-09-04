@@ -23,7 +23,7 @@
   <customwidget>
    <class>table_view</class>
    <extends>QTableView</extends>
-   <header location="global">mtm/view/table_view.h</header>
+   <header>utils/table_view.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
