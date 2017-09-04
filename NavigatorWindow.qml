@@ -33,9 +33,7 @@ Rectangle
         {
             id: videoTestProduction
             objectName: "videoTestProduction"
-
             text: "视频分析(试产)"
-
             anchors.top: videoMassProduction.bottom
             anchors.topMargin: 4
             anchors.bottom: parent.bottom
@@ -56,6 +54,7 @@ Rectangle
         {
             id:mtm
             text: "MTM-UAS"
+            objectName: "mtm"
             anchors.top: parent.top
             anchors.topMargin: 4
         }

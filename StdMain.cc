@@ -38,7 +38,7 @@ void StdMain::onstackChanged(QString name)
     {
         ui->mainStack->setCurrentWidget (ui->vid);
     }
-    else if(name == "videoTestProduction")
+    else if(name == "mtm")
     {
         ui->mainStack->setCurrentWidget (ui->mtm);
     }

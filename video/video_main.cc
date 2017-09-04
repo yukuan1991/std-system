@@ -206,20 +206,20 @@ void video_main::video_import()
 void video_main::init_conn()
 {
     connect (ui->mdi, &QMdiArea::subWindowActivated, this, &video_main::mdi_changed);
-    connect (ui->video_ribbon, &ribbon::create_new, this, &video_main::create_analysis);
-    connect (ui->video_ribbon, &ribbon::import_data, this, &video_main::video_import);
-    connect (ui->video_ribbon, &ribbon::change_task_count, [this] { apply_to_current (&video_analysis::set_task_count); });
-    connect (ui->video_ribbon, &ribbon::invalid_timespan, [this] { apply_to_current (&video_analysis::modify_invalid); });
-    connect (ui->video_ribbon, &ribbon::paste, [this] { apply_to_current (&video_analysis::on_paste); });
-    connect (ui->video_ribbon, &ribbon::save, this, &video_main::on_save);
-    connect (ui->video_ribbon, &ribbon::save_as, this, &video_main::on_save_as);
-    connect (ui->video_ribbon, &ribbon::open, this, &video_main::on_open);
-    connect (ui->video_ribbon, &ribbon::quit, this, &video_main::close);
-    connect (ui->video_ribbon, &ribbon::export_data, this, &video_main::export_xlsx);
-    connect (ui->video_ribbon, &ribbon::measure_date, this, &video_main::on_measure_date);
-    connect (ui->video_ribbon, &ribbon::measure_man, this, &video_main::on_measure_man);
-    connect (ui->video_ribbon, &ribbon::task_man, this, &video_main::on_task_man);
-    connect (ui->video_ribbon, &ribbon::change_example_cycle, this, &video_main::on_example_cycle);
+    connect (ui->video_ribbon, &VideoRibbon::create_new, this, &video_main::create_analysis);
+    connect (ui->video_ribbon, &VideoRibbon::import_data, this, &video_main::video_import);
+    connect (ui->video_ribbon, &VideoRibbon::change_task_count, [this] { apply_to_current (&video_analysis::set_task_count); });
+    connect (ui->video_ribbon, &VideoRibbon::invalid_timespan, [this] { apply_to_current (&video_analysis::modify_invalid); });
+    connect (ui->video_ribbon, &VideoRibbon::paste, [this] { apply_to_current (&video_analysis::on_paste); });
+    connect (ui->video_ribbon, &VideoRibbon::save, this, &video_main::on_save);
+    connect (ui->video_ribbon, &VideoRibbon::save_as, this, &video_main::on_save_as);
+    connect (ui->video_ribbon, &VideoRibbon::open, this, &video_main::on_open);
+    connect (ui->video_ribbon, &VideoRibbon::quit, this, &video_main::close);
+    connect (ui->video_ribbon, &VideoRibbon::export_data, this, &video_main::export_xlsx);
+    connect (ui->video_ribbon, &VideoRibbon::measure_date, this, &video_main::on_measure_date);
+    connect (ui->video_ribbon, &VideoRibbon::measure_man, this, &video_main::on_measure_man);
+    connect (ui->video_ribbon, &VideoRibbon::task_man, this, &video_main::on_task_man);
+    connect (ui->video_ribbon, &VideoRibbon::change_example_cycle, this, &video_main::on_example_cycle);
 }
 
 void video_main::change_task_count()

@@ -1,16 +1,16 @@
-﻿#include "video/model/json_model.h"
+﻿#include "utils/json_model.h"
 #include "QDebug"
 #include <QColor>
 #include <QBrush>
+#include <boost/scope_exit.hpp>
 #include <QFont>
-#include <base/lang/scope.hpp>
+#include "mtm/arithmetic_resource.hpp"
 
 json_model::json_model(QObject *parent)
     : QAbstractTableModel(parent)
 {
+    std::tie (kv_tmu_, std::ignore) = read_tmu_data ();
 }
-
-using std::optional;
 
 QVariant json_model::headerData(int section, Qt::Orientation orientation, int role) const
 {
@@ -115,7 +115,7 @@ bool json_model::setData(const QModelIndex &index, const QVariant &value, int ro
         return false;
     }
 
-    SCOPE_EXIT
+    BOOST_SCOPE_EXIT_ALL (&)
     {
         emit dataChanged (this->index (0, 0), this->index (rowCount () - 1, columnCount () - 1));
     };
@@ -346,7 +346,36 @@ bool json_model::paste_data(const QModelIndex &index, const QVariant &value)
 
     if (paste_col_.contains (*op_header))
     {
-        return setData (index, value, Qt::EditRole);
+        qDebug() << value;
+        auto header = index.model ()->headerData (index.column (),
+                                                  Qt::Horizontal, Qt::DisplayRole);
+        auto str_header = header.toString ();
+        if (str_header == "代码")
+        {
+            QStringList code_list;
+            auto tmu = 0;
+            auto code = value.toString();
+            auto list = code.split(".");
+            for(auto it : list)
+            {
+                auto str = it.toStdString();
+                const auto prefix_code = "mtm_" + str;
+
+                auto found = kv_tmu_.find (prefix_code);
+
+                if (found == kv_tmu_.end ())
+                {
+                    return setData (index, value, Qt::EditRole);
+                }
+                tmu += found->second;
+                code_list << prefix_code.data ();
+            }
+            return setData (index, code_list, Qt::EditRole);
+        }
+        else
+        {
+            return setData (index, value, Qt::EditRole);
+        }
     }
     else
     {

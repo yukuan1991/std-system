@@ -167,7 +167,7 @@
   <customwidget>
    <class>video_player</class>
    <extends>QWidget</extends>
-   <header>video/video_player.hpp</header>
+   <header>utils/video_player.hpp</header>
    <container>1</container>
   </customwidget>
   <customwidget>

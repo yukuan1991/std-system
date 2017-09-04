@@ -5,6 +5,7 @@
 #include <boost/scope_exit.hpp>
 #include <string>
 #include <math.h>
+#include <optional>
 
 const char * const video_form_model::cols[] =
 {
@@ -165,7 +166,7 @@ void video_form_model::clear()
     this->resize (rowCount ());
 }
 
-optional<action_ratio> video_form_model::operation_ratio() const
+std::optional<action_ratio> video_form_model::operation_ratio() const
 {
     std::array<qreal, 4> arr {{0, 0, 0, 0}};
 
@@ -237,7 +238,7 @@ std::optional<overall_stats> video_form_model::operation_stats() const
 
     for (int i = 0; i < max_round; i ++)
     {
-        optional<qreal> total = 0.0;
+        std::optional<qreal> total = 0.0;
         for (int j = 0; j < this->rowCount (); j ++)
         {
             const auto time = get_value_by_key (j, QString::number (i + 1) + "R").toDouble (&b);
@@ -283,7 +284,7 @@ std::vector<qreal> video_form_model::cycle_times() const
     vector<qreal> ret;
     for (int i = 2; i < 2 + max_round * 2; i += 2)
     {
-        optional<qreal> sum = 0.0;
+        std::optional<qreal> sum = 0.0;
         for (int j = 0; j < rowCount (); j ++)
         {
             const auto var = data (index (j, i + 1));
@@ -355,7 +356,7 @@ QVariant video_form_model::get_result_table(const QModelIndex &index) const
     return json_model::data (index, Qt::DisplayRole);
 }
 
-optional<double> video_form_model::get_increment_data(const QModelIndex &index) const
+std::optional<double> video_form_model::get_increment_data(const QModelIndex &index) const
 {
     bool is_ok;
     auto last_total_time = get_last_total_time (index.row (), index.column ());

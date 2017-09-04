@@ -4,7 +4,7 @@
 #include <QAbstractTableModel>
 #include <QStringList>
 #include "utils/json.hpp"
-#include <optional>
+#include "mtm/Qt-Utils/stl_extension.hpp"
 
 using json = nlohmann::json;
 constexpr int paste_role = Qt::UserRole + 100;
@@ -22,9 +22,10 @@ public:
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     int columnCount(const QModelIndex &parent = QModelIndex()) const override;
 
+    std::string::size_type size() { return data_.size(); }
     virtual void resize (unsigned);
 
-    std::optional<QString> get_header (const QModelIndex& index) const;
+    optional<QString> get_header (const QModelIndex& index) const;
 
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
     virtual QVariant decoration_data (const QModelIndex& index) const ;
@@ -47,6 +48,8 @@ protected:
     QStringList headers_;
     QStringList edit_col_;
     QStringList paste_col_;
+private:
+    std::map<std::string, int> kv_tmu_;
 };
 
 #endif // TABLE_MODEL_H

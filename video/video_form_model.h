@@ -3,7 +3,7 @@
 
 #include <QAbstractTableModel>
 #include <QStringList>
-#include "model/json_model.h"
+#include "utils/json_model.h"
 #include <optional>
 #include "utils/utils.hpp"
 

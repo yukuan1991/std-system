@@ -13,7 +13,7 @@
 #include <QMenu>
 
 
-class ribbon : public QTabWidget
+class VideoRibbon : public QTabWidget
 {
     Q_OBJECT
 signals:
@@ -40,7 +40,7 @@ signals:
     void task_man ();
     void mdi_active (bool);
 public:
-    ribbon (QWidget * parent = nullptr);
+    VideoRibbon (QWidget * parent = nullptr);
 private:
     static std::unique_ptr<QToolButton> make_button (const QPixmap & icon, const QString & text);
     void setup_ui ();

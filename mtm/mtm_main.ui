@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>video_main</class>
- <widget class="QWidget" name="video_main">
+ <class>mtm_main</class>
+ <widget class="QWidget" name="mtm_main">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>606</width>
-    <height>399</height>
+    <width>737</width>
+    <height>412</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>视频分析法</string>
+   <string>mtm_main</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
@@ -30,18 +30,19 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="VideoRibbon" name="video_ribbon"/>
+    <widget class="ribbon_mtm" name="widget_ribbon" native="true"/>
    </item>
    <item>
     <widget class="QMdiArea" name="mdi"/>
    </item>
   </layout>
  </widget>
+ <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>VideoRibbon</class>
-   <extends>QTabWidget</extends>
-   <header location="global">utils/VideoRibbon.h</header>
+   <class>ribbon_mtm</class>
+   <extends>QWidget</extends>
+   <header>interface_control/ribbon_mtm.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

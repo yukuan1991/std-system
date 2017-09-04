@@ -3,7 +3,7 @@
 #include <QTableView>
 #include <vector>
 #include <string>
-#include "video/model/json_model.h"
+#include "utils/json_model.h"
 #include <tuple>
 #include <QPoint>
 

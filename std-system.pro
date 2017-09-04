@@ -14,13 +14,28 @@ SOURCES += main.cc \
     video/form_widget.cpp \
     video/video_delegate.cc \
     video/video_form_model.cc \
-    video/model/json_model.cc \
-    video/view/table_view.cpp \
     video/video_form_split.cc \
     video/first_dlg.cpp \
     video/whisker.cc \
     video/progress_label.cpp \
-    utils/ribbon.cc
+    utils/VideoRibbon.cc \
+    mtm/data_widget.cc \
+    mtm/mtm_analysis.cc \
+    mtm/mtm_main.cc \
+    mtm/mtm_widget.cc \
+    mtm/Qt-Utils/des.cpp \
+    mtm/Qt-Utils/encryption.cpp \
+    mtm/Qt-Utils/tinyxml2.cpp \
+    mtm/interface_control/about_us_dlg.cc \
+    mtm/interface_control/push_button.cpp \
+    mtm/interface_control/ribbon.cc \
+    mtm/interface_control/ribbon_mtm.cc \
+    mtm/pts/code_edit.cpp \
+    mtm/pts/pts_delegate.cpp \
+    mtm/pts/pts_model.cpp \
+    utils/json_model.cpp \
+    utils/json_model.cpp \
+    utils/table_view.cpp
 
 RESOURCES += qml.qrc
 
@@ -56,7 +71,11 @@ FORMS += \
     video/video_main.ui \
     video/video_widget.ui \
     video/form_widget.ui \
-    video/first_dlg.ui
+    video/first_dlg.ui \
+    mtm/data_widget.ui \
+    mtm/mtm_analysis.ui \
+    mtm/mtm_main.ui \
+    mtm/mtm_widget.ui
 
 HEADERS += \
     StdMain.h \
@@ -68,16 +87,36 @@ HEADERS += \
     video/form_widget.h \
     video/video_delegate.h \
     video/video_form_model.h \
-    video/model/json_model.h \
     utils/json.hpp \
     utils/utils.hpp \
-    video/view/table_view.h \
     video/video_form_split.h \
     video/first_dlg.h \
     utils/video_player.hpp \
     video/whisker.h \
     video/progress_label.h \
-    utils/ribbon.h
+    utils/VideoRibbon.h \
+    mtm/arithmetic_resource.hpp \
+    mtm/data_widget.h \
+    mtm/mtm_analysis.h \
+    mtm/mtm_main.h \
+    mtm/mtm_widget.h \
+    mtm/Qt-Utils/des.h \
+    mtm/Qt-Utils/encryption.h \
+    mtm/Qt-Utils/json.hpp \
+    mtm/Qt-Utils/krys_application.hpp \
+    mtm/Qt-Utils/qt.hpp \
+    mtm/Qt-Utils/stl_extension.hpp \
+    mtm/Qt-Utils/tinyxml2.h \
+    mtm/interface_control/about_us_dlg.h \
+    mtm/interface_control/push_button.h \
+    mtm/interface_control/ribbon.h \
+    mtm/interface_control/ribbon_mtm.h \
+    mtm/pts/code_edit.h \
+    mtm/pts/pts_delegate.h \
+    mtm/pts/pts_model.h \
+    utils/json_model.h \
+    utils/json_model.h \
+    utils/table_view.h
 
 QMAKE_CXXFLAGS += -Wextra
 QMAKE_CXXFLAGS += -Wno-deprecated-declarations

@@ -121,7 +121,7 @@ void form_widget::set_result_view()
     ui->table_result->setItemDelegate (des_delegate_.get ());
 }
 
-optional<QModelIndex> form_widget::get_next_index(const QModelIndex & index) const
+std::optional<QModelIndex> form_widget::get_next_index(const QModelIndex & index) const
 {
     if (!index.isValid())
     {
