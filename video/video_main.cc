@@ -28,6 +28,7 @@ video_main::video_main(QWidget *parent)
     ui->mdi->setViewMode (QMdiArea::TabbedView);
     init_conn ();
     setStyle (QStyleFactory::create ("fusion"));
+    set_button_enabled();
 }
 
 video_main::~video_main()
@@ -38,6 +39,25 @@ video_main::~video_main()
 QMdiArea *video_main::area()
 {
     return ui->mdi;
+}
+
+void video_main::set_button_enabled()
+{
+    const bool state = (active_window() != nullptr);
+    ui->video_rib->set_enabled(state);
+}
+
+video_analysis * video_main::active_window()
+{
+    if(QMdiSubWindow* active_subwindow = ui->mdi->activeSubWindow())
+    {
+        video_analysis* w = dynamic_cast<video_analysis*>(active_subwindow->widget());
+        return w;
+    }
+    else
+    {
+        return nullptr;
+    }
 }
 
 not_null<video_analysis *> video_main::create_window(const QString &title)

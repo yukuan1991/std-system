@@ -21,6 +21,8 @@ public:
     explicit video_main(QWidget *parent = 0);
     ~video_main();
     QMdiArea * area ();
+    void set_button_enabled();
+    video_analysis * active_window();
 private:
     using analysis_slot = void (video_analysis::*) ();
     not_null<video_analysis*> create_window (const QString & title);

@@ -188,7 +188,7 @@ inline auto read_tmu_data ()
 
 void read_mtm_data (std::map<std::string, int>& kv_tmu, std::map<std::string, std::tuple<std::string, std::string, std::string, std::string, unsigned>>& mtm_data)
 {
-    auto encryption = krys::read_all ("mtm.data");
+    auto encryption = krys::read_all ("mtm/mtm.data");
     assert (encryption);
     std::string str_decryption;
     krys3des_decryption (*encryption, "123456789012345678901234", str_decryption);
