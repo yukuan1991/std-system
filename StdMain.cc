@@ -44,10 +44,12 @@ void StdMain::onstackChanged(QString name)
     }
     else if(name == "mod")
     {
+        qDebug() << "yuzhi_mod";
         ui->mainStack->setCurrentWidget (ui->mod);
     }
     else if(name == "most")
     {
+        qDebug() << "yuzhi_most";
         ui->mainStack->setCurrentWidget (ui->most);
     }
 }

@@ -39,6 +39,11 @@ mod_main::~mod_main()
 void mod_main::init_conn()
 {
 //    connect(ui->widget_ribbon, &ribbon_mod::file_menu_triggered, [this] (const QString & s) { file_operations(s); });
+    connect (ui->widget_ribbon, &ribbon::file_new, this, &mod_main::file_new);
+    connect (ui->widget_ribbon, &ribbon::file_open, this, &mod_main::file_open);
+    connect (ui->widget_ribbon, &ribbon::file_save, this, &mod_main::file_save);
+    connect (ui->widget_ribbon, &ribbon::file_saveas, this, &mod_main::file_save_as);
+    connect (ui->widget_ribbon, &ribbon::file_exit, this, &mod_main::close);
 
     connect(ui->widget_ribbon, &ribbon_mod::copy, this, &mod_main::copy);
     connect(ui->widget_ribbon, &ribbon_mod::cut, this, &mod_main::cut);
