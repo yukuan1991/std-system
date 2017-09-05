@@ -39,7 +39,7 @@ public:
     /// 获取视频播放状态
     video_player::state_enum state();
     /// 设置标记无效的进度条的位置
-    bool set_progress_label_position(std::pair<unsigned long long, unsigned long long> pos);
+    bool set_progress_label_position (std::pair<unsigned long long, unsigned long long> pos);
     const std::vector<qint64> &retrieve_invalid();
     /// 载入标记位置
     void set_invalid(const std::vector<qint64> &data);

@@ -5,21 +5,21 @@
 #include <string>
 
 namespace Ui {
-class video_main;
+class VideoMainMassive;
 }
 
 class QMdiArea;
 class QMdiSubWindow;
 
 class video_analysis;
-class video_main final : public QWidget
+class VideoMainMassive final : public QWidget
 {
     Q_OBJECT
 signals:
     void mdi_active (bool);
 public:
-    explicit video_main(QWidget *parent = 0);
-    ~video_main();
+    explicit VideoMainMassive(QWidget *parent = 0);
+    ~VideoMainMassive();
     QMdiArea * area ();
 private:
     using analysis_slot = void (video_analysis::*) ();
@@ -47,6 +47,6 @@ private:
     void on_save_as ();
     void on_example_cycle ();
 private:
-    Ui::video_main *ui;
+    Ui::VideoMainMassive *ui;
 };
 

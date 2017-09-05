@@ -7,7 +7,6 @@ QMAKE_CXXFLAGS += -std=c++1z
 SOURCES += main.cc \
     StdMain.cc \
     video/video_analysis.cc \
-    video/video_main.cc \
     video/video_widget.cc \
     video/form_widget.cpp \
     video/video_delegate.cc \
@@ -31,9 +30,9 @@ SOURCES += main.cc \
     mtm/pts/pts_model.cpp \
     utils/json_model.cpp \
     utils/table_view.cpp \
-    utils/VideoRibbonOld.cc \
     utils/ribbon.cc \
-    video/video_ribbon.cc
+    video/video_ribbon.cc \
+    video/VideoMainMassive.cc
 
 RESOURCES += qml.qrc
 
@@ -64,19 +63,18 @@ DISTFILES +=
 FORMS += \
     StdMain.ui \
     video/video_analysis.ui \
-    video/video_main.ui \
     video/video_widget.ui \
     video/form_widget.ui \
     video/first_dlg.ui \
     mtm/data_widget.ui \
     mtm/mtm_analysis.ui \
     mtm/mtm_main.ui \
-    mtm/mtm_widget.ui
+    mtm/mtm_widget.ui \
+    video/VideoMainMassive.ui
 
 HEADERS += \
     StdMain.h \
     video/video_analysis.h \
-    video/video_main.h \
     video/video_widget.h \
     video/form_widget.h \
     video/video_delegate.h \
@@ -108,9 +106,9 @@ HEADERS += \
     mtm/pts/pts_model.h \
     utils/json_model.h \
     utils/table_view.h \
-    utils/VideoRibbonOld.h \
     utils/ribbon.h \
-    video/video_ribbon.h
+    video/video_ribbon.h \
+    video/VideoMainMassive.h
 
 QMAKE_CXXFLAGS += -Wextra
 QMAKE_CXXFLAGS += -Wno-deprecated-declarations

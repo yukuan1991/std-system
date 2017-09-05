@@ -1,4 +1,4 @@
-﻿#include "video/video_main.h"
+﻿#include "video/VideoMainMassive.h"
 #include "video/video_analysis.h"
 #include "ui_video_main.h"
 #include <QMdiSubWindow>
@@ -20,9 +20,9 @@
 
 using namespace std;
 
-video_main::video_main(QWidget *parent)
+VideoMainMassive::VideoMainMassive(QWidget *parent)
     :QWidget(parent)
-    ,ui(new Ui::video_main)
+    ,ui(new Ui::VideoMainMassive)
 {
     ui->setupUi(this);
     ui->mdi->setViewMode (QMdiArea::TabbedView);
@@ -30,17 +30,17 @@ video_main::video_main(QWidget *parent)
     setStyle (QStyleFactory::create ("fusion"));
 }
 
-video_main::~video_main()
+VideoMainMassive::~VideoMainMassive()
 {
     delete ui;
 }
 
-QMdiArea *video_main::area()
+QMdiArea *VideoMainMassive::area()
 {
     return ui->mdi;
 }
 
-not_null<video_analysis *> video_main::create_window(const QString &title)
+not_null<video_analysis *> VideoMainMassive::create_window(const QString &title)
 {
     auto v_win = make_unique<video_analysis> ();
     v_win->setAttribute (Qt::WA_DeleteOnClose);
@@ -51,13 +51,13 @@ not_null<video_analysis *> video_main::create_window(const QString &title)
     return v_win.release ();
 }
 
-void video_main::create_analysis()
+void VideoMainMassive::create_analysis()
 {
     auto w = create_window ("未命名");
     w->set_task_count ();
 }
 
-video_analysis *video_main::current_sub_window ()
+video_analysis *VideoMainMassive::current_sub_window ()
 {
     const auto active = ui->mdi->currentSubWindow ();
     if (active == null)
@@ -69,12 +69,12 @@ video_analysis *video_main::current_sub_window ()
     return w;
 }
 
-void video_main::mdi_changed(QMdiSubWindow * window)
+void VideoMainMassive::mdi_changed(QMdiSubWindow * window)
 {
     ui->video_rib->mdi_active (window != null);
 }
 
-void video_main::apply_to_current(analysis_slot slot)
+void VideoMainMassive::apply_to_current(analysis_slot slot)
 {
     auto w = current_sub_window ();
     if (w != null)
@@ -83,7 +83,7 @@ void video_main::apply_to_current(analysis_slot slot)
     }
 }
 
-void video_main::invalid_timespan()
+void VideoMainMassive::invalid_timespan()
 {
     auto w = current_sub_window ();
     if (w != null)
@@ -92,7 +92,7 @@ void video_main::invalid_timespan()
     }
 }
 
-void video_main::on_measure_date()
+void VideoMainMassive::on_measure_date()
 {
     auto w = current_sub_window ();
     if (w == null)
@@ -126,7 +126,7 @@ void video_main::on_measure_date()
     w->set_measure_date (edit->date ());
 }
 
-void video_main::on_measure_man()
+void VideoMainMassive::on_measure_man()
 {
     auto w = current_sub_window ();
     if (w == null)
@@ -143,7 +143,7 @@ void video_main::on_measure_man()
     }
 }
 
-void video_main::on_task_man()
+void VideoMainMassive::on_task_man()
 {
     auto w = current_sub_window ();
     if (w == null)
@@ -161,7 +161,7 @@ void video_main::on_task_man()
     }
 }
 
-void video_main::video_import()
+void VideoMainMassive::video_import()
 {
     const QString type = tr ("Video Files (*.mp4 *.mpg *.mod *.mov *.mkv *.wmv *.avi *.vid)");
     const auto file = QFileDialog::getOpenFileName (this, "打开视频", ".", type);
@@ -203,26 +203,26 @@ void video_main::video_import()
     w->set_video_file (dest_path);
 }
 
-void video_main::init_conn()
+void VideoMainMassive::init_conn()
 {
-    connect (ui->mdi, &QMdiArea::subWindowActivated, this, &video_main::mdi_changed);
-    connect (ui->video_rib, &ribbon::file_new, this, &video_main::create_analysis);
-    connect (ui->video_rib, &video_ribbon::import_data, this, &video_main::video_import);
+    connect (ui->mdi, &QMdiArea::subWindowActivated, this, &VideoMainMassive::mdi_changed);
+    connect (ui->video_rib, &ribbon::file_new, this, &VideoMainMassive::create_analysis);
+    connect (ui->video_rib, &video_ribbon::import_data, this, &VideoMainMassive::video_import);
     connect (ui->video_rib, &video_ribbon::change_task_count, [this] { apply_to_current (&video_analysis::set_task_count); });
     connect (ui->video_rib, &video_ribbon::invalid_timespan, [this] { apply_to_current (&video_analysis::modify_invalid); });
     connect (ui->video_rib, &video_ribbon::paste, [this] { apply_to_current (&video_analysis::on_paste); });
-    connect (ui->video_rib, &ribbon::file_save, this, &video_main::on_save);
-    connect (ui->video_rib, &ribbon::file_saveas, this, &video_main::on_save_as);
-    connect (ui->video_rib, &ribbon::file_open, this, &video_main::on_open);
-    connect (ui->video_rib, &ribbon::file_exit, this, &video_main::close);
-    connect (ui->video_rib, &video_ribbon::export_data, this, &video_main::export_xlsx);
-    connect (ui->video_rib, &video_ribbon::measure_date, this, &video_main::on_measure_date);
-    connect (ui->video_rib, &video_ribbon::measure_man, this, &video_main::on_measure_man);
-    connect (ui->video_rib, &video_ribbon::task_man, this, &video_main::on_task_man);
-    connect (ui->video_rib, &video_ribbon::change_example_cycle, this, &video_main::on_example_cycle);
+    connect (ui->video_rib, &ribbon::file_save, this, &VideoMainMassive::on_save);
+    connect (ui->video_rib, &ribbon::file_saveas, this, &VideoMainMassive::on_save_as);
+    connect (ui->video_rib, &ribbon::file_open, this, &VideoMainMassive::on_open);
+    connect (ui->video_rib, &ribbon::file_exit, this, &VideoMainMassive::close);
+    connect (ui->video_rib, &video_ribbon::export_data, this, &VideoMainMassive::export_xlsx);
+    connect (ui->video_rib, &video_ribbon::measure_date, this, &VideoMainMassive::on_measure_date);
+    connect (ui->video_rib, &video_ribbon::measure_man, this, &VideoMainMassive::on_measure_man);
+    connect (ui->video_rib, &video_ribbon::task_man, this, &VideoMainMassive::on_task_man);
+    connect (ui->video_rib, &video_ribbon::change_example_cycle, this, &VideoMainMassive::on_example_cycle);
 }
 
-void video_main::change_task_count()
+void VideoMainMassive::change_task_count()
 {
     auto w = current_sub_window ();
     if (w != null)
@@ -231,7 +231,7 @@ void video_main::change_task_count()
     }
 }
 
-void video_main::export_xlsx()
+void VideoMainMassive::export_xlsx()
 {
     auto w = current_sub_window ();
     if (w == null)
@@ -371,7 +371,7 @@ void video_main::export_xlsx()
     }
 }
 
-void video_main::on_save()
+void VideoMainMassive::on_save()
 {
     const auto active = ui->mdi->currentSubWindow ();
     if (active == null)
@@ -401,7 +401,7 @@ void video_main::on_save()
 
 }
 
-void video_main::on_open()
+void VideoMainMassive::on_open()
 {
     const auto path = QFileDialog::getOpenFileName (this, "文件打开", ".", tr ("Video Analysis File (*.vaf)"));
     if (path.isEmpty ())
@@ -428,7 +428,7 @@ void video_main::on_open()
     }
 }
 
-void video_main::on_save_as()
+void VideoMainMassive::on_save_as()
 {
     auto w = current_sub_window ();
     if (w != null)
@@ -440,7 +440,7 @@ void video_main::on_save_as()
     }
 }
 
-void video_main::on_example_cycle()
+void VideoMainMassive::on_example_cycle()
 {
     auto w = current_sub_window ();
     if (w == null)
