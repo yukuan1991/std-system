@@ -42,5 +42,13 @@ void StdMain::onstackChanged(QString name)
     {
         ui->mainStack->setCurrentWidget (ui->mtm);
     }
+    else if(name == "mod")
+    {
+        ui->mainStack->setCurrentWidget (ui->mod);
+    }
+    else if(name == "most")
+    {
+        ui->mainStack->setCurrentWidget (ui->most);
+    }
 }
 

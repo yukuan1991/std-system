@@ -37,10 +37,8 @@ void set_style ()
 
 int main(int argc, char *argv[])
 {
-    qDebug() << "yuzhi";
     QApplication app (argc, argv);
     app.setAttribute (Qt::AA_DontCreateNativeWidgetSiblings, true);
-    //qDebug() << "yzuhi";
     set_style ();
     StdMain w;
     w.resize (1366, 768);

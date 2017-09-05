@@ -85,10 +85,11 @@
      <item>
       <widget class="QStackedWidget" name="mainStack">
        <property name="currentIndex">
-        <number>1</number>
+        <number>3</number>
        </property>
        <widget class="video_main" name="vid"/>
        <widget class="mod_main" name="mod"/>
+       <widget class="most_main" name="most"/>
        <widget class="mtm_main" name="mtm"/>
       </widget>
      </item>
@@ -118,6 +119,12 @@
    <class>mod_main</class>
    <extends>QWidget</extends>
    <header location="global">mod/mod_main.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>most_main</class>
+   <extends>QWidget</extends>
+   <header location="global">most/most_main.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

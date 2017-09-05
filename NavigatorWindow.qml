@@ -25,7 +25,6 @@ Rectangle
         {
             id:videoMassProduction
             objectName: "videoMassProduction"
-
             text: "视频分析(量产)"
         }
 
@@ -63,6 +62,7 @@ Rectangle
         {
             id: mod
             text: "MOD"
+            objectName: "mod"
             anchors.top: mtm.bottom
             anchors.topMargin: 4
         }
@@ -71,6 +71,7 @@ Rectangle
         {
             id: most
             text: "MOST"
+            objectName: "most"
             anchors.top: mod.bottom
             anchors.topMargin: 4
         }

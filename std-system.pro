@@ -37,7 +37,13 @@ SOURCES += main.cc \
     mod/ribbon/ribbon_mod.cc \
     mtm/ribbon/ribbon_mtm.cc \
     mtm/mtm_data_widget.cc \
-    mod/mod_data_widget.cc
+    mod/mod_data_widget.cc \
+    most/ribbon/ribbon_most.cc \
+    most/most_analysis.cc \
+    most/most_main.cc \
+    most/most_selection_dlg.cpp \
+    most/most_widget.cc \
+    most/most_data_widget.cc
 
 RESOURCES += qml.qrc
 
@@ -64,7 +70,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
-    mod/mod.data
+    mod/mod.data \
+    most/most.data
 
 FORMS += \
     StdMain.ui \
@@ -80,7 +87,12 @@ FORMS += \
     mod/mod_main.ui \
     mod/mod_widget.ui \
     mod/mod_data_widget.ui \
-    mtm/mtm_data_widget.ui
+    mtm/mtm_data_widget.ui \
+    most/most_analysis.ui \
+    most/most_main.ui \
+    most/most_selection_dlg.ui \
+    most/most_widget.ui \
+    most/most_data_widget.ui
 
 HEADERS += \
     StdMain.h \
@@ -101,30 +113,9 @@ HEADERS += \
     mtm/mtm_analysis.h \
     mtm/mtm_main.h \
     mtm/mtm_widget.h \
-    mtm/Qt-Utils/des.h \
-    mtm/Qt-Utils/encryption.h \
-    mtm/Qt-Utils/krys_application.hpp \
-    mtm/Qt-Utils/qt.hpp \
-    mtm/Qt-Utils/stl_extension.hpp \
-    mtm/Qt-Utils/tinyxml2.h \
-    mtm/interface_control/ribbon_mtm.h \
-    mtm/pts/code_edit.h \
-    mtm/pts/pts_delegate.h \
-    mtm/pts/pts_model.h \
-    utils/json_model.h \
-    utils/table_view.h \
     utils/ribbon.h \
     video/video_ribbon.h \
     utils/arithmetic_resource.hpp \
-    mod/pts/code_edit.h \
-    mod/pts/pts_delegate.h \
-    mod/pts/pts_model.h \
-    mod/Qt-Utils/des.h \
-    mod/Qt-Utils/encryption.h \
-    mod/Qt-Utils/krys_application.hpp \
-    mod/Qt-Utils/qt.hpp \
-    mod/Qt-Utils/stl_extension.hpp \
-    mod/Qt-Utils/tinyxml2.h \
     mod/mod_analysis.h \
     mod/mod_main.h \
     mod/mod_widget.h \
@@ -146,7 +137,13 @@ HEADERS += \
     mtm/ribbon/ribbon_mtm.h \
     utils/arithmetic_resource.hpp \
     mtm/mtm_data_widget.h \
-    mod/mod_data_widget.h
+    mod/mod_data_widget.h \
+    most/ribbon/ribbon_most.h \
+    most/most_analysis.h \
+    most/most_main.h \
+    most/most_selection_dlg.h \
+    most/most_widget.h \
+    most/most_data_widget.h
 
 QMAKE_CXXFLAGS += -Wextra
 QMAKE_CXXFLAGS += -Wno-deprecated-declarations
