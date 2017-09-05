@@ -1875,7 +1875,7 @@
   <customwidget>
    <class>push_button</class>
    <extends>QPushButton</extends>
-   <header>mtm/interface_control/push_button.h</header>
+   <header location="global">utils/interface_control/push_button.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

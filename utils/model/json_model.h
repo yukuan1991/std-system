@@ -4,7 +4,7 @@
 #include <QAbstractTableModel>
 #include <QStringList>
 #include "utils/json.hpp"
-#include "mtm/Qt-Utils/stl_extension.hpp"
+#include "utils/Qt-Utils/stl_extension.hpp"
 
 using json = nlohmann::json;
 constexpr int paste_role = Qt::UserRole + 100;

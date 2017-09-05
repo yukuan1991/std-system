@@ -16,24 +16,28 @@ SOURCES += main.cc \
     video/first_dlg.cpp \
     video/whisker.cc \
     video/progress_label.cpp \
-    mtm/data_widget.cc \
     mtm/mtm_analysis.cc \
     mtm/mtm_main.cc \
     mtm/mtm_widget.cc \
-    mtm/Qt-Utils/des.cpp \
-    mtm/Qt-Utils/encryption.cpp \
-    mtm/Qt-Utils/tinyxml2.cpp \
-    mtm/interface_control/about_us_dlg.cc \
-    mtm/interface_control/push_button.cpp \
-    mtm/interface_control/ribbon_mtm.cc \
-    mtm/pts/code_edit.cpp \
-    mtm/pts/pts_delegate.cpp \
-    mtm/pts/pts_model.cpp \
-    utils/json_model.cpp \
-    utils/table_view.cpp \
-    utils/VideoRibbonOld.cc \
     utils/ribbon.cc \
-    video/video_ribbon.cc
+    video/video_ribbon.cc \
+    mod/mod_analysis.cc \
+    mod/mod_main.cc \
+    mod/mod_widget.cc \
+    utils/interface_control/about_us_dlg.cc \
+    utils/interface_control/push_button.cpp \
+    utils/model/json_model.cpp \
+    utils/pts/code_edit.cpp \
+    utils/pts/pts_delegate.cpp \
+    utils/pts/pts_model.cpp \
+    utils/Qt-Utils/des.cpp \
+    utils/Qt-Utils/encryption.cpp \
+    utils/Qt-Utils/tinyxml2.cpp \
+    utils/view/table_view.cpp \
+    mod/ribbon/ribbon_mod.cc \
+    mtm/ribbon/ribbon_mtm.cc \
+    mtm/mtm_data_widget.cc \
+    mod/mod_data_widget.cc
 
 RESOURCES += qml.qrc
 
@@ -59,7 +63,8 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-DISTFILES +=
+DISTFILES += \
+    mod/mod.data
 
 FORMS += \
     StdMain.ui \
@@ -68,10 +73,14 @@ FORMS += \
     video/video_widget.ui \
     video/form_widget.ui \
     video/first_dlg.ui \
-    mtm/data_widget.ui \
     mtm/mtm_analysis.ui \
     mtm/mtm_main.ui \
-    mtm/mtm_widget.ui
+    mtm/mtm_widget.ui \
+    mod/mod_analysis.ui \
+    mod/mod_main.ui \
+    mod/mod_widget.ui \
+    mod/mod_data_widget.ui \
+    mtm/mtm_data_widget.ui
 
 HEADERS += \
     StdMain.h \
@@ -89,28 +98,55 @@ HEADERS += \
     video/whisker.h \
     video/progress_label.h \
     mtm/arithmetic_resource.hpp \
-    mtm/data_widget.h \
     mtm/mtm_analysis.h \
     mtm/mtm_main.h \
     mtm/mtm_widget.h \
     mtm/Qt-Utils/des.h \
     mtm/Qt-Utils/encryption.h \
-    mtm/Qt-Utils/json.hpp \
     mtm/Qt-Utils/krys_application.hpp \
     mtm/Qt-Utils/qt.hpp \
     mtm/Qt-Utils/stl_extension.hpp \
     mtm/Qt-Utils/tinyxml2.h \
-    mtm/interface_control/about_us_dlg.h \
-    mtm/interface_control/push_button.h \
     mtm/interface_control/ribbon_mtm.h \
     mtm/pts/code_edit.h \
     mtm/pts/pts_delegate.h \
     mtm/pts/pts_model.h \
     utils/json_model.h \
     utils/table_view.h \
-    utils/VideoRibbonOld.h \
     utils/ribbon.h \
-    video/video_ribbon.h
+    video/video_ribbon.h \
+    utils/arithmetic_resource.hpp \
+    mod/pts/code_edit.h \
+    mod/pts/pts_delegate.h \
+    mod/pts/pts_model.h \
+    mod/Qt-Utils/des.h \
+    mod/Qt-Utils/encryption.h \
+    mod/Qt-Utils/krys_application.hpp \
+    mod/Qt-Utils/qt.hpp \
+    mod/Qt-Utils/stl_extension.hpp \
+    mod/Qt-Utils/tinyxml2.h \
+    mod/mod_analysis.h \
+    mod/mod_main.h \
+    mod/mod_widget.h \
+    utils/interface_control/about_us_dlg.h \
+    utils/interface_control/push_button.h \
+    utils/model/json_model.h \
+    utils/pts/code_edit.h \
+    utils/pts/pts_delegate.h \
+    utils/pts/pts_model.h \
+    utils/Qt-Utils/des.h \
+    utils/Qt-Utils/encryption.h \
+    utils/Qt-Utils/json.hpp \
+    utils/Qt-Utils/krys_application.hpp \
+    utils/Qt-Utils/qt.hpp \
+    utils/Qt-Utils/stl_extension.hpp \
+    utils/Qt-Utils/tinyxml2.h \
+    utils/view/table_view.h \
+    mod/ribbon/ribbon_mod.h \
+    mtm/ribbon/ribbon_mtm.h \
+    utils/arithmetic_resource.hpp \
+    mtm/mtm_data_widget.h \
+    mod/mod_data_widget.h
 
 QMAKE_CXXFLAGS += -Wextra
 QMAKE_CXXFLAGS += -Wno-deprecated-declarations

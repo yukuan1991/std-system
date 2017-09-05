@@ -3,25 +3,25 @@
 
 #include <QWidget>
 #include <memory>
-#include "utils/json_model.h"
-#include "mtm/pts/pts_model.h"
-#include "mtm/pts/pts_delegate.h"
+#include "utils/model/json_model.h"
+#include "utils/pts/pts_model.h"
+#include "utils/pts/pts_delegate.h"
 
 class table_view;
 class QStyledItemDelegate;
 namespace Ui {
-class data_widget;
+class mtm_data_widget;
 }
 
-class data_widget : public QWidget
+class mtm_data_widget : public QWidget
 {
     Q_OBJECT
 signals:
     void line_exists (bool yes_or_no);
     void std_time_sum(QString&);
 public:
-    explicit data_widget(QWidget *parent = 0);
-    ~data_widget();
+    explicit mtm_data_widget(QWidget *parent = 0);
+    ~mtm_data_widget();
 public:
     QString get_std_time_sum() const;
     void add_code (const QVariant& code);
@@ -46,7 +46,7 @@ private:
     std::unique_ptr<json_model> result_model_ = pts_model::make (PTS::result);
     std::unique_ptr<QStyledItemDelegate> result_delegate_ {new pts_delegate};
 private:
-    Ui::data_widget *ui;
+    Ui::mtm_data_widget *ui;
 };
 
 #endif // DATA_WIDGET_H

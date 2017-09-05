@@ -5,7 +5,7 @@
 #include "mtm_analysis.h"
 #include <memory>
 #include <QMdiSubWindow>
-#include "interface_control/about_us_dlg.h"
+#include "utils/interface_control/about_us_dlg.h"
 #include <QDateEdit>
 #include <QFileDialog>
 #include <base/io/file/file.hpp>

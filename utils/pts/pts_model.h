@@ -1,12 +1,12 @@
 ﻿#ifndef PTS_MODEL_H
 #define PTS_MODEL_H
 
-#include "utils/json_model.h"
+#include "utils/model/json_model.h"
 #include <type_traits>
 #include <memory>
 #include <QVariant>
 #include <string>
-#include "mtm/arithmetic_resource.hpp"
+#include "utils/arithmetic_resource.hpp"
 #include <map>
 
 
@@ -48,7 +48,7 @@ private:
     data_map_ [6] =
     {
         {"代码", &pts_model::get_code},
-        {"TMU", &pts_model::get_tmu},
+        {"MOD", &pts_model::get_tmu},
         {"基本时间", &pts_model::get_base_time},
         {"增值/非增值", &pts_model::get_if_valuable},
         {"宽放率", &pts_model::get_allowance},

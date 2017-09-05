@@ -9,24 +9,25 @@ bool pts_model::init(PTS attr)
     switch (attr)
     {
     case PTS::left:
-        headers_ << "作业内容" << "代码" << "数量*频次" << "TMU" << "评比系数" << "基本时间";
+        headers_ << "作业内容" << "代码" << "数量*频次" << "MOD" << "评比系数" << "基本时间";
         edit_col_ << "作业内容" << "代码" << "数量*频次" << "评比系数";
         paste_col_ << "作业内容" << "代码" << "数量*频次" << "评比系数";
         break;
     case PTS::right:
-        headers_ << "基本时间" << "评比系数" << "TMU" << "数量*频次" << "代码" << "作业内容";
+        headers_ << "基本时间" << "评比系数" << "MOD" << "数量*频次" << "代码" << "作业内容";
         edit_col_ << "作业内容" << "代码" << "数量*频次" << "评比系数";
         paste_col_ << "作业内容" << "代码" << "数量*频次" << "评比系数";
         break;
     case PTS::result:
-        headers_ << "作业内容" << "代码" << "数量*频次" << "TMU" << "评比系数" << "基本时间" << "宽放率" << "标准工时" << "增值/非增值" << "操作分类";
+        headers_ << "作业内容" << "代码" << "数量*频次" << "MOD" << "评比系数" << "基本时间" << "宽放率" << "标准工时" << "增值/非增值" << "操作分类";
         edit_col_ << "作业内容" << "代码" << "数量*频次" << "评比系数" << "宽放率" << "操作分类";
         paste_col_ << "作业内容" << "代码" << "数量*频次" << "评比系数" << "宽放率" << "操作分类";
         break;
     default:
         assert (false);
     }
-    std::tie (kv_tmu_, std::ignore) = read_tmu_data ();
+//    std::tie (kv_tmu_, std::ignore) = read_tmu_data ();
+    std::tie (kv_tmu_, std::ignore, std::ignore, std::ignore) = read_tmu_data();
     return true;
 }
 
@@ -66,10 +67,8 @@ bool pts_model::setData(const QModelIndex &index, const QVariant &value, int rol
 
     for (auto& it : this->set_data_map_)
     {
-
         if (*op_header == it.header_)
         {
-
             auto func_ptr = it.setter_;
             return (this->*func_ptr) (index, value, role);
         }
@@ -82,7 +81,7 @@ bool pts_model::set_code(const QModelIndex &index, const QVariant &value, int ro
 {
     assert (abs (rate_ >= 0.0001));
 
-    if (role ==Qt::EditRole and value.isValid ())
+    if (role == Qt::EditRole and value.isValid ())
     {
         if (QVariant::String == value.type ())
         {
@@ -133,6 +132,11 @@ bool pts_model::set_code(const QModelIndex &index, const QVariant &value, int ro
                     setData (index, QString{}, Qt::EditRole);
                 }
             }
+            else if (QVariant::Invalid == value.type())
+            {
+                setData (index, QString {}, Qt::EditRole);
+            }
+
         }
     }
     else if(role == paste_role)
@@ -177,7 +181,7 @@ QVariant pts_model::get_base_time(const QModelIndex &index, int role) const
         return {};
     }
 
-    auto tmu = get_header_data (this, "TMU", index);
+    auto tmu = get_header_data (this, "MOD", index);
     auto judge_rate = get_header_data (this, "评比系数", index);
     if (!tmu.isValid () or !judge_rate.isValid ())
     {
@@ -262,8 +266,6 @@ void pts_model::resize(unsigned size)
 
 QVariant pts_model::get_task_name(const QModelIndex &index, int role) const
 {
-    Q_UNUSED(index);
-    Q_UNUSED(role);
     return {};
 }
 

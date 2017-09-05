@@ -1,12 +1,12 @@
-﻿#include "data_widget.h"
-#include "ui_data_widget.h"
+﻿#include "mtm_data_widget.h"
+#include "ui_mtm_data_widget.h"
 #include <QScrollBar>
 #include <QMessageBox>
 #include <QDebug>
 
-data_widget::data_widget(QWidget *parent) :
+mtm_data_widget::mtm_data_widget(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::data_widget)
+    ui(new Ui::mtm_data_widget)
 {
     ui->setupUi(this);
     ui->table_result->setItemDelegate(result_delegate_.get());
@@ -17,12 +17,12 @@ data_widget::data_widget(QWidget *parent) :
             [this] { auto sum = get_std_time_sum(); emit std_time_sum(sum); });
 }
 
-data_widget::~data_widget()
+mtm_data_widget::~mtm_data_widget()
 {
     delete ui;
 }
 
-QString data_widget::get_std_time_sum() const
+QString mtm_data_widget::get_std_time_sum() const
 {
     auto col = 5;
     double sum = 0;
@@ -43,7 +43,7 @@ QString data_widget::get_std_time_sum() const
     return QString::number(sum, 'f', 2);
 }
 
-void data_widget::add_code(const QVariant &code)
+void mtm_data_widget::add_code(const QVariant &code)
 {
     if (result_model_->size() <= 0)
     {
@@ -94,12 +94,12 @@ void data_widget::add_code(const QVariant &code)
 
 }
 
-void data_widget::set_unit(double unit)
+void mtm_data_widget::set_unit(double unit)
 {
     this->result_model_->setData (QModelIndex (), unit, Qt::UserRole + 100);
 }
 
-void data_widget::next_code()
+void mtm_data_widget::next_code()
 {
     if (view_ == nullptr or view_->model () == nullptr)
     {
@@ -135,7 +135,7 @@ void data_widget::next_code()
     view_->selectionModel ()->select (next_index, QItemSelectionModel::Select);
 }
 
-json data_widget::save_result() try
+json mtm_data_widget::save_result() try
 {
     json result = json::array();
     QVariant vat;
@@ -201,7 +201,7 @@ catch (std::exception &e)
     return {};
 }
 
-void data_widget::set_row(int num)
+void mtm_data_widget::set_row(int num)
 {
     emit line_exists (num != 0);
 
@@ -210,7 +210,7 @@ void data_widget::set_row(int num)
     ui->table_result->setModel(result_model_.get ());
 }
 
-bool data_widget::load_result(const json &result) try
+bool mtm_data_widget::load_result(const json &result) try
 {
     QModelIndex index;
     result_model_->resize(result.size());
@@ -269,7 +269,7 @@ catch (std::exception &e)
     return false;
 }
 
-bool data_widget::task_content_check()
+bool mtm_data_widget::task_content_check()
 {
     for (int i = 0; i < result_model_->rowCount (); i ++)
     {
@@ -288,14 +288,14 @@ bool data_widget::task_content_check()
     return true;
 }
 
-void data_widget::clear()
+void mtm_data_widget::clear()
 {
     result_model_->clear ();
     ui->table_result->setModel (nullptr);
     ui->table_result->setModel (result_model_.get ());
 }
 
-void data_widget::on_cut()
+void mtm_data_widget::on_cut()
 {
     if (view_ != nullptr)
     {
@@ -303,7 +303,7 @@ void data_widget::on_cut()
     }
 }
 
-void data_widget::on_copy()
+void mtm_data_widget::on_copy()
 {
     if (view_ != nullptr)
     {
@@ -311,7 +311,7 @@ void data_widget::on_copy()
     }
 }
 
-void data_widget::on_paste()
+void mtm_data_widget::on_paste()
 {
     if (view_ != nullptr)
     {
@@ -319,7 +319,7 @@ void data_widget::on_paste()
     }
 }
 
-void data_widget::on_del()
+void mtm_data_widget::on_del()
 {
     if (view_ != nullptr)
     {
@@ -327,7 +327,7 @@ void data_widget::on_del()
     }
 }
 
-void data_widget::set_view()
+void mtm_data_widget::set_view()
 {
     view_->horizontalHeader ()->setSectionResizeMode (QHeaderView::Interactive);
     view_->verticalHeader ()->setSectionResizeMode (QHeaderView::Fixed);

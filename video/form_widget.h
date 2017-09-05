@@ -2,7 +2,7 @@
 #include <QWidget>
 #include "video/video_delegate.h"
 #include <QTableView>
-#include "utils/table_view.h"
+#include "utils/view/table_view.h"
 #include <memory>
 #include <QTableWidgetItem>
 #include <vector>

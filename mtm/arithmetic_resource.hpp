@@ -4,17 +4,17 @@
 #include <map>
 #include <string>
 #include <QString>
-#include "Qt-Utils/encryption.h"
+#include "utils/Qt-Utils/encryption.h"
 #include <boost/regex.hpp>
 #include <boost/filesystem.hpp>
-#include "Qt-Utils/stl_extension.hpp"
+#include "utils/Qt-Utils/stl_extension.hpp"
 #include <mutex>
 #include <QDir>
-#include "Qt-Utils/qt.hpp"
+#include "utils/Qt-Utils/qt.hpp"
 #include <QAbstractItemModel>
 #include <QModelIndex>
 
-#include "Qt-Utils/json.hpp"
+#include "utils/Qt-Utils/json.hpp"
 using json = nlohmann::json;
 
 inline bool check_file_position_legality (const QString& path);

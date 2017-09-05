@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>mtm_main</class>
- <widget class="QWidget" name="mtm_main">
+ <class>mod_main</class>
+ <widget class="QWidget" name="mod_main">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>737</width>
-    <height>412</height>
+    <width>885</width>
+    <height>517</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>0</width>
+    <height>0</height>
+   </size>
+  </property>
   <property name="windowTitle">
-   <string>mtm_main</string>
+   <string>mod_main</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
@@ -30,7 +36,7 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="ribbon_mtm" name="widget_ribbon" native="true"/>
+    <widget class="ribbon_mod" name="widget_ribbon" native="true"/>
    </item>
    <item>
     <widget class="QMdiArea" name="mdi"/>
@@ -40,9 +46,9 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>ribbon_mtm</class>
+   <class>ribbon_mod</class>
    <extends>QWidget</extends>
-   <header>mtm/ribbon/ribbon_mtm.h</header>
+   <header>mod/ribbon/ribbon_mod.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

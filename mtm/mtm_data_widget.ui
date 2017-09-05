@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>data_widget</class>
- <widget class="QWidget" name="data_widget">
+ <class>mtm_data_widget</class>
+ <widget class="QWidget" name="mtm_data_widget">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -23,7 +23,7 @@
   <customwidget>
    <class>table_view</class>
    <extends>QTableView</extends>
-   <header>utils/table_view.h</header>
+   <header location="global">utils/view/table_view.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

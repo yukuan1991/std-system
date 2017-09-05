@@ -2,7 +2,7 @@
 #define MTM_WIDGET_H
 
 #include <QWidget>
-#include <mtm/Qt-Utils/tinyxml2.h>
+#include <utils/Qt-Utils/tinyxml2.h>
 
 namespace Ui {
 class mtm_widget;

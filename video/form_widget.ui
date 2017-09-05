@@ -99,7 +99,7 @@
   <customwidget>
    <class>table_view</class>
    <extends>QTableView</extends>
-   <header>utils/table_view.h</header>
+   <header location="global">utils/view/table_view.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

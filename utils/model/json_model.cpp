@@ -1,15 +1,16 @@
-﻿#include "utils/json_model.h"
+﻿#include "utils/model/json_model.h"
 #include "QDebug"
 #include <QColor>
 #include <QBrush>
 #include <boost/scope_exit.hpp>
 #include <QFont>
-#include "mtm/arithmetic_resource.hpp"
+#include "utils/arithmetic_resource.hpp"
 
 json_model::json_model(QObject *parent)
     : QAbstractTableModel(parent)
 {
-    std::tie (kv_tmu_, std::ignore) = read_tmu_data ();
+//    std::tie (kv_tmu_, std::ignore) = read_tmu_data ();
+    std::tie (kv_tmu_, std::ignore, std::ignore, std::ignore) = read_tmu_data();
 }
 
 QVariant json_model::headerData(int section, Qt::Orientation orientation, int role) const
@@ -135,6 +136,7 @@ bool json_model::setData(const QModelIndex &index, const QVariant &value, int ro
         assert (op_header);
 
         row_data[*op_header] = value;
+
 
         return true;
     }
@@ -359,7 +361,7 @@ bool json_model::paste_data(const QModelIndex &index, const QVariant &value)
             for(auto it : list)
             {
                 auto str = it.toStdString();
-                const auto prefix_code = "mtm_" + str;
+                const auto prefix_code = "mod_" + str;
 
                 auto found = kv_tmu_.find (prefix_code);
 

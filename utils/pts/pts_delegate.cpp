@@ -6,7 +6,7 @@
 #include <QComboBox>
 #include <QSpinBox>
 #include <QDoubleSpinBox>
-#include "mtm/arithmetic_resource.hpp"
+#include "utils/arithmetic_resource.hpp"
 #include <boost/algorithm/string.hpp>
 #include <QStyleOptionViewItem>
 #include "code_edit.h"
@@ -14,7 +14,9 @@
 
 pts_delegate::pts_delegate(QObject *parent) : QStyledItemDelegate (parent)
 {
-    std::tie (kv_tmu_, std::ignore) = read_tmu_data ();
+//    std::tie (kv_tmu_, std::ignore) = read_tmu_data ();
+    std::tie (kv_tmu_, std::ignore, std::ignore, std::ignore) = read_tmu_data();
+
 }
 
 QWidget *pts_delegate::createEditor(QWidget *parent, const QStyleOptionViewItem &, const QModelIndex &index) const
@@ -177,9 +179,11 @@ void pts_delegate::set_code(QWidget *editor, QAbstractItemModel *model, const QM
 {
     auto edit = dynamic_cast<QLineEdit*> (editor); assert (edit);
     std::string raw_code = edit->text ().toStdString ();
+
     boost::trim (raw_code);
 
     std::for_each (raw_code.begin (), raw_code.end (), [] (auto& ch) {if (ch >= 'a' and ch <= 'z') ch &= ~(32);});
+
 
     boost::regex splitter ("[[:alnum:]]+");
     boost::smatch hit;
@@ -192,12 +196,13 @@ void pts_delegate::set_code(QWidget *editor, QAbstractItemModel *model, const QM
     {
         const auto code = hit[0].str ();
 
-        const auto prefix_code = "mtm_" + code;
+        const auto prefix_code = "mod_" + code;
 
         auto found = kv_tmu_.find (prefix_code);
+
         if (found == kv_tmu_.end ())
         {
-            model->setData (index, edit->text ().trimmed (), Qt::EditRole);
+            model->setData (index, raw_code.data (), Qt::EditRole);
             return;
         }
 

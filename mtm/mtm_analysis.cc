@@ -67,17 +67,17 @@ void mtm_analysis::init()
 void mtm_analysis::init_conn()
 {
     connect (ui->widget_mtm, &mtm_widget::code_changed,
-             ui->widget_data, &data_widget::add_code);
+             ui->widget_data, &mtm_data_widget::add_code);
 
     connect (ui->widget_mtm, &mtm_widget::return_pressed,
-             ui->widget_data, &data_widget::next_code);
+             ui->widget_data, &mtm_data_widget::next_code);
 
-    connect(this, &mtm_analysis::cut, ui->widget_data, &data_widget::on_cut);
-    connect(this, &mtm_analysis::copy, ui->widget_data, &data_widget::on_copy);
-    connect(this, &mtm_analysis::paste, ui->widget_data, &data_widget::on_paste);
-    connect(this, &mtm_analysis::del, ui->widget_data, &data_widget::on_del);
+    connect(this, &mtm_analysis::cut, ui->widget_data, &mtm_data_widget::on_cut);
+    connect(this, &mtm_analysis::copy, ui->widget_data, &mtm_data_widget::on_copy);
+    connect(this, &mtm_analysis::paste, ui->widget_data, &mtm_data_widget::on_paste);
+    connect(this, &mtm_analysis::del, ui->widget_data, &mtm_data_widget::on_del);
 
-    connect (ui->widget_data, &data_widget::std_time_sum,
+    connect (ui->widget_data, &mtm_data_widget::std_time_sum,
              ui->widget_mtm, &mtm_widget::set_std_time_sum);
 }
 

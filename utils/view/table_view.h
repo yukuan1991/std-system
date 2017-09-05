@@ -1,9 +1,10 @@
-﻿#pragma once
+﻿#ifndef TABLE_VIEW_H
+#define TABLE_VIEW_H
 
 #include <QTableView>
 #include <vector>
 #include <string>
-#include "utils/json_model.h"
+#include "utils/model/json_model.h"
 #include <tuple>
 #include <QPoint>
 
@@ -35,3 +36,4 @@ private:
     QModelIndex current_click_index_;
 };
 
+#endif // TABLE_VIEW_H

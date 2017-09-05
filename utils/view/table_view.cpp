@@ -5,13 +5,13 @@
 #include <QMouseEvent>
 #include <boost/scope_exit.hpp>
 #include <QAbstractItemView>
+#include "utils/Qt-Utils/krys_application.hpp"
 #include <QString>
 #include <QMessageBox>
+#include "utils/Qt-Utils/stl_extension.hpp"
 #include <memory>
 #include <QMenu>
 #include <QDir>
-#include <QApplication>
-#include <QPainter>
 
 table_view::table_view(QWidget* parent)
     :QTableView (parent)
@@ -29,7 +29,6 @@ void table_view::mouseReleaseEvent (QMouseEvent *event)
     QTableView::mouseReleaseEvent (event);
 
     current_click_index_ = this->indexAt (event->pos ());
-
     if (event->button () == Qt::RightButton)
     {
         auto menu = std::make_unique<QMenu> ();
@@ -45,8 +44,8 @@ void table_view::mouseReleaseEvent (QMouseEvent *event)
         connect (action_paste, &QAction::triggered, this, &table_view::on_paste);
         menu->exec (QCursor::pos ());
     }
-
     current_click_index_ = {};
+
 }
 
 void table_view::mousePressEvent(QMouseEvent *event)
@@ -114,7 +113,8 @@ void table_view::on_copy_del(int flag)
 
             if (flag & OPERATION_DEL)
             {
-                model->setData (index, {}, paste_role);
+                qDebug() << "del";
+                model->setData (index, QString {}, paste_role);
             }
         }
         if (i != max_row)
@@ -123,6 +123,7 @@ void table_view::on_copy_del(int flag)
         }
     }
     board->setText (clip_data);
+    qDebug() << clip_data;
 }
 
 void table_view::on_paste()
@@ -176,6 +177,8 @@ void table_view::on_paste()
             }
 
             auto index = model->index (current_row, current_col);
+            qDebug() << data[i][j].data();
+//            model->setData (index, data[i][j].data (), Qt::UserRole + 100);
             model->setData (index, data[i][j].data (), paste_role);
         }
     }
@@ -195,13 +198,19 @@ void table_view::keyPressEvent(QKeyEvent *event)
             table_view::on_copy_del(OPERATION_COPY | OPERATION_DEL);
             return;
         }
+        else if (event->key () == Qt::Key_V)
+        {
+            table_view::on_paste();
+            return;
+        }
     }
+
     QTableView::keyPressEvent (event);
 }
 
 std::vector<std::vector<std::string>> table_view::get_clip_structure()
 {
-    auto board = QApplication::clipboard ();
+    auto board = krys_application::clipboard ();
     auto clip = board->text ().toStdString ();
     if (clip.empty ())
     {
