@@ -27,7 +27,6 @@ SOURCES += main.cc \
     utils/interface_control/about_us_dlg.cc \
     utils/interface_control/push_button.cpp \
     utils/model/json_model.cpp \
-    utils/pts/code_edit.cpp \
     utils/pts/pts_delegate.cpp \
     utils/pts/pts_model.cpp \
     utils/Qt-Utils/des.cpp \
@@ -109,20 +108,17 @@ HEADERS += \
     utils/video_player.hpp \
     video/whisker.h \
     video/progress_label.h \
-    mtm/arithmetic_resource.hpp \
     mtm/mtm_analysis.h \
     mtm/mtm_main.h \
     mtm/mtm_widget.h \
     utils/ribbon.h \
     video/video_ribbon.h \
-    utils/arithmetic_resource.hpp \
     mod/mod_analysis.h \
     mod/mod_main.h \
     mod/mod_widget.h \
     utils/interface_control/about_us_dlg.h \
     utils/interface_control/push_button.h \
     utils/model/json_model.h \
-    utils/pts/code_edit.h \
     utils/pts/pts_delegate.h \
     utils/pts/pts_model.h \
     utils/Qt-Utils/des.h \

@@ -1,8 +1,9 @@
 ﻿#include "mtm_widget.h"
 #include "ui_mtm_widget.h"
 #include <assert.h>
-#include "arithmetic_resource.hpp"
+#include "utils/arithmetic_resource.hpp"
 #include <QDate>
+#include <base/lang/defines.hpp>
 
 std::map<std::string, int> mtm_widget::kv_tmu_;
 
@@ -12,8 +13,8 @@ mtm_widget::mtm_widget(QWidget *parent) :
 {
     ui->setupUi(this);
     init ();
-    std::tie (kv_tmu_, mtm_data_) = read_tmu_data ();
-    ui->pushButton_78->setFlat(true);
+    std::tie (kv_tmu_, std::ignore, std::ignore, mtm_data_) = read_tmu_data ();
+    //ui->pushButton_78->setFlat(true);
 }
 
 

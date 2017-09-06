@@ -9,14 +9,11 @@
 #include "utils/arithmetic_resource.hpp"
 #include <boost/algorithm/string.hpp>
 #include <QStyleOptionViewItem>
-#include "code_edit.h"
 
 
 pts_delegate::pts_delegate(QObject *parent) : QStyledItemDelegate (parent)
 {
-//    std::tie (kv_tmu_, std::ignore) = read_tmu_data ();
     std::tie (kv_tmu_, std::ignore, std::ignore, std::ignore) = read_tmu_data();
-
 }
 
 QWidget *pts_delegate::createEditor(QWidget *parent, const QStyleOptionViewItem &, const QModelIndex &index) const
@@ -142,38 +139,6 @@ void pts_delegate::updateEditorGeometry(QWidget *editor, const QStyleOptionViewI
 {
     editor->setGeometry (option.rect);
 }
-
-//void pts_delegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
-//{
-//    auto model = index.model (); assert (model);
-//    auto header = model->headerData (index.column (), Qt::Horizontal).toString ();
-//
-//    if (header == "宽放率")
-//    {
-//        if (option.state & QStyle::State_Selected)
-//        {
-//            if (option.state & QStyle::State_Active)
-//            {
-//                painter->setPen (Qt::white);
-//                painter->fillRect (option.rect, option.palette.highlight ());
-//            }
-//            else
-//            {
-//                painter->setPen (Qt::black);
-//                painter->fillRect (option.rect, option.palette.window ());
-//            }
-//        }
-//        else
-//        {
-//            painter->setPen (Qt::black);
-//        }
-//
-//        painter->drawText (option.rect, "12345");
-//        return;
-//    }
-//    QStyledItemDelegate::paint (painter, option, index);
-//}
-
 
 void pts_delegate::set_code(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const
 {
