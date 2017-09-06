@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string> 标准工时系统</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
@@ -30,83 +30,47 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="QQuickWidget" name="topBanner">
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>30</height>
-      </size>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="tabPosition">
+      <enum>QTabWidget::West</enum>
      </property>
-     <property name="maximumSize">
-      <size>
-       <width>16777215</width>
-       <height>30</height>
-      </size>
+     <property name="currentIndex">
+      <number>4</number>
      </property>
-     <property name="resizeMode">
-      <enum>QQuickWidget::SizeRootObjectToView</enum>
-     </property>
-     <property name="source">
-      <url>
-       <string>qrc:/TopBanner.qml</string>
-      </url>
-     </property>
+     <widget class="QWidget" name="video_trial">
+      <attribute name="title">
+       <string>视频分析( 试产)</string>
+      </attribute>
+     </widget>
+     <widget class="VideoMainMassive" name="video_massive">
+      <attribute name="title">
+       <string> 视频分析(量产)</string>
+      </attribute>
+     </widget>
+     <widget class="mtm_main" name="mtm">
+      <attribute name="title">
+       <string>MTM</string>
+      </attribute>
+     </widget>
+     <widget class="mod_main" name="mod">
+      <attribute name="title">
+       <string>MOD</string>
+      </attribute>
+     </widget>
+     <widget class="most_main" name="most">
+      <attribute name="title">
+       <string>MOST</string>
+      </attribute>
+     </widget>
     </widget>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,1">
-     <property name="spacing">
-      <number>0</number>
-     </property>
-     <item>
-      <widget class="QQuickWidget" name="leftBanner">
-       <property name="minimumSize">
-        <size>
-         <width>180</width>
-         <height>750</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>155</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="resizeMode">
-        <enum>QQuickWidget::SizeRootObjectToView</enum>
-       </property>
-       <property name="source">
-        <url>
-         <string>qrc:/NavigatorWindow.qml</string>
-        </url>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QStackedWidget" name="mainStack">
-       <property name="currentIndex">
-        <number>3</number>
-       </property>
-       <widget class="video_main" name="vid"/>
-       <widget class="mod_main" name="mod"/>
-       <widget class="most_main" name="most"/>
-       <widget class="mtm_main" name="mtm"/>
-      </widget>
-     </item>
-    </layout>
    </item>
   </layout>
  </widget>
  <customwidgets>
   <customwidget>
-   <class>QQuickWidget</class>
+   <class>VideoMainMassive</class>
    <extends>QWidget</extends>
-   <header>QtQuickWidgets/QQuickWidget</header>
-  </customwidget>
-  <customwidget>
-   <class>video_main</class>
-   <extends>QWidget</extends>
-   <header location="global">video/video_main.h</header>
+   <header location="global">video/VideoMainMassive.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>

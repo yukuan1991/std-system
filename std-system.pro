@@ -7,7 +7,6 @@ QMAKE_CXXFLAGS += -std=c++1z
 SOURCES += main.cc \
     StdMain.cc \
     video/video_analysis.cc \
-    video/video_main.cc \
     video/video_widget.cc \
     video/form_widget.cpp \
     video/video_delegate.cc \
@@ -19,8 +18,6 @@ SOURCES += main.cc \
     mtm/mtm_analysis.cc \
     mtm/mtm_main.cc \
     mtm/mtm_widget.cc \
-    utils/ribbon.cc \
-    video/video_ribbon.cc \
     mod/mod_analysis.cc \
     mod/mod_main.cc \
     mod/mod_widget.cc \
@@ -42,7 +39,10 @@ SOURCES += main.cc \
     most/most_main.cc \
     most/most_selection_dlg.cpp \
     most/most_widget.cc \
-    most/most_data_widget.cc
+    most/most_data_widget.cc \
+    utils/ribbon.cc \
+    video/video_ribbon.cc \
+    video/VideoMainMassive.cc
 
 RESOURCES += qml.qrc
 
@@ -75,7 +75,6 @@ DISTFILES += \
 FORMS += \
     StdMain.ui \
     video/video_analysis.ui \
-    video/video_main.ui \
     video/video_widget.ui \
     video/form_widget.ui \
     video/first_dlg.ui \
@@ -91,12 +90,12 @@ FORMS += \
     most/most_main.ui \
     most/most_selection_dlg.ui \
     most/most_widget.ui \
-    most/most_data_widget.ui
+    most/most_data_widget.ui \
+    video/VideoMainMassive.ui
 
 HEADERS += \
     StdMain.h \
     video/video_analysis.h \
-    video/video_main.h \
     video/video_widget.h \
     video/form_widget.h \
     video/video_delegate.h \
@@ -139,7 +138,8 @@ HEADERS += \
     most/most_main.h \
     most/most_selection_dlg.h \
     most/most_widget.h \
-    most/most_data_widget.h
+    most/most_data_widget.h \
+    video/VideoMainMassive.h
 
 QMAKE_CXXFLAGS += -Wextra
 QMAKE_CXXFLAGS += -Wno-deprecated-declarations

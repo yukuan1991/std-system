@@ -59,7 +59,7 @@ void mtm_analysis::add_row()
     }
 }
 
-void mtm_analysis::init()
+void mtm_analysis::init ()
 {
     ui->widget_data->set_unit(0.036);
 }
@@ -119,7 +119,6 @@ nlohmann::json mtm_analysis::dump()
     data ["measure-date"] = measure_date().toStdString ();
     data ["measure-man"] = measure_man().toStdString ();
     data ["task-man"] = task_man().toStdString ();
-//    data ["std-time"] = std_time_sum().toStdString();
 
     return data;
 }
