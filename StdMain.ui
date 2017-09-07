@@ -35,7 +35,7 @@
       <enum>QTabWidget::West</enum>
      </property>
      <property name="currentIndex">
-      <number>4</number>
+      <number>5</number>
      </property>
      <widget class="QWidget" name="video_trial">
       <attribute name="title">
@@ -60,6 +60,11 @@
      <widget class="most_main" name="most">
       <attribute name="title">
        <string>MOST</string>
+      </attribute>
+     </widget>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>  产品族管理</string>
       </attribute>
      </widget>
     </widget>

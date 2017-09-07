@@ -42,7 +42,10 @@ SOURCES += main.cc \
     most/most_data_widget.cc \
     utils/ribbon.cc \
     video/video_ribbon.cc \
-    video/VideoMainMassive.cc
+    video/VideoMainMassive.cc \
+    IoManipulator.cc \
+    HttpIoManipulator.cc \
+    tcp.cc
 
 RESOURCES += qml.qrc
 
@@ -139,7 +142,10 @@ HEADERS += \
     most/most_selection_dlg.h \
     most/most_widget.h \
     most/most_data_widget.h \
-    video/VideoMainMassive.h
+    video/VideoMainMassive.h \
+    IoManipulator.h \
+    HttpIoManipulator.h \
+    tcp.h
 
 QMAKE_CXXFLAGS += -Wextra
 QMAKE_CXXFLAGS += -Wno-deprecated-declarations
