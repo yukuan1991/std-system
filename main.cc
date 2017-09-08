@@ -45,7 +45,5 @@ int main(int argc, char *argv[])
     w.setIoManipulator (std::make_shared<HttpIoManipulator> ("192.168.56.3"));
     w.resize (1366, 768);
     w.show ();
-
-
     return app.exec();
 }
