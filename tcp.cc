@@ -1,6 +1,7 @@
 ﻿#include "tcp.h"
 #include <regex>
 #include <boost/lexical_cast.hpp>
+#include <string_view>
 
 using namespace std::string_literals;
 using namespace nlohmann;
@@ -240,6 +241,29 @@ std::string read_chunked (conn_socket& sock)
     return str_output;
 }
 
+std::string http_post(not_null<const char *> host, not_null<const char*> path, std::string_view data, uint16_t port)
+{
+    auto sock = conn_socket::make_socket ();
+
+    if (!sock.connect (host, port))
+    {
+        return {};
+    }
+
+    std::stringstream ss;
+    ss << "POST " << path << " HTTP/1.1\r\n";
+    ss << "Host: " << host << "\r\n";
+    ss << "Content-Length:" << data.length () << "\r\n";
+
+
+    ss << "\r\n";
+    ss << data;
+
+
+    sock.writen (ss.str ());
+
+    return http_response (sock);
+}
 
 json json_http_post(const char *host, not_null<const char*> path, const json &data, uint16_t port) try
 {

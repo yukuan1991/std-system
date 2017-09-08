@@ -45,7 +45,9 @@ SOURCES += main.cc \
     video/VideoMainMassive.cc \
     IoManipulator.cc \
     HttpIoManipulator.cc \
-    tcp.cc
+    tcp.cc \
+    utils/JsonTree.cc \
+    product-family/ProductFamilyWidget.cc
 
 RESOURCES += qml.qrc
 
@@ -94,7 +96,8 @@ FORMS += \
     most/most_selection_dlg.ui \
     most/most_widget.ui \
     most/most_data_widget.ui \
-    video/VideoMainMassive.ui
+    video/VideoMainMassive.ui \
+    product-family/productfamilywidget.ui
 
 HEADERS += \
     StdMain.h \
@@ -145,7 +148,9 @@ HEADERS += \
     video/VideoMainMassive.h \
     IoManipulator.h \
     HttpIoManipulator.h \
-    tcp.h
+    tcp.h \
+    utils/JsonTree.h \
+    product-family/ProductFamilyWidget.h
 
 QMAKE_CXXFLAGS += -Wextra
 QMAKE_CXXFLAGS += -Wno-deprecated-declarations

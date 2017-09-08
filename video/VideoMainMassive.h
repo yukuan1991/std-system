@@ -2,7 +2,9 @@
 
 #include <QWidget>
 #include <base/lang/not_null.h>
+#include <memory>
 #include <string>
+#include "IoManipulator.h"
 
 namespace Ui {
 class VideoMainMassive;
@@ -23,6 +25,7 @@ public:
     QMdiArea * area ();
     void set_button_enabled();
     video_analysis * active_window();
+    void setIoManipulator (std::shared_ptr<IoManipulator> io) { this->io = io; }
 private:
     using analysis_slot = void (video_analysis::*) ();
     not_null<video_analysis*> create_window (const QString & title);
@@ -50,5 +53,6 @@ private:
     void on_example_cycle ();
 private:
     Ui::VideoMainMassive *ui;
+    std::shared_ptr<IoManipulator> io;
 };
 

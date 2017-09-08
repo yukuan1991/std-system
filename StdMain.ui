@@ -62,7 +62,7 @@
        <string>MOST</string>
       </attribute>
      </widget>
-     <widget class="QWidget" name="tab">
+     <widget class="ProductFamilyWidget" name="product_family">
       <attribute name="title">
        <string>  产品族管理</string>
       </attribute>
@@ -94,6 +94,12 @@
    <class>most_main</class>
    <extends>QWidget</extends>
    <header location="global">most/most_main.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ProductFamilyWidget</class>
+   <extends>QWidget</extends>
+   <header>product-family/ProductFamilyWidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
