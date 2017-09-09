@@ -45,7 +45,12 @@ SOURCES += main.cc \
     video/VideoMainMassive.cc \
     IoManipulator.cc \
     HttpIoManipulator.cc \
-    tcp.cc
+    tcp.cc \
+    video/VideoTrialRibbon.cpp \
+    video/FormWidget.cpp \
+    video/VideoAnalysis.cc \
+    video/VideoFormModel.cc \
+    video/VideoMainTrial.cc
 
 RESOURCES += qml.qrc
 
@@ -94,7 +99,10 @@ FORMS += \
     most/most_selection_dlg.ui \
     most/most_widget.ui \
     most/most_data_widget.ui \
-    video/VideoMainMassive.ui
+    video/VideoMainMassive.ui \
+    video/FormWidget.ui \
+    video/VideoAnalysis.ui \
+    video/VideoMainTrial.ui
 
 HEADERS += \
     StdMain.h \
@@ -145,7 +153,12 @@ HEADERS += \
     video/VideoMainMassive.h \
     IoManipulator.h \
     HttpIoManipulator.h \
-    tcp.h
+    tcp.h \
+    video/VideoTrialRibbon.h \
+    video/FormWidget.h \
+    video/VideoAnalysis.h \
+    video/VideoFormModel.h \
+    video/VideoMainTrial.h
 
 QMAKE_CXXFLAGS += -Wextra
 QMAKE_CXXFLAGS += -Wno-deprecated-declarations
