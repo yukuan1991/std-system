@@ -47,7 +47,8 @@ SOURCES += main.cc \
     HttpIoManipulator.cc \
     tcp.cc \
     utils/JsonTree.cc \
-    product-family/ProductFamilyWidget.cc
+    product-family/ProductFamilyWidget.cc \
+    database/database.cc
 
 RESOURCES += qml.qrc
 
@@ -75,7 +76,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 DISTFILES += \
     mod/mod.data \
-    most/most.data
+    most/most.data \
+    database/test.json
 
 FORMS += \
     StdMain.ui \
@@ -97,7 +99,8 @@ FORMS += \
     most/most_widget.ui \
     most/most_data_widget.ui \
     video/VideoMainMassive.ui \
-    product-family/productfamilywidget.ui
+    product-family/productfamilywidget.ui \
+    database/database.ui
 
 HEADERS += \
     StdMain.h \
@@ -150,7 +153,8 @@ HEADERS += \
     HttpIoManipulator.h \
     tcp.h \
     utils/JsonTree.h \
-    product-family/ProductFamilyWidget.h
+    product-family/ProductFamilyWidget.h \
+    database/database.h
 
 QMAKE_CXXFLAGS += -Wextra
 QMAKE_CXXFLAGS += -Wno-deprecated-declarations
