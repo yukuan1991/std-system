@@ -1,4 +1,4 @@
-QT += qml quick widgets core gui quickwidgets avwidgets charts xlsx
+QT += qml quick widgets core gui quickwidgets avwidgets charts xlsx printsupport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 CONFIG -= c++11
@@ -47,7 +47,24 @@ SOURCES += main.cc \
     HttpIoManipulator.cc \
     tcp.cc \
     utils/JsonTree.cc \
-    product-family/ProductFamilyWidget.cc
+    product-family/ProductFamilyWidget.cc \
+    database/database.cc \
+    video/videotrial/FormWidget.cpp \
+    video/videotrial/VideoAnalysis.cc \
+    video/videotrial/VideoFormModel.cc \
+    video/videotrial/VideoMainTrial.cc \
+    video/videotrial/VideoTrialRibbon.cc \
+    pwh_contrast/PwhContrastMain.cc \
+    utils/data_veryfication.cpp \
+    utils/Qt-Utils/openaf.cc \
+    pwh_contrast/ribbon/PwhContrastRibbon.cc \
+    pwh_contrast/PieView.cc \
+    pwh_contrast/production_management_button_tree_dlg.cpp \
+    pwh_contrast/PwhContrast.cc \
+    pwh_contrast/PwhListWidget.cc \
+    pwh_contrast/StatView.cc \
+    utils/model/product_info_model.cpp \
+    utils/model/product_structure_model.cpp
 
 RESOURCES += qml.qrc
 
@@ -75,7 +92,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 DISTFILES += \
     mod/mod.data \
-    most/most.data
+    most/most.data \
+    database/test.json
 
 FORMS += \
     StdMain.ui \
@@ -97,7 +115,15 @@ FORMS += \
     most/most_widget.ui \
     most/most_data_widget.ui \
     video/VideoMainMassive.ui \
-    product-family/productfamilywidget.ui
+    product-family/productfamilywidget.ui \
+    database/database.ui \
+    video/videotrial/FormWidget.ui \
+    video/videotrial/VideoAnalysis.ui \
+    video/videotrial/VideoMainTrial.ui \
+    pwh_contrast/pwhcontrastmain.ui \
+    pwh_contrast/production_management_button_tree_dlg.ui \
+    pwh_contrast/pwhcontrast.ui \
+    pwh_contrast/StatView.ui
 
 HEADERS += \
     StdMain.h \
@@ -150,7 +176,24 @@ HEADERS += \
     HttpIoManipulator.h \
     tcp.h \
     utils/JsonTree.h \
-    product-family/ProductFamilyWidget.h
+    product-family/ProductFamilyWidget.h \
+    database/database.h \
+    video/videotrial/FormWidget.h \
+    video/videotrial/VideoAnalysis.h \
+    video/videotrial/VideoFormModel.h \
+    video/videotrial/VideoMainTrial.h \
+    video/videotrial/VideoTrialRibbon.h \
+    pwh_contrast/PwhContrastMain.h \
+    utils/data_veryfication.h \
+    utils/Qt-Utils/openaf.h \
+    pwh_contrast/ribbon/PwhContrastRibbon.h \
+    pwh_contrast/PieView.h \
+    pwh_contrast/production_management_button_tree_dlg.h \
+    pwh_contrast/PwhContrast.h \
+    pwh_contrast/PwhListWidget.h \
+    pwh_contrast/StatView.h \
+    utils/model/product_info_model.h \
+    utils/model/product_structure_model.h
 
 QMAKE_CXXFLAGS += -Wextra
 QMAKE_CXXFLAGS += -Wno-deprecated-declarations

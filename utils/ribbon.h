@@ -27,6 +27,7 @@ signals:
     void file_save ();
     void file_saveas ();
     void file_exit ();
+
     void set_enabled(bool);
     void mdi_active (bool);
 protected:
