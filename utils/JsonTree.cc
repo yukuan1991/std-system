@@ -10,6 +10,7 @@
 #include <QMenu>
 #include <assert.h>
 
+#include <QMouseEvent>
 #include <QDebug>
 
 using std::make_unique;
@@ -98,6 +99,7 @@ void JsonTree::resetHeader()
 
 void JsonTree::resetTree()
 {
+    clear ();
     const auto data = treeData ();
     for (auto & it : data.toList ())
     {
@@ -112,6 +114,15 @@ void JsonTree::resetTree()
 JsonTree::~JsonTree()
 {
 
+}
+
+void JsonTree::mouseReleaseEvent(QMouseEvent *event)
+{
+    QTreeWidget::mouseReleaseEvent (event);
+    if (itemAt (event->pos ()) == null)
+    {
+        clearSelection ();
+    }
 }
 
 std::unique_ptr<QTreeWidgetItem> JsonTree::setupItem (const QVariant &data)

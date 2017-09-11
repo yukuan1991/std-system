@@ -20,8 +20,6 @@ public:
     explicit ProductFamilyWidget(QWidget *parent = 0);
     ~ProductFamilyWidget();
     void setIoManipulator (std::shared_ptr<IoManipulator> io) { this->io = io; }
-protected:
-    bool eventFilter(QObject *watched, QEvent *event) override;
 private:
     void showEvent (QShowEvent * event) override;
     void initConn ();
@@ -29,7 +27,7 @@ private:
     void onRemoveButtonClicked ();
     void onModifyButtonClicked ();
     void onAdd (const QStringList & list, const QString & name);
-    QVariant refreshVariant(QStringList & list, const QString &name, const QVariant var);
+    void onDel (const QStringList & list);
 private:
     Ui::ProductFamilyWidget *ui;
     std::shared_ptr<IoManipulator> io;

@@ -7,6 +7,7 @@
 #include <QMouseEvent>
 #include <QJsonArray>
 #include <QMenu>
+#include <assert.h>
 #include <QDebug>
 #include <QJsonObject>
 #include "utils/json.hpp"
@@ -19,6 +20,8 @@ ProductFamilyWidget::ProductFamilyWidget(QWidget *parent) :
     ui->setupUi(this);
 
     QVariantList list;
+    list << "名称";
+    list << "类型";
     ui->treeWidget->setTreeHeader (list);
 
     initConn();
@@ -29,37 +32,6 @@ ProductFamilyWidget::ProductFamilyWidget(QWidget *parent) :
 ProductFamilyWidget::~ProductFamilyWidget()
 {
     delete ui;
-}
-
-bool ProductFamilyWidget::eventFilter(QObject *watched, QEvent *event)
-{
-    if(watched == ui->treeWidget)
-    {
-        if(event->type() == QEvent::MouseButtonRelease)
-        {
-            QMouseEvent* w = static_cast<QMouseEvent*>(event);
-            if(w->button() == Qt::RightButton)
-            {
-                QMenu menu;
-                auto add = menu.addAction("增加");
-                auto remove = menu.addAction("删除");
-                auto modify = menu.addAction("修改");
-                connect(add, &QAction::triggered, this, &ProductFamilyWidget::onAddButtonClicked);
-                connect(remove, &QAction::triggered, this, &ProductFamilyWidget::onRemoveButtonClicked);
-                connect(modify, &QAction::triggered, this, &ProductFamilyWidget::onModifyButtonClicked);
-                menu.exec(QCursor::pos());
-            }
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-    else
-    {
-        return QWidget::eventFilter(watched, event);
-    }
 }
 
 void ProductFamilyWidget::showEvent(QShowEvent *event)
@@ -83,7 +55,14 @@ void ProductFamilyWidget::onAddButtonClicked ()
 {
     const auto selectedItems = ui->treeWidget->selectedItems();
 
-    const auto name = QInputDialog::getText (this, "添加项目", "请输入项目名称");
+    bool isOk = false;
+    const auto name = QInputDialog::getText(this, "修改项目", "请输入新名称", QLineEdit::Normal, {}, &isOk);
+    if(name.isEmpty() and isOk)
+    {
+        QMessageBox::information(this, "提示", "目录名不能为空!");
+        return;
+    }
+
     QStringList list;
 
     if(selectedItems.size() == 0)
@@ -102,11 +81,6 @@ void ProductFamilyWidget::onAddButtonClicked ()
         return;
     }
 
-    if(name.isEmpty())
-    {
-        QMessageBox::information(this, "提示", "目录名不能为空!");
-        return;
-    }
 
     list << selectedText;
 
@@ -146,7 +120,7 @@ void ProductFamilyWidget::onRemoveButtonClicked()
         parentItem = parentItem->parent();
     }
 
-    emit ui->treeWidget->remove(list);
+    onDel (list);
 }
 
 void ProductFamilyWidget::onModifyButtonClicked()
@@ -161,8 +135,9 @@ void ProductFamilyWidget::onModifyButtonClicked()
     auto selectedItem = selectedItems.at(0);
     const auto selectedText = selectedItem->text(0);
 
-    const auto name = QInputDialog::getText(this, "修改项目", "请输入新名称");
-    if(name.isEmpty())
+    bool isOk = false;
+    const auto name = QInputDialog::getText(this, "修改项目", "请输入新名称", QLineEdit::Normal, {}, &isOk);
+    if(name.isEmpty() and isOk)
     {
         QMessageBox::information(this, "提示", "目录名不能为空!");
         return;
@@ -173,6 +148,7 @@ void ProductFamilyWidget::onModifyButtonClicked()
     previousList << selectedText;
     modifyList << name;
     auto parentItem = selectedItem->parent();
+
     while(parentItem)
     {
         previousList.prepend(parentItem->text(0));
@@ -185,28 +161,17 @@ void ProductFamilyWidget::onModifyButtonClicked()
 
 void ProductFamilyWidget::onAdd (const QStringList &list, const QString &name)
 {
-    auto var = ui->treeWidget->treeData ();
-    auto tmp = list;
-    auto newVar = refreshVariant (tmp, name, var);
-
-    io->pushData ("product", newVar);
-    ui->treeWidget->setTreeData (io->pullData ("product"));
+    io->addNode (list, name, "product", "", QVariantList ());
+    const auto data = io->pullData ("product");
+    ui->treeWidget->setTreeData (data);
 }
 
-
-QVariant ProductFamilyWidget::refreshVariant(QStringList & list, const QString &name, const QVariant var)
+void ProductFamilyWidget::onDel(const QStringList &list)
 {
-    QJsonObject obj;
-    obj["name"] = name;
-    obj["content"] = QJsonArray ();
-
-    auto totalData = QJsonDocument::fromVariant (var).array ();
-
-    if (totalData.isEmpty ())
-    {
-        totalData.append (obj);
-    }
-
-    return totalData.toVariantList ();
+    io->delNode (list, "product");
+    const auto data = io->pullData ("product");
+    ui->treeWidget->setTreeData (data);
 }
+
+
 

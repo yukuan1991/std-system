@@ -27,6 +27,7 @@ public:
     QVariant treeHeader () const noexcept { return treeHeader_; }
 
     ~JsonTree () override;
+    void mouseReleaseEvent (QMouseEvent * event) override;
 
 private:
     void resetHeader ();
