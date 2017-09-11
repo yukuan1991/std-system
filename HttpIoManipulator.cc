@@ -22,6 +22,7 @@ void HttpIoManipulator::sendForApproval(const QStringList &path, const QVariant 
 QVariant HttpIoManipulator::pullData(const QString &data)
 {
 
+
 //    const auto res = http_get (ip_, "/cgi-bin/pull-data", {{"type", binary_to_base64 (data.toStdString ())}}, port_);
 //    qDebug () << __PRETTY_FUNCTION__ << " " << data;
 //    qDebug () << res.data ();
@@ -37,4 +38,5 @@ bool HttpIoManipulator::pushData (const QString &type, const QVariant &data)
 //    qDebug () << res.data ();
 //    return not res.empty ();
     return true;
+
 }
