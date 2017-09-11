@@ -7,6 +7,8 @@
 #include <QQmlApplicationEngine>
 #include <boost/filesystem.hpp>
 #include <boost/range/adaptors.hpp>
+
+#include "video/VideoMainTrial.h"
 #include <QDebug>
 #include <HttpIoManipulator.h>
 using namespace std::chrono_literals;
@@ -41,9 +43,18 @@ int main(int argc, char *argv[])
     QApplication app (argc, argv);
     app.setAttribute (Qt::AA_DontCreateNativeWidgetSiblings, true);
     set_style ();
-    StdMain w;
-    w.setIoManipulator (std::make_shared<HttpIoManipulator> ("192.168.56.3"));
-    w.resize (1366, 768);
-    w.show ();
+
+//    StdMain w;
+//    w.setIoManipulator (std::make_shared<HttpIoManipulator> ("192.168.56.3"));
+//    w.resize (1366, 768);
+//    w.show ();
+
+//    StdMain w;
+//    w.resize (1366, 768);
+//    w.show ();
+    VideoMainTrial w;
+    w.show();
+
+
     return app.exec();
 }

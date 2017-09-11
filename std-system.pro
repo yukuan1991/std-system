@@ -48,7 +48,12 @@ SOURCES += main.cc \
     tcp.cc \
     utils/JsonTree.cc \
     product-family/ProductFamilyWidget.cc \
-    database/database.cc
+    database/database.cc\
+    video/VideoTrialRibbon.cpp \
+    video/FormWidget.cpp \
+    video/VideoAnalysis.cc \
+    video/VideoFormModel.cc \
+    video/VideoMainTrial.cc
 
 RESOURCES += qml.qrc
 
@@ -100,7 +105,10 @@ FORMS += \
     most/most_data_widget.ui \
     video/VideoMainMassive.ui \
     product-family/productfamilywidget.ui \
-    database/database.ui
+    database/database.ui\
+    video/FormWidget.ui \
+    video/VideoAnalysis.ui \
+    video/VideoMainTrial.ui
 
 HEADERS += \
     StdMain.h \
@@ -154,7 +162,12 @@ HEADERS += \
     tcp.h \
     utils/JsonTree.h \
     product-family/ProductFamilyWidget.h \
-    database/database.h
+    database/database.h\
+    video/VideoTrialRibbon.h \
+    video/FormWidget.h \
+    video/VideoAnalysis.h \
+    video/VideoFormModel.h \
+    video/VideoMainTrial.h
 
 QMAKE_CXXFLAGS += -Wextra
 QMAKE_CXXFLAGS += -Wno-deprecated-declarations
