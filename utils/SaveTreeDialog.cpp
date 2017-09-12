@@ -67,7 +67,7 @@ void SaveTreeDialog::onButtonConfirmClicked()
         return;
     }
 
-    const auto name = ui->lineEdit->text();
+    const auto name = ui->lineEdit->text().trimmed();
     if(name.isEmpty())
     {
         QMessageBox::information(nullptr, "提示", "文件名不能为空！");
