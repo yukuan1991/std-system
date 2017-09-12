@@ -1,6 +1,8 @@
 ﻿#include "tcp.h"
 #include <regex>
 #include <boost/lexical_cast.hpp>
+#include <QDebug>
+#include <string_view>
 
 using namespace std::string_literals;
 using namespace nlohmann;
@@ -83,7 +85,6 @@ std::string http_get (const char* host, not_null<const char*> path, const std::m
     str_get += path;
     str_get += "?";
 
-    if (path)
     for (auto & it : params)
     {
         str_get += (it.first + "=" + it.second + "&");
@@ -97,8 +98,9 @@ std::string http_get (const char* host, not_null<const char*> path, const std::m
 
     return http_response (sock);
 }
-catch (...)
+catch (const std::exception & e)
 {
+    qDebug () << e.what ();
     return {};
 }
 
@@ -108,7 +110,7 @@ json json_http_get (const char *host, not_null<const char*> path, const std::map
 }
 catch (...)
 {
-    return {};
+return {};
 }
 
 
@@ -240,6 +242,29 @@ std::string read_chunked (conn_socket& sock)
     return str_output;
 }
 
+std::string http_post(not_null<const char *> host, not_null<const char*> path, std::string_view data, uint16_t port)
+{
+    auto sock = conn_socket::make_socket ();
+
+    if (!sock.connect (host, port))
+    {
+        return {};
+    }
+
+    std::stringstream ss;
+    ss << "POST " << path << " HTTP/1.1\r\n";
+    ss << "Host: " << host << "\r\n";
+    ss << "Content-Length:" << data.length () << "\r\n";
+
+
+    ss << "\r\n";
+    ss << data;
+
+
+    sock.writen (ss.str ());
+
+    return http_response (sock);
+}
 
 json json_http_post(const char *host, not_null<const char*> path, const json &data, uint16_t port) try
 {

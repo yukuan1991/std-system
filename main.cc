@@ -10,6 +10,7 @@
 
 #include "video/VideoMainTrial.h"
 #include <QDebug>
+#include <HttpIoManipulator.h>
 using namespace std::chrono_literals;
 using namespace std::string_view_literals;
 
@@ -42,11 +43,10 @@ int main(int argc, char *argv[])
     QApplication app (argc, argv);
     app.setAttribute (Qt::AA_DontCreateNativeWidgetSiblings, true);
     set_style ();
-//    StdMain w;
-//    w.resize (1366, 768);
-//    w.show ();
-    VideoMainTrial w;
-    w.show();
 
+    StdMain w;
+    w.setIoManipulator (std::make_shared<HttpIoManipulator> ("172.16.5.81", 8080));
+    w.resize (1366, 768);
+    w.show ();
     return app.exec();
 }

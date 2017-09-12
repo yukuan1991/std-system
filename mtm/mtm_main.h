@@ -4,6 +4,7 @@
 #include <QWidget>
 #include "utils/json.hpp"
 #include <base/lang/not_null.h>
+#include "IoManipulator.h"
 
 
 namespace Ui {
@@ -47,7 +48,7 @@ private:
 private:
     Ui::mtm_main *ui;
     json current_file_data_;
-
+    std::shared_ptr<IoManipulator> io;
 };
 
 #endif // MTM_MAIN_H

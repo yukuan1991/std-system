@@ -4,6 +4,7 @@
 #include "utils/json.hpp"
 #include <wininet.h>
 #include <base/io/file/file.hpp>
+#include <base/lang/not_null.h>
 constexpr int max_longlong_buffer = 32;
 
 conn_socket tcp_open (const char* ip, uint16_t port);
@@ -13,6 +14,7 @@ std::string read_string (conn_socket& sock, uint32_t max = 1024 * 1024 * 16);
 std::string http_get (const char* host, not_null<const char*> path, const std::map<std::string, std::string>& params = {}, uint16_t port = 80);
 nlohmann::json json_http_get (const char* host, not_null<const char*> path, const std::map<std::string, std::string>& params = {}, uint16_t port = 80);
 nlohmann::json json_http_post (const char* host, not_null<const char*> path, const nlohmann::json& data, uint16_t port = 80);
+std::string http_post(not_null<const char *> host, not_null<const char*> path, std::string_view data, uint16_t port = 80);
 
 // template download functions with callbacks
 struct close_wininet_deleter { void operator () (void* p) { ::InternetCloseHandle (p); } };

@@ -4,6 +4,7 @@
 #include <QWidget>
 #include "most_analysis.h"
 #include <base/lang/not_null.h>
+#include "IoManipulator.h"
 
 namespace Ui {
 class most_main;
@@ -43,6 +44,7 @@ private:
     most_analysis* active_window();
 private:
     Ui::most_main *ui;
+    std::shared_ptr<IoManipulator> io;
 };
 
 #endif // MOST_MAIN_H

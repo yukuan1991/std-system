@@ -35,9 +35,9 @@
       <enum>QTabWidget::West</enum>
      </property>
      <property name="currentIndex">
-      <number>5</number>
+      <number>0</number>
      </property>
-     <widget class="QWidget" name="video_trial">
+     <widget class="VideoMainTrial" name="video_trial">
       <attribute name="title">
        <string>视频分析( 试产)</string>
       </attribute>
@@ -62,9 +62,19 @@
        <string>MOST</string>
       </attribute>
      </widget>
-     <widget class="QWidget" name="tab">
+     <widget class="ProductFamilyWidget" name="product_family">
       <attribute name="title">
        <string>  产品族管理</string>
+      </attribute>
+     </widget>
+     <widget class="database" name="data_base">
+      <attribute name="title">
+       <string>标准资料库</string>
+      </attribute>
+     </widget>
+     <widget class="PwhContrastMain" name="pwh_contrast">
+      <attribute name="title">
+       <string>产品工时对比</string>
       </attribute>
      </widget>
     </widget>
@@ -94,6 +104,30 @@
    <class>most_main</class>
    <extends>QWidget</extends>
    <header location="global">most/most_main.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ProductFamilyWidget</class>
+   <extends>QWidget</extends>
+   <header>product-family/ProductFamilyWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>database</class>
+   <extends>QWidget</extends>
+   <header>database/database.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>VideoMainTrial</class>
+   <extends>QWidget</extends>
+   <header>video/videotrial/VideoMainTrial.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>PwhContrastMain</class>
+   <extends>QWidget</extends>
+   <header>pwh_contrast/PwhContrastMain.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

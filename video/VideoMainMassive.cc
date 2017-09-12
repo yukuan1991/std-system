@@ -231,15 +231,19 @@ void VideoMainMassive::init_conn()
     connect (ui->video_rib, &video_ribbon::change_task_count, [this] { apply_to_current (&video_analysis::set_task_count); });
     connect (ui->video_rib, &video_ribbon::invalid_timespan, [this] { apply_to_current (&video_analysis::modify_invalid); });
     connect (ui->video_rib, &video_ribbon::paste, [this] { apply_to_current (&video_analysis::on_paste); });
+
     connect (ui->video_rib, &ribbon::file_save, this, &VideoMainMassive::on_save);
     connect (ui->video_rib, &ribbon::file_saveas, this, &VideoMainMassive::on_save_as);
     connect (ui->video_rib, &ribbon::file_open, this, &VideoMainMassive::on_open);
     connect (ui->video_rib, &ribbon::file_exit, this, &VideoMainMassive::close);
+
     connect (ui->video_rib, &video_ribbon::export_data, this, &VideoMainMassive::export_xlsx);
     connect (ui->video_rib, &video_ribbon::measure_date, this, &VideoMainMassive::on_measure_date);
     connect (ui->video_rib, &video_ribbon::measure_man, this, &VideoMainMassive::on_measure_man);
     connect (ui->video_rib, &video_ribbon::task_man, this, &VideoMainMassive::on_task_man);
     connect (ui->video_rib, &video_ribbon::change_example_cycle, this, &VideoMainMassive::on_example_cycle);
+
+    connect(ui->mdi, &QMdiArea::subWindowActivated, this, &VideoMainMassive::set_button_enabled);
 }
 
 void VideoMainMassive::change_task_count()

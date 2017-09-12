@@ -22,7 +22,6 @@ mod_main::mod_main(QWidget *parent) :
     ui->mdi->setViewMode (QMdiArea::TabbedView);
     setWindowState(Qt::WindowMaximized);
     setMinimumSize(QSize(1000, 800));
-//    init();
     init_conn();
     set_button_enabled();
 }
@@ -32,13 +31,8 @@ mod_main::~mod_main()
     delete ui;
 }
 
-//void mod_main::init()
-//{
-//}
-
 void mod_main::init_conn()
 {
-//    connect(ui->widget_ribbon, &ribbon_mod::file_menu_triggered, [this] (const QString & s) { file_operations(s); });
     connect (ui->widget_ribbon, &ribbon::file_new, this, &mod_main::file_new);
     connect (ui->widget_ribbon, &ribbon::file_open, this, &mod_main::file_open);
     connect (ui->widget_ribbon, &ribbon::file_save, this, &mod_main::file_save);
@@ -56,7 +50,6 @@ void mod_main::init_conn()
 
     connect(ui->widget_ribbon, &ribbon_mod::help, this, &mod_main::help_advice);
 
-//    connect (ui->widget_data, &data_widget::line_exists, ui->widget_ribbon, &ribbon_mod::set_enabled);
     connect(ui->mdi, &QMdiArea::subWindowActivated, this, &mod_main::set_button_enabled);
 
 }

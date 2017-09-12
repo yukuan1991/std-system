@@ -4,6 +4,8 @@
 #include <QWidget>
 #include "utils/json.hpp"
 #include <base/lang/not_null.h>
+#include <memory>
+#include "IoManipulator.h"
 
 
 namespace Ui {
@@ -44,6 +46,7 @@ private:
     mod_analysis* active_window();
 private:
     Ui::mod_main *ui;
+    std::shared_ptr<IoManipulator> io;
 };
 
 #endif // MOD_MAIN_H

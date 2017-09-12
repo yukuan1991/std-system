@@ -15,6 +15,11 @@ StdMain::StdMain(QWidget *parent) :
     ui->setupUi(this);
 }
 
+void StdMain::setIoManipulator(std::shared_ptr<IoManipulator> p)
+{
+    ui->product_family->setIoManipulator (p);
+}
+
 StdMain::~StdMain()
 {
     delete ui;
