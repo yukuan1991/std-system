@@ -164,7 +164,7 @@ void mtm_main::file_save()
     QByteArray arr (w->dump ().dump (4).data ());
     const auto variantData = QJsonDocument::fromJson (arr).toVariant ();
 
-    io->addNode (path, name, "product", "视频分析法", variantData);
+    io->addNode (path, name, "product", "mtm", variantData);
 }
 
 void mtm_main::file_save_as()

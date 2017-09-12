@@ -405,7 +405,7 @@ void VideoMainTrial::on_save()
     const auto path = saveDetail["path"].toStringList ();
     const auto name = saveDetail["name"].toString ();
 
-    io->addNode (path, name, "product", "视频分析法", w->dump ());
+    io->addNode (path, name, "product", "视频分析法(试产)", w->dump ());
 
 }
 
