@@ -15,6 +15,7 @@
 #include <QDateEdit>
 #include <QStyleFactory>
 #include <QInputDialog>
+#include "utils/SaveTreeDialog.h"
 #include <base/lang/not_null.h>
 #include <QInputDialog>
 
@@ -410,6 +411,21 @@ void VideoMainMassive::on_save()
     }
 
     const auto data = io->pullData ("product");
+
+    SaveTreeDialog dlg;
+    dlg.load (data);
+    const auto res = dlg.exec ();
+    if (res != SaveTreeDialog::Accepted)
+    {
+        return;
+    }
+
+    const auto path = dlg.dump ();
+
+    QByteArray arr (w->dump ().dump (4).data ());
+    const auto variantData = QJsonDocument::fromJson (arr).toVariant ();
+
+    io->addNode (path, "测试分析", "product", "视频分析法", variantData);
 
     //if (const auto title_path = active->windowTitle ();
     //        title_path == "未命名")

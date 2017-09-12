@@ -46,6 +46,7 @@ bool HttpIoManipulator::addNode(const QStringList &path, const QString &name, co
     map ["name"] = name;
     map ["data"] = data;
     map ["type"] = dataType;
+    qDebug () << QJsonDocument::fromVariant (map).toJson ().toStdString ().data ();
 
 
     auto res = http_post (ip_, "/cgi-bin/add-node", QJsonDocument::fromVariant (map).toJson ().toStdString ());
