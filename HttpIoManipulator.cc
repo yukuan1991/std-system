@@ -8,6 +8,7 @@
 #include <QDebug>
 #include <base/io/file/file.hpp>
 #include <QStringList>
+#include <base/io/file/file.hpp>
 #include <QVariantList>
 
 HttpIoManipulator::HttpIoManipulator(not_null<const char *> ip, uint16_t port)
@@ -48,7 +49,7 @@ bool HttpIoManipulator::addNode(const QStringList &path, const QString &name, co
     map ["type"] = dataType;
 
 
-    auto res = http_post (ip_, "/cgi-bin/add-node", QJsonDocument::fromVariant (map).toJson ().toStdString ());
+    auto res = http_post (ip_, "/cgi-bin/add-node", QJsonDocument::fromVariant (map).toJson ().toStdString (), port_);
     qDebug () << res.data ();
 
     return res == "success";
@@ -64,8 +65,9 @@ bool HttpIoManipulator::delNode(const QStringList &path, const QString &dataFami
     map ["path"] = list;
     map ["file"] = dataFamily;
 
-    qDebug () << QJsonDocument::fromVariant (map).toJson ().toStdString ().data ();
-    auto res = http_post (ip_, "/cgi-bin/del-node", QJsonDocument::fromVariant (map).toJson ().toStdString ());
+    file::write_buffer ("123.json", QJsonDocument::fromVariant (map).toJson ().toStdString ());
+
+    auto res = http_post (ip_, "/cgi-bin/del-node", QJsonDocument::fromVariant (map).toJson ().toStdString (), port_);
     qDebug () << res.data ();
     return res == "success";
 }
