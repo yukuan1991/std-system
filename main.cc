@@ -51,18 +51,23 @@ int main(int argc, char *argv[])
 //    w.setIoManipulator (std::make_shared<HttpIoManipulator> ("172.16.5.81", 8080));
 //    w.resize (1366, 768);
 //    w.show ();
-    QFile file("1.json");
-    file.open(QIODevice::ReadOnly);
-    auto text = file.readAll();
-    auto data = QJsonDocument::fromJson(text).toVariant();
-    qDebug() << data;
-    file.close();
 
-    SaveTreeDialog dlg;
-    dlg.load(data);
-    if(QDialog::Accepted == dlg.exec())
+    QFile file ("1.json");
+    file.open (QFile::ReadOnly);
+    const auto arr = file.readAll ();
+    const auto text = QJsonDocument::fromJson(arr).toVariant();
+
+    SaveTreeDialog w;
+    w.load(text);
+    if(QDialog::Accepted == w.exec())
     {
-        qDebug() << dlg.dump();
+        auto data = w.dump();
+        const auto list = data.toMap()["path"].toList();
+        for(int i = 0; i < list.size(); i++)
+        {
+            qDebug() << list.at(i).toString();
+        }
+        qDebug() << data.toMap()["name"];
     }
 
 

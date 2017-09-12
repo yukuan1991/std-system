@@ -26,7 +26,7 @@ void SaveTreeDialog::load(const QVariant &data)
     ui->treeWidget->setTreeData(data);
 }
 
-QStringList SaveTreeDialog::dump() const
+QVariant SaveTreeDialog::dump() const
 {
     const auto selectedList = ui->treeWidget->selectedItems();
 
@@ -42,7 +42,11 @@ QStringList SaveTreeDialog::dump() const
         parentItem = parentItem->parent();
     }
 
-    return dirList;
+    QVariantMap map;
+    map["path"] = dirList;
+    map["name"] = ui->lineEdit->text();
+
+    return map;
 }
 
 void SaveTreeDialog::onButtonConfirmClicked()
@@ -60,6 +64,13 @@ void SaveTreeDialog::onButtonConfirmClicked()
     if(!text.isEmpty())
     {
         QMessageBox::information(nullptr, "提示", "选择位置有误！");
+        return;
+    }
+
+    const auto name = ui->lineEdit->text();
+    if(name.isEmpty())
+    {
+        QMessageBox::information(nullptr, "提示", "文件名不能为空！");
         return;
     }
 
