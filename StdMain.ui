@@ -77,6 +77,11 @@
        <string>产品工时对比</string>
       </attribute>
      </widget>
+     <widget class="ExamineApproveMain" name="approval">
+      <attribute name="title">
+       <string>审批</string>
+      </attribute>
+     </widget>
     </widget>
    </item>
   </layout>
@@ -128,6 +133,12 @@
    <class>PwhContrastMain</class>
    <extends>QWidget</extends>
    <header>pwh_contrast/PwhContrastMain.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ExamineApproveMain</class>
+   <extends>QWidget</extends>
+   <header>approval/ExamineApproveMain.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

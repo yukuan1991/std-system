@@ -33,7 +33,6 @@ database::database(QWidget *parent) :
 //        ui->treeWidget->setTreeData (var);
 //    }
 //    qDebug() << "yuzhizhe_database_02";
-
     //ui->treeWidget->setTreeData (QJsonDocument::fromJson (arr).toVariant ());
 }
 

@@ -64,7 +64,8 @@ SOURCES += main.cc \
     pwh_contrast/PwhListWidget.cc \
     pwh_contrast/StatView.cc \
     utils/model/product_info_model.cpp \
-    utils/model/product_structure_model.cpp
+    utils/model/product_structure_model.cpp \
+    approval/ExamineApproveMain.cpp
 
 RESOURCES += qml.qrc
 
@@ -93,7 +94,9 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 DISTFILES += \
     mod/mod.data \
     most/most.data \
-    database/test.json
+    database/test.json \
+    approval/test.json \
+    approval/2.vaf
 
 FORMS += \
     StdMain.ui \
@@ -123,7 +126,8 @@ FORMS += \
     pwh_contrast/pwhcontrastmain.ui \
     pwh_contrast/production_management_button_tree_dlg.ui \
     pwh_contrast/pwhcontrast.ui \
-    pwh_contrast/StatView.ui
+    pwh_contrast/StatView.ui \
+    approval/ExamineApproveMain.ui
 
 HEADERS += \
     StdMain.h \
@@ -193,7 +197,8 @@ HEADERS += \
     pwh_contrast/PwhListWidget.h \
     pwh_contrast/StatView.h \
     utils/model/product_info_model.h \
-    utils/model/product_structure_model.h
+    utils/model/product_structure_model.h \
+    approval/ExamineApproveMain.h
 
 QMAKE_CXXFLAGS += -Wextra
 QMAKE_CXXFLAGS += -Wno-deprecated-declarations
