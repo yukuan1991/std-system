@@ -7,13 +7,8 @@
 #include <QQmlApplicationEngine>
 #include <boost/filesystem.hpp>
 #include <boost/range/adaptors.hpp>
-
-#include "video/VideoMainTrial.h"
-#include <QDebug>
 #include <HttpIoManipulator.h>
-#include "utils/SaveTreeDialog.h"
-#include <QFile>
-#include <QJsonDocument>
+
 using namespace std::chrono_literals;
 using namespace std::string_view_literals;
 
