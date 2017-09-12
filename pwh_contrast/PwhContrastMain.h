@@ -3,6 +3,8 @@
 
 #include <QWidget>
 #include <base/lang/not_null.h>
+#include "IoManipulator.h"
+#include <memory>
 
 namespace Ui {
 class PwhContrastMain;
@@ -15,6 +17,8 @@ class PwhContrastMain : public QWidget
 public:
     explicit PwhContrastMain(QWidget *parent = 0);
     ~PwhContrastMain();
+
+    void setIoManipulator (std::shared_ptr<IoManipulator> io) { this->io = io; }
 
 private:
     void fileNew();
@@ -37,6 +41,7 @@ private:
     PwhContrast* activeWindow();
 private:
     Ui::PwhContrastMain *ui;
+    std::shared_ptr<IoManipulator> io;
 };
 
 #endif // PWHCONTRASTMAIN_H

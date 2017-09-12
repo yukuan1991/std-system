@@ -3,6 +3,8 @@
 #include <QWidget>
 #include <base/lang/not_null.h>
 #include <string>
+#include "IoManipulator.h"
+#include <memory>
 
 namespace Ui {
 class VideoMainTrial;
@@ -21,6 +23,7 @@ public:
     explicit VideoMainTrial(QWidget *parent = 0);
     ~VideoMainTrial();
     QMdiArea * area ();
+    void setIoManipulator (std::shared_ptr<IoManipulator> io) { this->io = io; }
 private:
     using analysis_slot = void (VideoAnalysis::*) ();
     not_null<VideoAnalysis*> create_window (const QString & title);
@@ -47,5 +50,6 @@ private:
     void on_save_as ();
 private:
     Ui::VideoMainTrial *ui;
+    std::shared_ptr<IoManipulator> io;
 };
 
