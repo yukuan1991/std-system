@@ -18,6 +18,7 @@ StdMain::StdMain(QWidget *parent) :
 void StdMain::setIoManipulator(std::shared_ptr<IoManipulator> p)
 {
     ui->product_family->setIoManipulator (p);
+    ui->video_massive->setIoManipulator (p);
 }
 
 StdMain::~StdMain()

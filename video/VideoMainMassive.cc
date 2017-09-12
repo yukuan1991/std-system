@@ -409,19 +409,21 @@ void VideoMainMassive::on_save()
         return;
     }
 
-    if (const auto title_path = active->windowTitle ();
-            title_path == "未命名")
-    {
-        const auto path = QFileDialog::getSaveFileName(this, "文件保存", ".", tr ("Video Analysis File (*.vaf)"));
-        const auto data = w->dump ();
+    const auto data = io->pullData ("product");
 
-        file::write_buffer (::utf_to_sys (path.toStdString ()).data (), data.dump (4));
-    }
-    else
-    {
-        const auto data = w->dump ();
-        file::write_buffer (::utf_to_sys (title_path.toStdString ()).data (), data.dump (4));
-    }
+    //if (const auto title_path = active->windowTitle ();
+    //        title_path == "未命名")
+    //{
+    //    const auto path = QFileDialog::getSaveFileName(this, "文件保存", ".", tr ("Video Analysis File (*.vaf)"));
+    //    const auto data = w->dump ();
+
+    //    file::write_buffer (::utf_to_sys (path.toStdString ()).data (), data.dump (4));
+    //}
+    //else
+    //{
+    //    const auto data = w->dump ();
+    //    file::write_buffer (::utf_to_sys (title_path.toStdString ()).data (), data.dump (4));
+    //}
 
 }
 
