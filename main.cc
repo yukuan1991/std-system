@@ -44,7 +44,6 @@ void set_style ()
 int main(int argc, char *argv[])
 {
     QApplication app (argc, argv);
-    app.setAttribute (Qt::AA_DontCreateNativeWidgetSiblings, true);
     set_style ();
     StdMain w;
     w.setIoManipulator (std::make_shared<HttpIoManipulator> ("192.168.56.3"));

@@ -420,27 +420,14 @@ void VideoMainMassive::on_save()
         return;
     }
 
-    const auto path = dlg.dump ();
+    const auto saveDetail = dlg.dump ().toMap ();
+    const auto path = saveDetail["path"].toStringList ();
+    const auto name = saveDetail["name"].toString ();
 
     QByteArray arr (w->dump ().dump (4).data ());
     const auto variantData = QJsonDocument::fromJson (arr).toVariant ();
 
-    io->addNode (path, "测试分析", "product", "视频分析法", variantData);
-
-    //if (const auto title_path = active->windowTitle ();
-    //        title_path == "未命名")
-    //{
-    //    const auto path = QFileDialog::getSaveFileName(this, "文件保存", ".", tr ("Video Analysis File (*.vaf)"));
-    //    const auto data = w->dump ();
-
-    //    file::write_buffer (::utf_to_sys (path.toStdString ()).data (), data.dump (4));
-    //}
-    //else
-    //{
-    //    const auto data = w->dump ();
-    //    file::write_buffer (::utf_to_sys (title_path.toStdString ()).data (), data.dump (4));
-    //}
-
+    io->addNode (path, name, "product", "视频分析法", variantData);
 }
 
 void VideoMainMassive::on_open()

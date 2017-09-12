@@ -16,7 +16,7 @@ public:
     ~SaveTreeDialog();
 
     void load(const QVariant& data);
-    QStringList dump() const;
+    QVariant dump() const;
 private:
     void onButtonConfirmClicked();
 
