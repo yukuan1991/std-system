@@ -10,6 +10,8 @@
 #include <base/io/file/file.hpp>
 #include <base/utils/charset.hpp>
 #include <QMessageBox>
+#include "utils/SaveTreeDialog.h"
+#include <QJsonDocument>
 #include <QDebug>
 
 using namespace std;
@@ -103,21 +105,24 @@ void mod_main::file_save()
         return;
     }
 
-    const auto title_path = active->windowTitle ();
-    if (title_path == "未命名")
-    {
-        const auto path = QFileDialog::getSaveFileName(this, "文件保存", ".", tr ("Mod Analysis File (*.modaf)"));
-        const auto data = w->dump ();
-//        qDebug() << data.dump(4).data();
+    const auto data = io->pullData ("product");
 
-        active->setWindowTitle(path);
-        file::write_buffer (::utf_to_sys (path.toStdString ()).data (), data.dump (4));
-    }
-    else
+    SaveTreeDialog dlg;
+    dlg.load (data);
+    const auto res = dlg.exec ();
+    if (res != SaveTreeDialog::Accepted)
     {
-        const auto data = w->dump ();
-        file::write_buffer (::utf_to_sys (title_path.toStdString ()).data (), data.dump (4));
+        return;
     }
+
+    const auto saveDetail = dlg.dump ().toMap ();
+    const auto path = saveDetail["path"].toStringList ();
+    const auto name = saveDetail["name"].toString ();
+
+    QByteArray arr (w->dump ().dump (4).data ());
+    const auto variantData = QJsonDocument::fromJson (arr).toVariant ();
+
+    io->addNode (path, name, "product", "视频分析法", variantData);
 }
 
 void mod_main::file_save_as()

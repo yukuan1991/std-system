@@ -18,6 +18,8 @@
 #include <QInputDialog>
 #include <QJsonDocument>
 #include <QJsonParseError>
+#include "utils/SaveTreeDialog.h"
+#include <QJsonDocument>
 
 using namespace std;
 
@@ -389,25 +391,21 @@ void VideoMainTrial::on_save()
         return;
     }
 
-    if (const auto title_path = active->windowTitle ();
-            title_path == "未命名")
-    {
-        const auto path = QFileDialog::getSaveFileName(this, "文件保存", ".", tr ("Video Analysis File (*.vaf)"));
-        const auto dumpData = w->dump();
-        QJsonDocument document = QJsonDocument::fromVariant(dumpData);
-        const auto text = document.toJson();
-        const auto data = QString(text).toStdString();
+    const auto data = io->pullData ("product");
 
-        file::write_buffer (::utf_to_sys (path.toStdString ()).data (), data);
-    }
-    else
+    SaveTreeDialog dlg;
+    dlg.load (data);
+    const auto res = dlg.exec ();
+    if (res != SaveTreeDialog::Accepted)
     {
-        const auto dumpData = w->dump();
-        QJsonDocument document = QJsonDocument::fromVariant(dumpData);
-        const auto text = document.toJson();
-        const auto data = QString(text).toStdString();
-        file::write_buffer (::utf_to_sys (title_path.toStdString ()).data (), data);
+        return;
     }
+
+    const auto saveDetail = dlg.dump ().toMap ();
+    const auto path = saveDetail["path"].toStringList ();
+    const auto name = saveDetail["name"].toString ();
+
+    io->addNode (path, name, "product", "视频分析法", w->dump ());
 
 }
 
