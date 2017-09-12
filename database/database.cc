@@ -2,6 +2,7 @@
 #include "ui_database.h"
 #include <QFile>
 #include <QJsonDocument>
+#include <QDebug>
 
 database::database(QWidget *parent) :
     QWidget(parent),
@@ -16,13 +17,23 @@ database::database(QWidget *parent) :
     auto value = intiData ();
     load (value);
 
+
+
     QVariantList list;
     list << "名称" << "类型";
     ui->treeWidget->setTreeHeader (list);
-    QFile file ("database/test.json");
-    file.open (QFile::ReadOnly);
-    const auto arr = file.readAll ();
-    ui->treeWidget->setTreeData (QJsonDocument::fromJson (arr).toVariant ());
+//    QFile file ("database/test.json");
+//    file.open (QFile::ReadOnly);
+//    const auto arr = file.readAll ();
+//    qDebug() << "yuzhizhe_database_01";
+//    if (io != null)
+//    {
+//        auto var = io->pullData ("product");
+//        qDebug() << var;
+//        ui->treeWidget->setTreeData (var);
+//    }
+//    qDebug() << "yuzhizhe_database_02";
+    //ui->treeWidget->setTreeData (QJsonDocument::fromJson (arr).toVariant ());
 }
 
 database::~database()
@@ -173,6 +184,16 @@ QVariant database::intiData()
     form["form"] = totalMap;
 
     return form;
+}
+
+void database::showEvent(QShowEvent *event)
+{
+    QWidget::showEvent (event);
+    if (io != null)
+    {
+        auto var = io->pullData ("product");
+        ui->treeWidget->setTreeData (var);
+    }
 }
 
 bool database::setTabelRowCount(const int &row)
