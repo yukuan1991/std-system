@@ -11,6 +11,9 @@
 #include "video/VideoMainTrial.h"
 #include <QDebug>
 #include <HttpIoManipulator.h>
+#include "utils/SaveTreeDialog.h"
+#include <QFile>
+#include <QJsonDocument>
 using namespace std::chrono_literals;
 using namespace std::string_view_literals;
 
@@ -44,9 +47,24 @@ int main(int argc, char *argv[])
     app.setAttribute (Qt::AA_DontCreateNativeWidgetSiblings, true);
     set_style ();
 
-    StdMain w;
-    w.setIoManipulator (std::make_shared<HttpIoManipulator> ("172.16.5.81", 8080));
-    w.resize (1366, 768);
-    w.show ();
+//    StdMain w;
+//    w.setIoManipulator (std::make_shared<HttpIoManipulator> ("172.16.5.81", 8080));
+//    w.resize (1366, 768);
+//    w.show ();
+    QFile file("1.json");
+    file.open(QIODevice::ReadOnly);
+    auto text = file.readAll();
+    auto data = QJsonDocument::fromJson(text).toVariant();
+    qDebug() << data;
+    file.close();
+
+    SaveTreeDialog dlg;
+    dlg.load(data);
+    if(QDialog::Accepted == dlg.exec())
+    {
+        qDebug() << dlg.dump();
+    }
+
+
     return app.exec();
 }

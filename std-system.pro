@@ -64,7 +64,8 @@ SOURCES += main.cc \
     pwh_contrast/PwhListWidget.cc \
     pwh_contrast/StatView.cc \
     utils/model/product_info_model.cpp \
-    utils/model/product_structure_model.cpp
+    utils/model/product_structure_model.cpp \
+    utils/SaveTreeDialog.cpp
 
 RESOURCES += qml.qrc
 
@@ -123,7 +124,8 @@ FORMS += \
     pwh_contrast/pwhcontrastmain.ui \
     pwh_contrast/production_management_button_tree_dlg.ui \
     pwh_contrast/pwhcontrast.ui \
-    pwh_contrast/StatView.ui
+    pwh_contrast/StatView.ui \
+    utils/SaveTreeDialog.ui
 
 HEADERS += \
     StdMain.h \
@@ -193,7 +195,8 @@ HEADERS += \
     pwh_contrast/PwhListWidget.h \
     pwh_contrast/StatView.h \
     utils/model/product_info_model.h \
-    utils/model/product_structure_model.h
+    utils/model/product_structure_model.h \
+    utils/SaveTreeDialog.h
 
 QMAKE_CXXFLAGS += -Wextra
 QMAKE_CXXFLAGS += -Wno-deprecated-declarations
