@@ -21,6 +21,8 @@ class mtm_main : public QWidget
 public:
     explicit mtm_main(QWidget *parent = 0);
     ~mtm_main();
+
+    void setIoManipulator (std::shared_ptr<IoManipulator> io) { this->io = io; }
 private:
 //    void init();
     void init_conn();

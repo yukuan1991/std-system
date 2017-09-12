@@ -21,6 +21,8 @@ class mod_main : public QWidget
 public:
     explicit mod_main(QWidget *parent = 0);
     ~mod_main();
+
+    void setIoManipulator (std::shared_ptr<IoManipulator> io) { this->io = io; }
 private:
 //    void init();
     void init_conn();

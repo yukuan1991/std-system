@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
     app.setAttribute (Qt::AA_DontCreateNativeWidgetSiblings, true);
     set_style ();
     StdMain w;
-    w.setIoManipulator (std::make_shared<HttpIoManipulator> ("192.168.56.3"));
+    w.setIoManipulator (std::make_shared<HttpIoManipulator> ("172.16.5.81",8080));
     w.resize (1366, 768);
     w.show ();
     return app.exec();

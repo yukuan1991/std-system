@@ -17,7 +17,7 @@ class most_main : public QWidget
 public:
     explicit most_main(QWidget *parent = 0);
     ~most_main();
-
+    void setIoManipulator (std::shared_ptr<IoManipulator> io) { this->io = io; }
 private:
     void init_conn();
     void set_button_enabled();

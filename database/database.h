@@ -3,6 +3,8 @@
 
 #include <QWidget>
 #include <QTableWidgetItem>
+#include "IoManipulator.h"
+#include <memory>
 
 namespace Ui {
 class database;
@@ -15,6 +17,7 @@ class database : public QWidget
 public:
     explicit database(QWidget *parent = 0);
     ~database();
+    void setIoManipulator (std::shared_ptr<IoManipulator> io) { this->io = io; }
 
     bool setTableHorizontalHeader(QStringList & list);
     bool setTabelRowCount(const int &value);
@@ -24,8 +27,11 @@ public:
     void load(const QVariant &data);
 
     QVariant intiData();
+
+    void showEvent (QShowEvent * event) override;
 private:
     Ui::database *ui;
+    std::shared_ptr<IoManipulator> io;
 };
 
 #endif // DATABASE_H
