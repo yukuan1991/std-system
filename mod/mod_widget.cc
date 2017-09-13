@@ -14,7 +14,7 @@ mod_widget::mod_widget(QWidget *parent) :
 
     init ();
 //    std::tie (kv_tmu_, mod_data_) = read_tmu_data ();
-    std::tie (kv_tmu_, std::ignore, std::ignore, std::ignore) = read_tmu_data();
+    std::tie (kv_tmu_, std::ignore, mod_data_, std::ignore) = read_tmu_data();
 
 //    for(const auto & w : kv_tmu_)
 //    {
