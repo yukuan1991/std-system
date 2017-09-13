@@ -19,6 +19,8 @@ public:
     virtual bool delNode (const QStringList & path, const QString & dataFamily) = 0;
     virtual bool pushData (const QString &, const QVariant &) = 0;
     virtual QVariant pullData (const QString &) = 0;
+    virtual QVariant doPost (const QString & api, const QVariant & data) = 0;
+    virtual QString commiter () const { return "Krys"; }
     virtual ~IoManipulator ();
 
 };
