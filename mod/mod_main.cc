@@ -53,7 +53,6 @@ void mod_main::init_conn()
     connect(ui->widget_ribbon, &ribbon_mod::help, this, &mod_main::help_advice);
 
     connect(ui->mdi, &QMdiArea::subWindowActivated, this, &mod_main::set_button_enabled);
-
 }
 
 void mod_main::set_button_enabled()

@@ -72,6 +72,11 @@
        <string>标准资料库</string>
       </attribute>
      </widget>
+     <widget class="PwhManagementMain" name="pwh_quota">
+      <attribute name="title">
+       <string>产品工时定额</string>
+      </attribute>
+     </widget>
      <widget class="PwhContrastMain" name="pwh_contrast">
       <attribute name="title">
        <string>产品工时对比</string>
@@ -139,6 +144,12 @@
    <class>approvalMain</class>
    <extends>QWidget</extends>
    <header>approval/approvalMain.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>PwhManagementMain</class>
+   <extends>QWidget</extends>
+   <header>pwh_quota/PwhManagementMain.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

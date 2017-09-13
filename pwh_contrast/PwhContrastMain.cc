@@ -25,83 +25,15 @@ PwhContrastMain::~PwhContrastMain()
 
 void PwhContrastMain::fileNew()
 {
-    createWindow();
-}
-
-void PwhContrastMain::addFirstTable()
-{
-    qDebug() << "addFirstTable";
-    auto w = activeWindow();
-    if(w == nullptr)
+    auto w = createWindow();
+    if (io != null)
     {
-        return;
+        auto var = io->pullData ("product");
+        w->initTreeData (var);
     }
-
-    w->on_add_clicked();
 }
 
-void PwhContrastMain::addSecondTable()
-{
-    qDebug() << "addSecondTable";
-    auto w = activeWindow();
-    if(w == nullptr)
-    {
-        return;
-    }
-
-    w->on_add_2_clicked();
-}
-
-void PwhContrastMain::addThirdTable()
-{
-    qDebug() << "addThirdTable";
-    auto w = activeWindow();
-    if(w == nullptr)
-    {
-        return;
-    }
-
-    w->on_add_3_clicked();
-}
-
-void PwhContrastMain::clearFirstTable()
-{
-    qDebug() << "clearFirstTable";
-    auto w = activeWindow();
-    if(w == nullptr)
-    {
-        return;
-    }
-
-    w->on_delete_2_clicked();
-}
-
-void PwhContrastMain::clearSecondTable()
-{
-    qDebug() << "clearSecondTable";
-    auto w = activeWindow();
-    if(w == nullptr)
-    {
-        return;
-    }
-
-    w->on_delete_3_clicked();
-
-}
-
-void PwhContrastMain::clearThirdTable()
-{
-    qDebug() << "clearThirdTable";
-    auto w = activeWindow();
-    if(w == nullptr)
-    {
-        return;
-    }
-
-    w->on_delete_4_clicked();
-}
-
-void PwhContrastMain::importAnalysisFile()
+void PwhContrastMain::load()
 {
     qDebug() << "addchart";
     auto w = activeWindow();
@@ -109,30 +41,30 @@ void PwhContrastMain::importAnalysisFile()
     {
         return;
     }
-    w->importAnalysisFile();
+    w->load();
 }
 
-void PwhContrastMain::upChart()
-{
-    qDebug() << "upchart";
-    auto w = activeWindow();
-    if(w == nullptr)
-    {
-        return;
-    }
-    w->upChart();
-}
+//void PwhContrastMain::upChart()
+//{
+//    qDebug() << "upchart";
+//    auto w = activeWindow();
+//    if(w == nullptr)
+//    {
+//        return;
+//    }
+//    w->upChart();
+//}
 
-void PwhContrastMain::downChart()
-{
-    qDebug() << "downchart";
-    auto w = activeWindow();
-    if(w == nullptr)
-    {
-        return;
-    }
-    w->downChart();
-}
+//void PwhContrastMain::downChart()
+//{
+//    qDebug() << "downchart";
+//    auto w = activeWindow();
+//    if(w == nullptr)
+//    {
+//        return;
+//    }
+//    w->downChart();
+//}
 
 void PwhContrastMain::exportPDF()
 {
@@ -148,9 +80,9 @@ void PwhContrastMain::initConn()
 {
     connect(ui->rib, &ribbon::file_new, this, &PwhContrastMain::fileNew);
 
-    connect(ui->rib, &PwhContrastRibbon::importAnalysisFile, this, &PwhContrastMain::importAnalysisFile);
-    connect(ui->rib, &PwhContrastRibbon::upChart, this, &PwhContrastMain::upChart);
-    connect(ui->rib, &PwhContrastRibbon::downChart, this, &PwhContrastMain::downChart);
+    connect(ui->rib, &PwhContrastRibbon::importAnalysisFile, this, &PwhContrastMain::load);
+//    connect(ui->rib, &PwhContrastRibbon::upChart, this, &PwhContrastMain::upChart);
+//    connect(ui->rib, &PwhContrastRibbon::downChart, this, &PwhContrastMain::downChart);
     connect(ui->rib, &PwhContrastRibbon::exportPDF, this, &PwhContrastMain::exportPDF);
 
 }

@@ -3,6 +3,7 @@
 #include <vector>
 #include <string_view>
 #include <QStringList>
+#include <QVariant>
 
 enum class workType
 {
@@ -23,3 +24,5 @@ std::vector<taskInfo> readPts (std::string_view data);
 QStringList findAll (const QString & path, const QStringList & filter);
 QMap<QString, std::vector<taskInfo>> collectVaf (const QString & folder);
 
+QVariant readPts (const QVariant & ptsAf);
+QVariant readVaf (const QVariant & vaf);

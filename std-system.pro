@@ -65,9 +65,16 @@ SOURCES += main.cc \
     pwh_contrast/StatView.cc \
     utils/model/product_info_model.cpp \
     utils/model/product_structure_model.cpp \
-    utils/SaveTreeDialog.cpp\
+    utils/SaveTreeDialog.cpp \
     utils/OpenTreeDialog.cpp \
-    approval/approvalMain.cc
+    approval/approvalMain.cc \
+    pwh_quota/ribbon/PwhManagementRibbon.cc \
+    pwh_quota/AddtoStdDatabaseDlg.cpp \
+    pwh_quota/DetailedInfoTable.cpp \
+    pwh_quota/ModifyProductDlg.cpp \
+    pwh_quota/PwhManagement.cc \
+    pwh_quota/PwhManagementMain.cc \
+    pwh_quota/ReportTableWidget.cpp
 
 
 RESOURCES += qml.qrc
@@ -132,7 +139,12 @@ FORMS += \
     pwh_contrast/StatView.ui \
     utils/SaveTreeDialog.ui\
     utils/OpenTreeDialog.ui \
-    approval/approvalMain.ui
+    approval/approvalMain.ui \
+    pwh_quota/addtostddatabasedlg.ui \
+    pwh_quota/modifyproductdlg.ui \
+    pwh_quota/pwhmanagement.ui \
+    pwh_quota/pwhmanagementmain.ui \
+    pwh_quota/ReportTableWidget.ui
 
 
 HEADERS += \
@@ -204,9 +216,16 @@ HEADERS += \
     pwh_contrast/StatView.h \
     utils/model/product_info_model.h \
     utils/model/product_structure_model.h \
-    utils/SaveTreeDialog.h\
+    utils/SaveTreeDialog.h \
     utils/OpenTreeDialog.h \
-    approval/approvalMain.h
+    approval/approvalMain.h \
+    pwh_quota/ribbon/PwhManagementRibbon.h \
+    pwh_quota/AddtoStdDatabaseDlg.h \
+    pwh_quota/DetailedInfoTable.h \
+    pwh_quota/ModifyProductDlg.h \
+    pwh_quota/PwhManagement.h \
+    pwh_quota/PwhManagementMain.h \
+    pwh_quota/ReportTableWidget.h
 
 
 QMAKE_CXXFLAGS += -Wextra

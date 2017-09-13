@@ -23,14 +23,7 @@ public:
 private:
     void fileNew();
 private:
-    void addFirstTable();
-    void addSecondTable();
-    void addThirdTable();
-    void clearFirstTable();
-    void clearSecondTable();
-    void clearThirdTable();
-
-    void importAnalysisFile();
+    void load();
     void upChart();
     void downChart();
     void exportPDF();

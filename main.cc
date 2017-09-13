@@ -8,12 +8,11 @@
 #include <boost/filesystem.hpp>
 #include <boost/range/adaptors.hpp>
 #include <HttpIoManipulator.h>
-
 #include "utils/OpenTreeDialog.h"
 #include <QFile>
 #include <QJsonDocument>
 #include <QDebug>
-
+#include "pwh_contrast/StatView.h"
 using namespace std::chrono_literals;
 using namespace std::string_view_literals;
 

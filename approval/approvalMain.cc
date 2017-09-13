@@ -115,13 +115,44 @@ bool approvalMain::setTableItemIsEditable(const int &rowCount, const int &column
 
 void approvalMain::load(const QVariant &data)
 {
-    auto content = data.toMap ()["content"].toMap ();
-    auto tabel = content["table"].toList ();
+    auto map = data.toMap ();
+    auto name = map["提交人"].toString();
+    auto dest = map["提交到"].toString();
+    auto type = map["类型"].toString();
+    auto content = map["content"].toMap ();
+    QVariantList table;
+    if(dest == "standard")
+    {
+         table = content["table"].toList ();
+    }
+    else
+    {
+        if(type == "视频分析(试产)")
+        {
+            table = readVaf (content).toList ();
+        }
+        else if(type == "视频分析(量产)")
+        {
+            table = readVaf (content).toList ();
+        }
+        else if(type == "mtm")
+        {
+            table = readPts (content).toList ();
+        }
+        else if(type == "most")
+        {
+            table = readPts (content).toList ();
+        }
+        else if(type == "mod")
+        {
+            table = readPts (content).toList ();
+        }
 
-    auto rowCount = tabel.size ();
+    }
+    auto rowCount = table.size ();
     setTabelRowCount (rowCount);
     int row = 0;
-    for(auto & it : tabel)
+    for(auto & it : table)
     {
         auto jobContent = it.toMap()["作业内容"].toString();
         auto basicTime = it.toMap ()["基本时间"].toString();
@@ -143,6 +174,9 @@ void approvalMain::load(const QVariant &data)
         ui->tableWidget->setItem(row, 5, newItem);
         row++;
     }
+    ui->man_name->setText (name);
+    ui->analysis_method->setText (type);
+    ui->submit->setText (dest);
     setTableItemIsEditable(rowCount,6);
 }
 
