@@ -71,3 +71,9 @@ bool HttpIoManipulator::delNode(const QStringList &path, const QString &dataFami
     qDebug () << res.data ();
     return res == "success";
 }
+
+QVariant HttpIoManipulator::doPost(const QString &api, const QVariant &data)
+{
+    auto res = http_post (ip_, ("/cgi-bin/" + api).toStdString ().data (), QJsonDocument::fromVariant (data).toJson ().toStdString (), port_);
+    return QJsonDocument::fromJson (QByteArray (res.data (), static_cast<int> (res.length ()))).toVariant ();
+}
