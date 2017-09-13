@@ -10,8 +10,8 @@ PwhManagementRibbon::PwhManagementRibbon(QWidget *parent)
         button_cell b;
 
 //        b.add("修改", QPixmap("png/修改.png"), modify_);
-        b.add("添加到标准工时", QPixmap("png/修改.png"), addStdDatabase_);
-        b.add("生成PDF", QPixmap("png/导出.png"), exportPDF_);
+        b.add("添加到标准工时", QPixmap("png/添加到标准工时.png"), addStdDatabase_);
+        b.add("生成PDF", QPixmap("png/PDF.png"), exportPDF_);
         b.add("表头设置", QPixmap("png/导出.png"), reportHeader_);
         b.set_title("报表管理");
 

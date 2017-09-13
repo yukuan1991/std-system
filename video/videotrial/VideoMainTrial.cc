@@ -334,7 +334,7 @@ void VideoMainTrial::exportXlsx()
             const auto rate = resultList.at(i).toMap()["宽放率"].toString();
             const auto stdTime = resultList.at(i).toMap()["标准时间"].toDouble();
             const auto appreciation = resultList.at(i).toMap()["增值/非增值"].toString();
-            const auto type = resultList.at(i).toMap()["操作类型"].toString();
+            const auto type = resultList.at(i).toMap()["操作分类"].toString();
 
             xlsx.write (i + 2, start_result + 0, averageTime);
             xlsx.write (i + 2, start_result + 1, comparsion);

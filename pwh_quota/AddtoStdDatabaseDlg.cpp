@@ -12,6 +12,8 @@ AddtoStdDatabaseDlg::AddtoStdDatabaseDlg(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    setWindowTitle("添加到标准资料库");
+
     QVariantList list;
     list << "名称";
     list << "类型";

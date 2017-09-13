@@ -154,6 +154,10 @@ void PwhManagement::onTreeWidgetClicked()
     const auto treeData = ui->treeWidget->currentSelectedData();
     const auto content = treeData.toMap()["content"];
     const auto items = ui->treeWidget->selectedItems();
+    if(items.size() <= 0)
+    {
+        return;
+    }
     const auto item = items.at(0);
     const auto type = item->text(1);
     if(type.isEmpty())
@@ -168,13 +172,16 @@ void PwhManagement::onTreeWidgetClicked()
     if(type == "视频分析法(量产)")
     {
         dataMap["table"] = readVaf(content);
-        ui->reportWidget->load(dataMap);
+    }
+    else if(type == "视频分析法(试产)")
+    {
+        dataMap["table"] = readVaf(content);
+    }
+    else if(type == "mod" or type == "mtm" or type == "most")
+    {
+        dataMap["table"] = readPts(content);
     }
 
-
-
-//    const auto data = QJsonDocument::fromJson(content).toVariant();
-
-
+    ui->reportWidget->load(dataMap);
 }
 
