@@ -291,6 +291,11 @@ QVariant VideoFormModel::previousData(const QModelIndex &index) const
     return {};
 }
 
+Qt::ItemFlags VideoFormModel::flags(const QModelIndex &index) const
+{
+    return QStandardItemModel::flags (index) | Qt::ItemIsEditable;
+}
+
 std::optional<action_ratio> VideoFormModel::operation_ratio() const
 {
     std::array<qreal, 4> arr {{0, 0, 0, 0}};

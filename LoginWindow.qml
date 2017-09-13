@@ -8,6 +8,7 @@ ApplicationWindow
     id: rootWindow
     visible: true
     flags: Qt.FramelessWindowHint
+    signal loginClicked (string name, string pass)
     Rectangle
     {
         anchors.fill: parent
@@ -20,10 +21,12 @@ ApplicationWindow
         }
         LoginPanel
         {
+            id: pannel
             anchors.top: header.bottom
             anchors.bottom: parent.bottom
             anchors.left: header.left
             anchors.right: header.right
+            onLoginClicked: rootWindow.loginClicked (name, pass)
         }
     }
 

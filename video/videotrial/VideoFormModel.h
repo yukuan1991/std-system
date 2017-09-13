@@ -22,6 +22,7 @@ public:
     bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) override;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
     QVariant previousData (const QModelIndex & index) const;
+    Qt::ItemFlags flags(const QModelIndex &index) const override;
 
     std::optional<action_ratio> operation_ratio () const;
     std::optional<overall_stats> operation_stats () const;

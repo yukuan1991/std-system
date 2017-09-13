@@ -143,8 +143,6 @@ void mod_main::file_save()
 
     io->doPost ("add-approv", totalMap);
 
-
-
     //io->addNode (path, name, "product", "mod", variantData);
 }
 

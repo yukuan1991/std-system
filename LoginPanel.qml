@@ -7,6 +7,9 @@ Rectangle
     visible: true
     property alias rememberPass: rememberPassword.checked
 
+    signal loginClicked (string user, string pass)
+    loginButton.onClicked: loginClicked(userName.text, password.text)
+
     Image {
         id: background
         source: "png/login-bg.png"
@@ -57,14 +60,6 @@ Rectangle
         anchors.right: password.left
         anchors.rightMargin: 4
         anchors.verticalCenter: password.verticalCenter
-    }
-
-    CheckBox
-    {
-        id: rememberPassword
-        text: "记住密码"
-        anchors.top: password.bottom
-        anchors.left: password.left
     }
 
     Button
