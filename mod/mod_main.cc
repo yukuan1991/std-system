@@ -12,6 +12,8 @@
 #include <QMessageBox>
 #include "utils/SaveTreeDialog.h"
 #include <QJsonDocument>
+
+#include "utils/OpenTreeDialog.h"
 #include <QDebug>
 
 using namespace std;
@@ -323,27 +325,21 @@ void mod_main::file_new()
 
 void mod_main::file_open()
 {
-    const auto path = QFileDialog::getOpenFileName (this, "文件打开", ".", tr ("Mod Analysis File (*.modaf)"));
-    if (path.isEmpty ())
-    {
-        return;
-    }
+    OpenTreeDialog dlg;
+    dlg.load(io->pullData("product"));
 
-    auto res = file::read_all (::utf_to_sys (path.toStdString ()).data ());
-    if (not res)
+    if(dlg.exec() == QDialog::Accepted)
     {
-        QMessageBox::information (this, "打开", "文件无法打开,读取失败");
-        return;
-    }
-    try
-    {
-        const auto data = json::parse (res.value ());
-        auto w = create_window (path);
-        w->load (data);
-    }
-    catch (std::exception &)
-    {
-        QMessageBox::information (this, "打开", "文件格式错误 无法打开");
-        return;
+        if(dlg.type() != "mod")
+        {
+            QMessageBox::information(this, "提示", "文件选取错误，请选择正确的文件！");
+            return;
+        }
+        const auto content =  dlg.dump().toMap()["content"];
+        const auto name = dlg.dump().toMap()["name"].toString();
+        const auto data = QJsonDocument::fromVariant(content).toJson().toStdString();
+
+        auto w = create_window(name);
+        w->load(nlohmann::json::parse (data));
     }
 }

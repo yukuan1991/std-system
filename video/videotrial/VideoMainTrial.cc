@@ -20,6 +20,7 @@
 #include <QJsonParseError>
 #include "utils/SaveTreeDialog.h"
 #include <QJsonDocument>
+#include "utils/OpenTreeDialog.h"
 
 using namespace std;
 
@@ -411,35 +412,21 @@ void VideoMainTrial::on_save()
 
 void VideoMainTrial::on_open()
 {
-    const auto path = QFileDialog::getOpenFileName (this, "文件打开", ".", tr ("Video Analysis File (*.vaf)"));
-    if (path.isEmpty ())
-    {
-        return;
-    }
+    OpenTreeDialog dlg;
+    dlg.load(io->pullData("product"));
 
-    auto res = file::read_all (::utf_to_sys (path.toStdString ()).data ());
-    if (not res)
+    if(dlg.exec() == QDialog::Accepted)
     {
-        QMessageBox::information (this, "打开", "文件无法打开,读取失败");
-        return;
-    }
-    try
-    {
-        QJsonParseError jsonError;
-        const auto text = QString(res.value().data());
-        QJsonDocument document = QJsonDocument::fromJson(text.toUtf8(), &jsonError);
-        if(jsonError.error == QJsonParseError::NoError)
+        if(dlg.type() != "视频分析法(试产)")
         {
-            const auto data = document.toVariant();
-            auto w = create_window (path);
-//            w->load (data);
-            w->load(data);
+            QMessageBox::information(this, "提示", "文件选取错误，请选择正确的文件！");
+            return;
         }
-    }
-    catch (std::exception &)
-    {
-        QMessageBox::information (this, "打开", "文件格式错误 无法打开");
-        return;
+        const auto content =  dlg.dump().toMap()["content"];
+        const auto name = dlg.dump().toMap()["name"].toString();
+
+        auto w = create_window(name);
+        w->load(content);
     }
 }
 

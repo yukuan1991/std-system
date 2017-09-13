@@ -18,6 +18,8 @@ public:
     void load(const QVariant& data);
     QVariant dump();
 
+    QString type() const;
+
 private:
     Ui::OpenTreeDialog *ui;
 };
