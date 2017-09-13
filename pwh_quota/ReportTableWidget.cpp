@@ -130,7 +130,6 @@ void ReportTableWidget::load(const QVariant &data)
         ui->tableWidget->item(i, 5)->setData(Qt::DisplayRole, type);
     }
 
-    const auto reportHeader = data.toMap()["报表名称"].toString();
     const auto productName = data.toMap()["所属产品名称"].toString();
     const auto processName = data.toMap()["所属工艺名称"].toString();
     const auto workStationNum = data.toMap()["工站号"].toString();
@@ -140,7 +139,6 @@ void ReportTableWidget::load(const QVariant &data)
     const auto measureFunc = data.toMap()["测量方法"].toString();
     const auto dataUnit = data.toMap()["数据单位"].toString();
 
-    ui->label_title->setText(reportHeader);
     ui->label_product_name->setText(productName);
     ui->label_process_name->setText(processName);
     ui->label_workStationNum->setText(workStationNum);

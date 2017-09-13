@@ -8,7 +8,6 @@
 #include <boost/filesystem.hpp>
 #include <boost/range/adaptors.hpp>
 #include <HttpIoManipulator.h>
-
 #include "utils/OpenTreeDialog.h"
 #include <QFile>
 #include <QJsonDocument>

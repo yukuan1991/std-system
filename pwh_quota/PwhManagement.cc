@@ -1,12 +1,7 @@
 ﻿#include "PwhManagement.h"
 #include "ui_pwhmanagement.h"
 #include <boost/filesystem.hpp>
-//#include <Qt-Utils/qt.hpp>
-//#include <Qt-Utils/krys_application.hpp>
 #include <boost/scope_exit.hpp>
-//#include "data_veryfication.h"
-//#include "arithmetic_resource.hpp"
-//#include "interface_control/modify_product_dlg.h"
 #include <QMessageBox>
 #include <QJsonDocument>
 #include "ModifyProductDlg.h"
@@ -15,6 +10,7 @@
 #include <QtPrintSupport/QPrinter>
 #include <QPainter>
 #include <QInputDialog>
+#include "utils/Qt-Utils/openaf.h"
 
 #include <QDebug>
 #include <QFile>
@@ -29,8 +25,7 @@ PwhManagement::PwhManagement(QWidget *parent) :
     list << "名称" << "类型";
     ui->treeWidget->setTreeHeader (list);
 
-
-
+    connect(ui->treeWidget, &JsonTree::itemSelectionChanged, this, &PwhManagement::onTreeWidgetClicked);
 }
 
 PwhManagement::~PwhManagement()
@@ -158,6 +153,25 @@ void PwhManagement::onTreeWidgetClicked()
 {
     const auto treeData = ui->treeWidget->currentSelectedData();
     const auto content = treeData.toMap()["content"];
+    const auto items = ui->treeWidget->selectedItems();
+    const auto item = items.at(0);
+    const auto type = item->text(1);
+    if(type.isEmpty())
+    {
+        return;
+    }
+
+    QVariantMap dataMap;
+    dataMap["task-man"] = content.toMap()["task-man"];
+    dataMap["measure-date"] = content.toMap()["measure-date"];
+    dataMap["measure-man"] = content.toMap()["measure-man"];
+    if(type == "视频分析法(量产)")
+    {
+        dataMap["table"] = readVaf(content);
+        ui->reportWidget->load(dataMap);
+    }
+
+
 
 //    const auto data = QJsonDocument::fromJson(content).toVariant();
 
