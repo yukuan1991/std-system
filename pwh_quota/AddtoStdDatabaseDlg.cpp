@@ -27,6 +27,11 @@ AddtoStdDatabaseDlg::~AddtoStdDatabaseDlg()
     delete ui;
 }
 
+void AddtoStdDatabaseDlg::initTreeData(const QVariant &data)
+{
+    ui->treeWidget->setTreeData(data);
+}
+
 void AddtoStdDatabaseDlg::load(const QVariant &data)
 {
    if(data.isNull())

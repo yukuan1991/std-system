@@ -13,7 +13,7 @@
 #include <QFile>
 #include <QJsonDocument>
 #include <QDebug>
-#include "pwh_contrast/StatView.h"
+
 using namespace std::chrono_literals;
 using namespace std::string_view_literals;
 

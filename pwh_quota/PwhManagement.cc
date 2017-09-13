@@ -28,10 +28,9 @@ PwhManagement::PwhManagement(QWidget *parent) :
     QVariantList list;
     list << "名称" << "类型";
     ui->treeWidget->setTreeHeader (list);
-    QFile file ("test.json");
-    file.open (QFile::ReadOnly);
-    const auto arr = file.readAll ();
-    ui->treeWidget->setTreeData (QJsonDocument::fromJson (arr).toVariant ());
+
+
+
 }
 
 PwhManagement::~PwhManagement()
@@ -69,12 +68,17 @@ void PwhManagement::on_button_addStdDatabase_clicked()
 {
     const auto reportData = ui->reportWidget->dump();
 
-    AddtoStdDatabaseDlg dlg;
+    if(reportData.isNull())
+    {
+        QMessageBox::information(this, "提示", "请先选中目录下的一个文件！");
+        return;
+    }
 
+    AddtoStdDatabaseDlg dlg;
+    dlg.initTreeData(io->pullData("standard"));
     dlg.load(reportData);
     if(QDialog::Accepted == dlg.exec())
     {
-        qDebug() << dlg.dump();
         const auto addData = dlg.dump();
         const auto numData = addData.toMap()["table"].toList();
 
@@ -88,8 +92,16 @@ void PwhManagement::on_button_addStdDatabase_clicked()
             list << tableData.at(num);
         }
         map["table"] = list;
-        map["path"] = addData.toMap()["path"];
 
+        const auto items = ui->treeWidget->selectedItems();
+        const auto item = items.at(0);
+        const auto name = item->text(0);
+
+        const auto standardPath = addData.toMap()["path"].toStringList();
+
+        const auto type = reportData.toMap()["测量方法"].toString();
+
+        io->addNode (standardPath, name, "standard", "mod", map);
     }
 }
 
@@ -140,5 +152,14 @@ void PwhManagement::on_button_reportHeader_clicked()
 void PwhManagement::initTreeWidget(const QVariant& data)
 {
     ui->treeWidget->setTreeData(data);
+}
+
+void PwhManagement::onTreeWidgetClicked()
+{
+    const auto treeData = ui->treeWidget->currentSelectedData();
+    const auto content = treeData.toMap()["content"];
+    const auto data = QJsonDocument::fromJson(content).toVariant();
+
+
 }
 

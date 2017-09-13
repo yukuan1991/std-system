@@ -9,37 +9,37 @@ ReportTableWidget::ReportTableWidget(QWidget *parent) :
 
     ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
-    QVariantMap totalMap;
+//    QVariantMap totalMap;
 
-    QVariantList list;
-    QVariantMap map1;
-    map1["作业内容"] = "焊锡";
-    map1["基本时间"] = 0.1;
-    map1["宽放率"] = "0.00%";
-    map1["标准时间"] = 0.1;
-    map1["增值/非增值"] = "增值";
-    map1["操作分类"] = "加工";
+//    QVariantList list;
+//    QVariantMap map1;
+//    map1["作业内容"] = "焊锡";
+//    map1["基本时间"] = 0.1;
+//    map1["宽放率"] = "0.00%";
+//    map1["标准时间"] = 0.1;
+//    map1["增值/非增值"] = "增值";
+//    map1["操作分类"] = "加工";
 
-    QVariantMap map2;
-    map2["作业内容"] = "xxx";
-    map2["基本时间"] = 0.2;
-    map2["宽放率"] = "0.00%";
-    map2["标准时间"] = 0.2;
-    map2["增值/非增值"] = "非增值";
-    map2["操作分类"] = "搬运";
+//    QVariantMap map2;
+//    map2["作业内容"] = "xxx";
+//    map2["基本时间"] = 0.2;
+//    map2["宽放率"] = "0.00%";
+//    map2["标准时间"] = 0.2;
+//    map2["增值/非增值"] = "非增值";
+//    map2["操作分类"] = "搬运";
 
-    QVariantMap map3;
-    map3["作业内容"] = "sdd";
-    map3["基本时间"] = 0.3;
-    map3["宽放率"] = "0.00%";
-    map3["标准时间"] = 0.3;
-    map3["增值/非增值"] = "增值";
-    map3["操作分类"] = "加工";
+//    QVariantMap map3;
+//    map3["作业内容"] = "sdd";
+//    map3["基本时间"] = 0.3;
+//    map3["宽放率"] = "0.00%";
+//    map3["标准时间"] = 0.3;
+//    map3["增值/非增值"] = "增值";
+//    map3["操作分类"] = "加工";
 
-    list << map1 << map2 << map3;
+//    list << map1 << map2 << map3;
 
-    totalMap["table"] = list;
-    load(totalMap);
+//    totalMap["table"] = list;
+//    load(totalMap);
 }
 
 ReportTableWidget::~ReportTableWidget()

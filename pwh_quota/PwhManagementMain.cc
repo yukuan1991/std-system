@@ -27,6 +27,7 @@ void PwhManagementMain::fileNew()
     {
         auto var = io->pullData ("product");
         w->initTreeWidget (var);
+        w->setIoManipulator(io);
     }
 }
 
