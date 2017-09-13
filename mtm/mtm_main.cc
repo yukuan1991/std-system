@@ -164,7 +164,27 @@ void mtm_main::file_save()
     QByteArray arr (w->dump ().dump (4).data ());
     const auto variantData = QJsonDocument::fromJson (arr).toVariant ();
 
-    io->addNode (path, name, "product", "mtm", variantData);
+    QVariantList list;
+    for (auto & it : path)
+    {
+        list << it;
+    }
+    QVariantMap map;
+    map ["path"] = list;
+    map ["file"] = "product";
+    map ["name"] = name;
+    map ["data"] = variantData;
+    map ["type"] = "mtm";
+
+    QVariantMap totalMap;
+    totalMap["raw"] = map;
+    totalMap["类型"] = "mtm";
+    totalMap["提交人"] = io->commiter ();
+    totalMap["提交到"] = "product";
+    totalMap["name"] = name;
+    totalMap["content"] = variantData;
+
+    io->doPost ("add-approv", totalMap);
 }
 
 void mtm_main::file_save_as()

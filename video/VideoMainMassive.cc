@@ -427,7 +427,27 @@ void VideoMainMassive::on_save()
     QByteArray arr (w->dump ().dump (4).data ());
     const auto variantData = QJsonDocument::fromJson (arr).toVariant ();
 
-    io->addNode (path, name, "product", "视频分析法(量产)", variantData);
+    QVariantList list;
+    for (auto & it : path)
+    {
+        list << it;
+    }
+    QVariantMap map;
+    map ["path"] = list;
+    map ["file"] = "product";
+    map ["name"] = name;
+    map ["data"] = variantData;
+    map ["type"] = "视频分析(量产)";
+
+    QVariantMap totalMap;
+    totalMap["raw"] = map;
+    totalMap["类型"] = "视频分析(量产)";
+    totalMap["提交人"] = io->commiter ();
+    totalMap["提交到"] = "product";
+    totalMap["name"] = name;
+    totalMap["content"] = variantData;
+
+    io->doPost ("add-approv", totalMap);
 }
 
 void VideoMainMassive::on_open()

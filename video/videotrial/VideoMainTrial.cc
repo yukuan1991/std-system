@@ -405,7 +405,29 @@ void VideoMainTrial::on_save()
     const auto path = saveDetail["path"].toStringList ();
     const auto name = saveDetail["name"].toString ();
 
-    io->addNode (path, name, "product", "视频分析法(试产)", w->dump ());
+    const auto variantData = w->dump ();
+
+    QVariantList list;
+    for (auto & it : path)
+    {
+        list << it;
+    }
+    QVariantMap map;
+    map ["path"] = list;
+    map ["file"] = "product";
+    map ["name"] = name;
+    map ["data"] = variantData;
+    map ["type"] = "视频分析(试产)";
+
+    QVariantMap totalMap;
+    totalMap["raw"] = map;
+    totalMap["类型"] = "视频分析(试产)";
+    totalMap["提交人"] = io->commiter ();
+    totalMap["提交到"] = "product";
+    totalMap["name"] = name;
+    totalMap["content"] = variantData;
+
+    io->doPost ("add-approv", totalMap);
 
 }
 
