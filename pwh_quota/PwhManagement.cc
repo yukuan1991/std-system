@@ -41,6 +41,8 @@ PwhManagement::~PwhManagement()
 
 void PwhManagement::on_button_detail_clicked()
 {
+    const auto data = ui->treeWidget->currentSelectedData();
+
 }
 
 void PwhManagement::on_button_modify_clicked()
@@ -61,44 +63,33 @@ void PwhManagement::on_button_modify_clicked()
         auto data = dlg.dump();
         qDebug() << QJsonDocument::fromVariant(data);
     }
-//    modify_product_dlg dlg;
-//    std::map<QString, QString> map_info
-//    {
-//        {
-//            {"路径", current_path_},
-//            {"工站号", ui->label_station->text ()},
-//            {"测量人", ui->label_measure->text ()},
-//            {"测量方法", ui->label_measurement->text ()},
-//            {"测量日期", ui->label_date->text ()},
-//            {"作业员", ui->label_operator->text ()}
-//        }
-//    };
-
-//    dlg.set_info(map_info);
-//    if (QDialog::Accepted == dlg.exec())
-//    {
-//        auto info = dlg.get_info();
-//        auto path = dlg.get_path();
-//        write_to_file (path, info);
-//        refresh_data();
-//    }
 }
 
 void PwhManagement::on_button_addStdDatabase_clicked()
 {
-    QVariantMap map;
-    QVariantMap jobMap;
-    QVariantList list;
-    list << "one" << "two" << "three" << "four";
-    jobMap["作业内容"] = list;
-    map["form"] = jobMap;
+    const auto reportData = ui->reportWidget->dump();
 
     AddtoStdDatabaseDlg dlg;
 
-    dlg.load(map);
+    dlg.load(reportData);
     if(QDialog::Accepted == dlg.exec())
     {
         qDebug() << dlg.dump();
+        const auto addData = dlg.dump();
+        const auto numData = addData.toMap()["table"].toList();
+
+        const auto tableData = reportData.toMap()["table"].toList();
+
+        QVariantMap map;
+        QVariantList list;
+        for(int i = 0; i < numData.size(); i++)
+        {
+            const auto num = numData.at(i).toInt();
+            list << tableData.at(num);
+        }
+        map["table"] = list;
+        map["path"] = addData.toMap()["path"];
+
     }
 }
 

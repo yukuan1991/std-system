@@ -12,30 +12,14 @@ AddtoStdDatabaseDlg::AddtoStdDatabaseDlg(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    QVariantList list;
+    list << "名称";
+    list << "类型";
+    ui->treeWidget->setTreeHeader (list);
+
     connect(ui->buttonConfirm, &QPushButton::clicked, this, &AddtoStdDatabaseDlg::onButtonConfirmClicked);
     connect(ui->buttonCancel, &QPushButton::clicked, this, &AddtoStdDatabaseDlg::reject);
     connect(ui->checkBox, &QCheckBox::stateChanged, this, &AddtoStdDatabaseDlg::onCheckAllStateChanged);
-
-
-//    QStringList list;
-//    list << "one" << "two" << "three";
-
-//    ui->listWidget->addItems(list);
-
-//    for(int i = 0; i < list.size(); i++)
-//    {
-//        ui->listWidget->item(i)->setFlags(Qt::ItemIsEnabled | Qt::ItemIsUserCheckable);
-//        ui->listWidget->item(i)->setCheckState(Qt::Unchecked);
-//    }
-
-//    QVariantList varlist;
-//    list << "名称" << "类型";
-//    ui->treeWidget->setTreeHeader (varlist);
-//    QFile file ("test.json");
-//    file.open (QFile::ReadOnly);
-//    const auto arr = file.readAll ();
-//    ui->treeWidget->setTreeData (QJsonDocument::fromJson (arr).toVariant ());
-
 }
 
 AddtoStdDatabaseDlg::~AddtoStdDatabaseDlg()
@@ -50,17 +34,14 @@ void AddtoStdDatabaseDlg::load(const QVariant &data)
        return;
    }
 
-   const auto directory = data.toMap()["目录结构"];
-   ui->treeWidget->setTreeData(directory);
-
-   const auto formMap = data.toMap()["form"].toMap();
-   const auto list = formMap["作业内容"].toList();
-   for(int i = 0; i < list.size(); i++)
+   const auto tableData = data.toMap()["table"].toList();
+   for(int i = 0; i < tableData.size(); i++)
    {
-       ui->listWidget->addItem(list.at(i).toString());
+       const auto jobContent = tableData.at(i).toMap()["作业内容"].toString();
+       ui->listWidget->addItem(jobContent);
    }
 
-   for(int i = 0; i < list.size(); i++)
+   for(int i = 0; i < tableData.size(); i++)
    {
        ui->listWidget->item(i)->setFlags(Qt::ItemIsEnabled | Qt::ItemIsUserCheckable);
        ui->listWidget->item(i)->setCheckState(Qt::Unchecked);
@@ -74,14 +55,20 @@ QVariant AddtoStdDatabaseDlg::dump() const
     {
         auto state = ui->listWidget->item(i)->checkState();
         auto content = ui->listWidget->item(i)->data(Qt::DisplayRole).toString();
+        if(state != Qt::Checked)
+        {
+            continue;
+        }
+
         QVariantMap map;
-        map["选中状态"] = state;
-        map["作业内容"] = content;
-        checkedList << map;
+//        map["选中状态"] = state;
+//        map["序号"] = i;
+//        map["作业内容"] = content;
+        checkedList << i;
     }
 
     QVariantMap map;
-    map["form"] = checkedList;
+    map["table"] = checkedList;
 
     const auto selectedItems = ui->treeWidget->selectedItems();
     auto selectedItem = selectedItems.at(0);
@@ -95,8 +82,7 @@ QVariant AddtoStdDatabaseDlg::dump() const
         list.prepend(parentItem->text(0));
         parentItem = parentItem->parent();
     }
-    map["目录结构"] = list;
-
+    map["path"] = list;
 
     return map;
 }
