@@ -158,7 +158,8 @@ void PwhManagement::onTreeWidgetClicked()
 {
     const auto treeData = ui->treeWidget->currentSelectedData();
     const auto content = treeData.toMap()["content"];
-    const auto data = QJsonDocument::fromJson(content).toVariant();
+
+//    const auto data = QJsonDocument::fromJson(content).toVariant();
 
 
 }
