@@ -21,9 +21,11 @@ approvalMain::approvalMain(QWidget *parent) :
     connect (ui->treeWidget, &QTreeWidget::itemSelectionChanged, [this]
     {
         auto data = ui->treeWidget->currentSelectedData ();
-        qDebug() << QJsonDocument::fromVariant (data).toJson ().toStdString ().data ();
         load(data);
     });
+    connect (ui->agree, &QPushButton::clicked, this , &approvalMain::onClickAgreeButton);
+    connect (ui->refuse, &QPushButton::clicked, this , &approvalMain::onClickRefuseButton);
+
 }
 
 approvalMain::~approvalMain()
@@ -188,4 +190,14 @@ void approvalMain::showEvent(QShowEvent *event)
         auto var = io->pullData ("approv");
         ui->treeWidget->setTreeData (var);
     }
+}
+
+void approvalMain::onClickRefuseButton()
+{
+    qDebug() << "refuse";
+}
+
+void approvalMain::onClickAgreeButton()
+{
+    qDebug() << "agree";
 }

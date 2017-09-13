@@ -29,6 +29,9 @@ public:
 
     void showEvent (QShowEvent * event) override;
 
+    void onClickAgreeButton();
+    void onClickRefuseButton();
+
 private:
     Ui::approvalMain *ui;
     std::shared_ptr<IoManipulator> io;
