@@ -35,7 +35,7 @@
       <enum>QTabWidget::West</enum>
      </property>
      <property name="currentIndex">
-      <number>6</number>
+      <number>7</number>
      </property>
      <widget class="VideoMainTrial" name="video_trial">
       <attribute name="title">
@@ -70,6 +70,11 @@
      <widget class="database" name="data_base">
       <attribute name="title">
        <string>标准资料库</string>
+      </attribute>
+     </widget>
+     <widget class="PwhManagementMain" name="pwh_quota">
+      <attribute name="title">
+       <string>产品工时定额</string>
       </attribute>
      </widget>
      <widget class="PwhContrastMain" name="pwh_contrast">
@@ -139,6 +144,12 @@
    <class>ExamineApproveMain</class>
    <extends>QWidget</extends>
    <header>approval/ExamineApproveMain.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>PwhManagementMain</class>
+   <extends>QWidget</extends>
+   <header>pwh_quota/PwhManagementMain.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
