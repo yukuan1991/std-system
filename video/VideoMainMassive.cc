@@ -427,7 +427,7 @@ void VideoMainMassive::on_save()
     QByteArray arr (w->dump ().dump (4).data ());
     const auto variantData = QJsonDocument::fromJson (arr).toVariant ();
 
-    io->addNode (path, name, "product", "视频分析法", variantData);
+    io->addNode (path, name, "product", "视频分析法(量产)", variantData);
 }
 
 void VideoMainMassive::on_open()

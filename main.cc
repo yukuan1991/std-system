@@ -8,12 +8,11 @@
 #include <boost/filesystem.hpp>
 #include <boost/range/adaptors.hpp>
 #include <HttpIoManipulator.h>
-
 #include "utils/OpenTreeDialog.h"
 #include <QFile>
 #include <QJsonDocument>
 #include <QDebug>
-
+#include "pwh_contrast/StatView.h"
 using namespace std::chrono_literals;
 using namespace std::string_view_literals;
 
@@ -46,7 +45,7 @@ int main(int argc, char *argv[])
     QApplication app (argc, argv);
     set_style ();
     StdMain w;
-    w.setIoManipulator (std::make_shared<HttpIoManipulator> ("127.0.0.1", 8080));
+    w.setIoManipulator (std::make_shared<HttpIoManipulator> ("172.16.5.81",8080));
     w.resize (1366, 768);
     w.show ();
 
