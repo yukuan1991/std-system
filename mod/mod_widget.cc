@@ -13,16 +13,7 @@ mod_widget::mod_widget(QWidget *parent) :
     ui->setupUi(this);
 
     init ();
-//    std::tie (kv_tmu_, mod_data_) = read_tmu_data ();
     std::tie (kv_tmu_, std::ignore, mod_data_, std::ignore) = read_tmu_data();
-
-//    for(const auto & w : kv_tmu_)
-//    {
-//        std::cout << w.first << " ";
-//        std::cout << w.second << std::endl;;
-//    }
-
-//    emit unit_changed(0.129);
 }
 
 mod_widget::~mod_widget()
@@ -30,9 +21,9 @@ mod_widget::~mod_widget()
     delete ui;
 }
 
-void mod_widget::set_std_time_sum(QString &sum)
+void mod_widget::set_std_time_sum (QString &sum)
 {
-    ui->label_total->setText(sum);
+    ui->label_total->setText (sum);
 }
 
 void mod_widget::set_measure_date(const QDate &date)
@@ -40,7 +31,7 @@ void mod_widget::set_measure_date(const QDate &date)
     ui->measure_date->setText (date.toString ("yyyy-MM-dd"));
 }
 
-QString mod_widget::measure_date() const
+QString mod_widget::measure_date () const
 {
     return ui->measure_date->text ();
 }

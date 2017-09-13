@@ -14,6 +14,53 @@
 
 using namespace std;
 
+QVariant readVaf (const QVariant & vaf)
+{
+    const auto form = vaf.toMap ()["form"].toMap ();
+
+    const auto result = form ["结果"].toList ();
+    const auto name = form ["作业内容"].toList ();
+    auto ret = QVariantList ();
+
+    int i = 0;
+    for (auto & it : name)
+    {
+        QVariantMap row;
+        row ["作业内容"] = it.toString ();
+        row ["基本时间"] = result[i].toMap ()["基本时间"];
+        row ["宽放率"] = result[i].toMap ()["宽放率"];
+        row ["标准时间"] = result[i].toMap ()["标准时间"];
+        row ["增值/非增值"] = result[i].toMap ()["增值/非增值"];
+        row ["操作分类"] = result[i].toMap ()["操作分类"];
+        ret.append (row);
+
+        i ++;
+    }
+
+    return ret;
+}
+
+QVariant readPts (const QVariant & ptsAf)
+{
+    const auto total = ptsAf.toMap ()["form"].toMap ()["总计"].toList ();
+
+    auto ret = QVariantList ();
+    for (auto & it : total)
+    {
+        auto map = it.toMap ();
+        QVariantMap row;
+        row ["作业内容"] = map ["作业内容"];
+        row ["基本时间"] = map ["基本时间"];
+        row ["宽放率"] = map ["宽放率"];
+        row ["标准时间"] = map ["标准时间"];
+        row ["增值/非增值"] = map ["增值/非增值"];
+        row ["操作分类"] = map ["操作分类"];
+        ret.append (row);
+    }
+
+    return ret;
+}
+
 /// 传入一个JSON的字符串然后会解析出一个文件中的所有任务信息
 vector<taskInfo> readVaf (string_view data)
 {
