@@ -66,8 +66,8 @@ SOURCES += main.cc \
     utils/model/product_info_model.cpp \
     utils/model/product_structure_model.cpp \
     utils/SaveTreeDialog.cpp\
-    approval/ExamineApproveMain.cpp \
-    utils/OpenTreeDialog.cpp
+    utils/OpenTreeDialog.cpp \
+    approval/approvalMain.cc
 
 
 RESOURCES += qml.qrc
@@ -131,8 +131,8 @@ FORMS += \
     pwh_contrast/pwhcontrast.ui \
     pwh_contrast/StatView.ui \
     utils/SaveTreeDialog.ui\
-    approval/ExamineApproveMain.ui \
-    utils/OpenTreeDialog.ui
+    utils/OpenTreeDialog.ui \
+    approval/approvalMain.ui
 
 
 HEADERS += \
@@ -205,8 +205,8 @@ HEADERS += \
     utils/model/product_info_model.h \
     utils/model/product_structure_model.h \
     utils/SaveTreeDialog.h\
-    approval/ExamineApproveMain.h \
-    utils/OpenTreeDialog.h
+    utils/OpenTreeDialog.h \
+    approval/approvalMain.h
 
 
 QMAKE_CXXFLAGS += -Wextra

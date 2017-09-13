@@ -26,6 +26,7 @@ void StdMain::setIoManipulator(std::shared_ptr<IoManipulator> p)
     ui->mtm->setIoManipulator (p);
     ui->data_base->setIoManipulator (p);
     ui->pwh_contrast->setIoManipulator (p);
+    ui->approval->setIoManipulator (p);
 }
 
 StdMain::~StdMain()

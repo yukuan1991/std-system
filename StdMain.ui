@@ -35,7 +35,7 @@
       <enum>QTabWidget::West</enum>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>8</number>
      </property>
      <widget class="VideoMainTrial" name="video_trial">
       <attribute name="title">
@@ -77,7 +77,7 @@
        <string>产品工时对比</string>
       </attribute>
      </widget>
-     <widget class="ExamineApproveMain" name="approval">
+     <widget class="approvalMain" name="approval">
       <attribute name="title">
        <string>审批</string>
       </attribute>
@@ -136,9 +136,9 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>ExamineApproveMain</class>
+   <class>approvalMain</class>
    <extends>QWidget</extends>
-   <header>approval/ExamineApproveMain.h</header>
+   <header>approval/approvalMain.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
