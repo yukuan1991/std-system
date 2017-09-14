@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
     QApplication app (argc, argv);
     set_style ();
     StdMain w;
-    w.setIoManipulator (std::make_shared<HttpIoManipulator> ("172.16.5.81", 8080));
+    w.setIoManipulator (std::make_shared<HttpIoManipulator> ("172.16.2.173", 8080));
     w.resize (1366, 768);
     w.show ();
 
