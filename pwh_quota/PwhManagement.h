@@ -28,7 +28,9 @@ public:
     void on_button_exportDF_clicked();
     void on_button_reportHeader_clicked();
     void initTreeWidget(const QVariant& data);
+private:
     void onTreeWidgetClicked();
+    void traverseTreeWidget(const QVariant& data, QVariantList& list);
 private:
     Ui::PwhManagement *ui;
     std::shared_ptr<IoManipulator> io;

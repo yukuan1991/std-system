@@ -160,28 +160,67 @@ void PwhManagement::onTreeWidgetClicked()
     }
     const auto item = items.at(0);
     const auto type = item->text(1);
+
+    QVariantList fileList;
+    QVariantMap dataMap;
+
     if(type.isEmpty())
     {
-        return;
+        traverseTreeWidget(content, fileList);
+        dataMap["table"] = fileList;
     }
-
-    QVariantMap dataMap;
-    dataMap["task-man"] = content.toMap()["task-man"];
-    dataMap["measure-date"] = content.toMap()["measure-date"];
-    dataMap["measure-man"] = content.toMap()["measure-man"];
-    if(type == "视频分析法(量产)")
+    else
     {
-        dataMap["table"] = readVaf(content);
-    }
-    else if(type == "视频分析法(试产)")
-    {
-        dataMap["table"] = readVaf(content);
-    }
-    else if(type == "mod" or type == "mtm" or type == "most")
-    {
-        dataMap["table"] = readPts(content);
+        dataMap["task-man"] = content.toMap()["task-man"];
+        dataMap["measure-date"] = content.toMap()["measure-date"];
+        dataMap["measure-man"] = content.toMap()["measure-man"];
+        if(type == "视频分析法(量产)")
+        {
+            dataMap["table"] = readVaf(content);
+        }
+        else if(type == "视频分析法(试产)")
+        {
+            dataMap["table"] = readVaf(content);
+        }
+        else if(type == "mod" or type == "mtm" or type == "most")
+        {
+            dataMap["table"] = readPts(content);
+        }
     }
 
     ui->reportWidget->load(dataMap);
+}
+
+void PwhManagement::traverseTreeWidget(const QVariant &data, QVariantList& list)
+{
+    if(data.type() == QVariant::Map)
+    {
+        const auto type =data.toMap()["类型"];
+        if(type == "mod" or type == "most" or type == "mtm")
+        {
+            const auto ptsList = readPts(data.toMap()["content"]).toList();
+            for(auto & it : ptsList)
+            {
+                list << it;
+            }
+        }
+        else if(type == "视频分析法(量产)" or type == "视频分析法(试产)")
+        {
+            const auto vafList = readVaf(data.toMap()["content"]).toList();
+            for(auto & it : vafList)
+            {
+                list << it;
+            }
+        }
+//        list << data.toMap()["content"];
+    }
+    else if(data.type() == QVariant::List)
+    {
+        const auto treeList = data.toList();
+        for(auto & it : treeList)
+        {
+            traverseTreeWidget(it, list);
+        }
+    }
 }
 
