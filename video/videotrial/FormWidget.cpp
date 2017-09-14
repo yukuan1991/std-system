@@ -263,7 +263,7 @@ QVariant FormWidget::resultData()
             const auto index = src_model_->index(row, typeCol);
             const auto var = index.data();
 
-            map["操作类型"] = var.toString();
+            map["操作分类"] = var.toString();
         }
 
         resultList.push_back(map);
@@ -490,7 +490,7 @@ void FormWidget::loadResult(const QVariant &result)
 
         const auto comparsion = list.at(row).toMap()["评比系数"];
         const auto rate = list.at(row).toMap()["宽放率"];
-        const auto type = list.at(row).toMap()["操作类型"];
+        const auto type = list.at(row).toMap()["操作分类"];
 
         src_model_->setData(comparsionIndex, comparsion);
         src_model_->setData(rateIndex, rate);

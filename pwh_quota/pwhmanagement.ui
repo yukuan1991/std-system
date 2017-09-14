@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QHBoxLayout" name="horizontalLayout">
+  <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,1">
    <item>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
@@ -32,16 +32,6 @@
        </column>
       </widget>
      </item>
-     <item>
-      <widget class="Line" name="line">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="video_widget" name="widget_video_player" native="true"/>
-     </item>
     </layout>
    </item>
    <item>
@@ -50,12 +40,6 @@
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>video_widget</class>
-   <extends>QWidget</extends>
-   <header>video/video_widget.h</header>
-   <container>1</container>
-  </customwidget>
   <customwidget>
    <class>ReportTableWidget</class>
    <extends>QWidget</extends>

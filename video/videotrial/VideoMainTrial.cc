@@ -20,6 +20,7 @@
 #include <QJsonParseError>
 #include "utils/SaveTreeDialog.h"
 #include <QJsonDocument>
+#include "utils/OpenTreeDialog.h"
 
 using namespace std;
 
@@ -334,7 +335,7 @@ void VideoMainTrial::exportXlsx()
             const auto rate = resultList.at(i).toMap()["宽放率"].toString();
             const auto stdTime = resultList.at(i).toMap()["标准时间"].toDouble();
             const auto appreciation = resultList.at(i).toMap()["增值/非增值"].toString();
-            const auto type = resultList.at(i).toMap()["操作类型"].toString();
+            const auto type = resultList.at(i).toMap()["操作分类"].toString();
 
             xlsx.write (i + 2, start_result + 0, averageTime);
             xlsx.write (i + 2, start_result + 1, comparsion);
@@ -422,7 +423,7 @@ void VideoMainTrial::on_save()
     QVariantMap totalMap;
     totalMap["raw"] = map;
     totalMap["类型"] = "视频分析(试产)";
-    totalMap["提交人"] = io->commiter ();
+    totalMap["提交人"] = io->user ();
     totalMap["提交到"] = "product";
     totalMap["name"] = name;
     totalMap["content"] = variantData;
@@ -433,35 +434,21 @@ void VideoMainTrial::on_save()
 
 void VideoMainTrial::on_open()
 {
-    const auto path = QFileDialog::getOpenFileName (this, "文件打开", ".", tr ("Video Analysis File (*.vaf)"));
-    if (path.isEmpty ())
-    {
-        return;
-    }
+    OpenTreeDialog dlg;
+    dlg.load(io->pullData("product"));
 
-    auto res = file::read_all (::utf_to_sys (path.toStdString ()).data ());
-    if (not res)
+    if(dlg.exec() == QDialog::Accepted)
     {
-        QMessageBox::information (this, "打开", "文件无法打开,读取失败");
-        return;
-    }
-    try
-    {
-        QJsonParseError jsonError;
-        const auto text = QString(res.value().data());
-        QJsonDocument document = QJsonDocument::fromJson(text.toUtf8(), &jsonError);
-        if(jsonError.error == QJsonParseError::NoError)
+        if(dlg.type() != "视频分析法(试产)")
         {
-            const auto data = document.toVariant();
-            auto w = create_window (path);
-//            w->load (data);
-            w->load(data);
+            QMessageBox::information(this, "提示", "文件选取错误，请选择正确的文件！");
+            return;
         }
-    }
-    catch (std::exception &)
-    {
-        QMessageBox::information (this, "打开", "文件格式错误 无法打开");
-        return;
+        const auto content =  dlg.dump().toMap()["content"];
+        const auto name = dlg.dump().toMap()["name"].toString();
+
+        auto w = create_window(name);
+        w->load(content);
     }
 }
 

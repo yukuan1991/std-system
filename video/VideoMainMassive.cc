@@ -18,6 +18,7 @@
 #include "utils/SaveTreeDialog.h"
 #include <base/lang/not_null.h>
 #include <QInputDialog>
+#include "utils/OpenTreeDialog.h"
 
 using namespace std;
 
@@ -442,7 +443,7 @@ void VideoMainMassive::on_save()
     QVariantMap totalMap;
     totalMap["raw"] = map;
     totalMap["类型"] = "视频分析(量产)";
-    totalMap["提交人"] = io->commiter ();
+    totalMap["提交人"] = io->user ();
     totalMap["提交到"] = "product";
     totalMap["name"] = name;
     totalMap["content"] = variantData;
@@ -452,28 +453,22 @@ void VideoMainMassive::on_save()
 
 void VideoMainMassive::on_open()
 {
-    const auto path = QFileDialog::getOpenFileName (this, "文件打开", ".", tr ("Video Analysis File (*.vaf)"));
-    if (path.isEmpty ())
-    {
-        return;
-    }
+    OpenTreeDialog dlg;
+    dlg.load(io->pullData("product"));
 
-    auto res = file::read_all (::utf_to_sys (path.toStdString ()).data ());
-    if (not res)
+    if(dlg.exec() == QDialog::Accepted)
     {
-        QMessageBox::information (this, "打开", "文件无法打开,读取失败");
-        return;
-    }
-    try
-    {
-        const auto data = json::parse (res.value ());
-        auto w = create_window (path);
-        w->load (data);
-    }
-    catch (std::exception &)
-    {
-        QMessageBox::information (this, "打开", "文件格式错误 无法打开");
-        return;
+        if(dlg.type() != "视频分析法(量产)")
+        {
+            QMessageBox::information(this, "提示", "文件选取错误，请选择正确的文件！");
+            return;
+        }
+        const auto content =  dlg.dump().toMap()["content"];
+        const auto name = dlg.dump().toMap()["name"].toString();
+        const auto data = QJsonDocument::fromVariant(content).toJson().toStdString();
+
+        auto w = create_window(name);
+        w->load(nlohmann::json::parse (data));
     }
 }
 

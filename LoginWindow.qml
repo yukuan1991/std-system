@@ -2,12 +2,12 @@
 import QtQuick.Window 2.0
 import QtQuick.Controls 2.2
 
-ApplicationWindow
+Rectangle
 {
     width: 600; height: 450
     id: rootWindow
-    visible: true
-    flags: Qt.FramelessWindowHint
+    //visible: true
+    //flags: Qt.FramelessWindowHint
     signal loginClicked (string name, string pass)
     Rectangle
     {
@@ -17,7 +17,6 @@ ApplicationWindow
             id: header
             headerHeight: 30
             color: "lightgray"
-            rootWindow: rootWindow
         }
         LoginPanel
         {

@@ -15,6 +15,7 @@ public:
     explicit AddtoStdDatabaseDlg(QWidget *parent = 0);
     ~AddtoStdDatabaseDlg();
 
+    void initTreeData(const QVariant& data);
     void load(const QVariant& data);
     QVariant dump () const;
 

@@ -4,11 +4,10 @@ import QtQuick.Controls 2.1
 
 Rectangle
 {
+    id: rootRect
     visible: true
-    property alias rememberPass: rememberPassword.checked
 
     signal loginClicked (string user, string pass)
-    loginButton.onClicked: loginClicked(userName.text, password.text)
 
     Image {
         id: background
@@ -67,10 +66,12 @@ Rectangle
         id: loginButton
         text: "登录"
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: rememberPassword.bottom
+        anchors.top: password.bottom
         anchors.topMargin: 10
         width: password.width
         height: password.height
+
+        onClicked: rootRect.loginClicked (userName.text, password.text)
 
         background: Rectangle
         {

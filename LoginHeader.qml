@@ -4,7 +4,6 @@ import QtQuick.Controls 2.1
 Rectangle
 {
     id: headerArea
-    property ApplicationWindow rootWindow: null
     property int headerHeight
 
     height: headerHeight
@@ -13,25 +12,6 @@ Rectangle
     anchors.top: parent.top
     anchors.left: parent.left
     anchors.right: parent.right
-
-    MouseArea
-    {
-        signal mouseDragged (real x, real y)
-        property point clickPos: "1,1"
-        id: headerMouseArea
-        anchors.fill: parent
-        onPressed:
-        {
-            clickPos = Qt.point(mouse.x, mouse.y)
-        }
-
-        onPositionChanged:
-        {
-            const delta = Qt.point (mouse.x - clickPos.x, mouse.y - clickPos.y)
-            rootWindow.setX(rootWindow.x + delta.x)
-            rootWindow.setY(rootWindow.y + delta.y)
-        }
-    }
 
     Button
     {

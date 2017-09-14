@@ -30,7 +30,7 @@ public:
     void downChart();
     void exportPDF();
 private:
-    bool parseAnalysisFile(const std::vector<taskInfo>& data);
+    bool parseAnalysisFile(const QString& fileName, const std::vector<taskInfo>& data);
 private:
     void setup_more_ui ();
     void set_table();

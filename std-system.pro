@@ -74,7 +74,8 @@ SOURCES += main.cc \
     pwh_quota/ModifyProductDlg.cpp \
     pwh_quota/PwhManagement.cc \
     pwh_quota/PwhManagementMain.cc \
-    pwh_quota/ReportTableWidget.cpp
+    pwh_quota/ReportTableWidget.cpp \
+    LoginDialog.cc
 
 
 RESOURCES += qml.qrc
@@ -144,7 +145,8 @@ FORMS += \
     pwh_quota/modifyproductdlg.ui \
     pwh_quota/pwhmanagement.ui \
     pwh_quota/pwhmanagementmain.ui \
-    pwh_quota/ReportTableWidget.ui
+    pwh_quota/ReportTableWidget.ui \
+    LoginDialog.ui
 
 
 HEADERS += \
@@ -225,7 +227,8 @@ HEADERS += \
     pwh_quota/ModifyProductDlg.h \
     pwh_quota/PwhManagement.h \
     pwh_quota/PwhManagementMain.h \
-    pwh_quota/ReportTableWidget.h
+    pwh_quota/ReportTableWidget.h \
+    LoginDialog.h
 
 
 QMAKE_CXXFLAGS += -Wextra

@@ -30,3 +30,17 @@ QVariant OpenTreeDialog::dump()
     return ui->treeWidget->currentSelectedData();
 }
 
+QString OpenTreeDialog::type() const
+{
+    const auto items = ui->treeWidget->selectedItems();
+    if(items.size() <= 0)
+    {
+        return {};
+    }
+
+    const auto item = items.at(0);
+    const auto type = item->text(1);
+    return type;
+}
+
+

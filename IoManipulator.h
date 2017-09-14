@@ -20,7 +20,9 @@ public:
     virtual bool pushData (const QString &, const QVariant &) = 0;
     virtual QVariant pullData (const QString &) = 0;
     virtual QVariant doPost (const QString & api, const QVariant & data) = 0;
-    virtual QString commiter () const { return "Krys"; }
+    virtual QVariant doGet (const QString & api, const QVariantMap & data = {}) = 0;
+    virtual QString user () const { return "Krys"; }
+    virtual void setUser (const QString & user) = 0;
     virtual ~IoManipulator ();
 
 };

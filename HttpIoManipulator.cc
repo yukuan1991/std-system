@@ -77,3 +77,21 @@ QVariant HttpIoManipulator::doPost(const QString &api, const QVariant &data)
     auto res = http_post (ip_, ("/cgi-bin/" + api).toStdString ().data (), QJsonDocument::fromVariant (data).toJson ().toStdString (), port_);
     return QJsonDocument::fromJson (QByteArray (res.data (), static_cast<int> (res.length ()))).toVariant ();
 }
+
+QVariant HttpIoManipulator::doGet(const QString &api, const QVariantMap &data)
+{
+    Q_UNUSED (data);
+    const auto res = http_get (ip_, ("/cgi-bin/" + api).toStdString ().data (), {}, port_);
+
+    return QJsonDocument::fromJson (QByteArray (res.data (), static_cast<int> (res.length ()))).toVariant ();
+}
+
+QString HttpIoManipulator::user() const
+{
+    return user_;
+}
+
+void HttpIoManipulator::setUser(const QString &user)
+{
+    user_ = user;
+}
