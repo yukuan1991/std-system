@@ -9,6 +9,9 @@
 #include <base/utils/charset.hpp>
 #include <QFileDialog>
 #include <QMessageBox>
+#include "utils/SaveTreeDialog.h"
+#include <QJsonDocument>
+#include "utils/OpenTreeDialog.h"
 
 #include <QDebug>
 
@@ -94,28 +97,22 @@ void most_main::file_new()
 
 void most_main::file_open()
 {
-    const auto path = QFileDialog::getOpenFileName (this, "文件打开", ".", tr ("Most Analysis File (*.mostaf)"));
-    if (path.isEmpty ())
-    {
-        return;
-    }
+    OpenTreeDialog dlg;
+    dlg.load(io->pullData("product"));
 
-    auto res = file::read_all (::utf_to_sys (path.toStdString ()).data ());
-    if (not res)
+    if(dlg.exec() == QDialog::Accepted)
     {
-        QMessageBox::information (this, "打开", "文件无法打开,读取失败");
-        return;
-    }
-    try
-    {
-        const auto data = json::parse (res.value ());
-        auto w = create_window (path);
-        w->load (data);
-    }
-    catch (std::exception &)
-    {
-        QMessageBox::information (this, "打开", "文件格式错误 无法打开");
-        return;
+        if(dlg.type() != "most")
+        {
+            QMessageBox::information(this, "提示", "文件选取错误，请选择正确的文件！");
+            return;
+        }
+        const auto content =  dlg.dump().toMap()["content"];
+        const auto name = dlg.dump().toMap()["name"].toString();
+        const auto data = QJsonDocument::fromVariant(content).toJson().toStdString();
+
+        auto w = create_window(name);
+        w->load(nlohmann::json::parse (data));
     }
 }
 
@@ -138,21 +135,24 @@ void most_main::file_save()
         return;
     }
 
-    const auto title_path = active->windowTitle ();
-    if (title_path == "未命名")
-    {
-        const auto path = QFileDialog::getSaveFileName(this, "文件保存", ".", tr ("Most Analysis File (*.mostaf)"));
-        const auto data = w->dump ();
-        qDebug() << data.dump(4).data();
+    const auto data = io->pullData ("product");
 
-        active->setWindowTitle(path);
-        file::write_buffer (::utf_to_sys (path.toStdString ()).data (), data.dump (4));
-    }
-    else
+    SaveTreeDialog dlg;
+    dlg.load (data);
+    const auto res = dlg.exec ();
+    if (res != SaveTreeDialog::Accepted)
     {
-        const auto data = w->dump ();
-        file::write_buffer (::utf_to_sys (title_path.toStdString ()).data (), data.dump (4));
+        return;
     }
+
+    const auto saveDetail = dlg.dump ().toMap ();
+    const auto path = saveDetail["path"].toStringList ();
+    const auto name = saveDetail["name"].toString ();
+
+    QByteArray arr (w->dump ().dump (4).data ());
+    const auto variantData = QJsonDocument::fromJson (arr).toVariant ();
+
+    io->addNode (path, name, "product", "most", variantData);
 }
 
 void most_main::file_save_as()

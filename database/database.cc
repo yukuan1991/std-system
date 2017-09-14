@@ -2,27 +2,34 @@
 #include "ui_database.h"
 #include <QFile>
 #include <QJsonDocument>
+#include <QDebug>
 
 database::database(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::database)
 {
     ui->setupUi(this);
-    setTabeltColumnCount (5);
+    setTabeltColumnCount (6);
     QStringList header;
-    header << "公司内部代码" << "标准操作单元作业内容" << "标准操作单元基本时间" << "历史来源" << "预定工时法总编码";
+    header << "作业内容" << "基本时间" << "宽放率" << "标准时间" << "增值/非增值" << "操作分类";
     setTableHorizontalHeader (header);
 
-    auto value = intiData ();
-    load (value);
+//    auto value = intiData ();
+//    load (value);
+
+//    auto data = ui->treeWidget->currentSelectedData ();
+//    qDebug() << data;
 
     QVariantList list;
     list << "名称" << "类型";
     ui->treeWidget->setTreeHeader (list);
-    QFile file ("database/test.json");
-    file.open (QFile::ReadOnly);
-    const auto arr = file.readAll ();
-    ui->treeWidget->setTreeData (QJsonDocument::fromJson (arr).toVariant ());
+
+    connect (ui->treeWidget, &QTreeWidget::itemSelectionChanged, [this]
+    {
+        auto data = ui->treeWidget->currentSelectedData ();
+        qDebug() << QJsonDocument::fromVariant (data).toJson ().toStdString ().data ();
+        load(data);
+    });
 }
 
 database::~database()
@@ -101,37 +108,37 @@ bool database::setTableItemIsEditable(const int &rowCount, const int &columnCoun
 
 void database::load(const QVariant &data)
 {
-    auto form = data.toMap ()["form"].toMap ();
-    auto video = form["video"].toMap ();
-    auto videoAdd = video["videoAdd"].toString ();
+    auto content = data.toMap ()["content"].toMap ();
+    auto tabel = content["table"].toList ();
+ //   auto videoAdd = video["videoAdd"].toString ();
  //   ui->video_add->setText (videoAdd);
 
-    auto list = form["list"].toList ();
-    auto rowCount = list.size ();
+    auto rowCount = tabel.size ();
     setTabelRowCount (rowCount);
     int row = 0;
-    for(auto & it : list)
+    for(auto & it : tabel)
     {
-        auto companyInternalCode = it.toMap ()["公司内部代码"].toString();
         auto jobContent = it.toMap()["作业内容"].toString();
         auto basicTime = it.toMap ()["基本时间"].toString();
-        auto historicalOrigin = it.toMap ()["历史来源"].toString();
-        auto allCode = it.toMap ()["总编码"].toString();
-        auto startTime = it.toMap ()["开始时间"].toString();
-        auto stopTime = it.toMap ()["结束时间"].toString();
-        QTableWidgetItem *newItem = new QTableWidgetItem(companyInternalCode);
+        auto zengzhi = it.toMap ()["增值/非增值"].toString();
+        auto kuanfang = it.toMap ()["宽放率"].toString();
+        auto caozuo = it.toMap ()["操作分类"].toString();
+        auto biaozhun = it.toMap ()["标准时间"].toString();
+        QTableWidgetItem *newItem = new QTableWidgetItem(jobContent);
         ui->tableWidget->setItem(row, 0, newItem);
-        newItem = new QTableWidgetItem(jobContent);
-        ui->tableWidget->setItem(row, 1, newItem);
         newItem = new QTableWidgetItem(basicTime);
+        ui->tableWidget->setItem(row, 1, newItem);
+        newItem = new QTableWidgetItem(kuanfang);
         ui->tableWidget->setItem(row, 2, newItem);
-        newItem = new QTableWidgetItem(historicalOrigin);
+        newItem = new QTableWidgetItem(biaozhun);
         ui->tableWidget->setItem(row, 3, newItem);
-        newItem = new QTableWidgetItem(allCode);
+        newItem = new QTableWidgetItem(zengzhi);
         ui->tableWidget->setItem(row, 4, newItem);
+        newItem = new QTableWidgetItem(caozuo);
+        ui->tableWidget->setItem(row, 5, newItem);
         row++;
     }
-    setTableItemIsEditable(rowCount,5);
+    setTableItemIsEditable(rowCount,6);
 }
 
 QVariant database::intiData()
@@ -173,6 +180,17 @@ QVariant database::intiData()
     form["form"] = totalMap;
 
     return form;
+}
+
+void database::showEvent(QShowEvent *event)
+{
+    QWidget::showEvent (event);
+    if (io != null)
+    {
+        auto var = io->pullData ("standard");
+        ui->treeWidget->setTreeData (var);
+    }
+
 }
 
 bool database::setTabelRowCount(const int &row)

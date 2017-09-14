@@ -1,6 +1,7 @@
 ﻿#include "tcp.h"
 #include <regex>
 #include <boost/lexical_cast.hpp>
+#include <QDebug>
 #include <string_view>
 
 using namespace std::string_literals;
@@ -84,7 +85,6 @@ std::string http_get (const char* host, not_null<const char*> path, const std::m
     str_get += path;
     str_get += "?";
 
-    if (path)
     for (auto & it : params)
     {
         str_get += (it.first + "=" + it.second + "&");
@@ -98,8 +98,9 @@ std::string http_get (const char* host, not_null<const char*> path, const std::m
 
     return http_response (sock);
 }
-catch (...)
+catch (const std::exception & e)
 {
+    qDebug () << e.what ();
     return {};
 }
 
@@ -109,7 +110,7 @@ json json_http_get (const char *host, not_null<const char*> path, const std::map
 }
 catch (...)
 {
-    return {};
+return {};
 }
 
 

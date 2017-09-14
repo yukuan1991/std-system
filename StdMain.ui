@@ -35,9 +35,9 @@
       <enum>QTabWidget::West</enum>
      </property>
      <property name="currentIndex">
-      <number>6</number>
+      <number>0</number>
      </property>
-     <widget class="QWidget" name="video_trial">
+     <widget class="VideoMainTrial" name="video_trial">
       <attribute name="title">
        <string>视频分析( 试产)</string>
       </attribute>
@@ -69,7 +69,22 @@
      </widget>
      <widget class="database" name="data_base">
       <attribute name="title">
-       <string>页</string>
+       <string>标准资料库</string>
+      </attribute>
+     </widget>
+     <widget class="PwhManagementMain" name="pwh_quota">
+      <attribute name="title">
+       <string>产品工时定额</string>
+      </attribute>
+     </widget>
+     <widget class="PwhContrastMain" name="pwh_contrast">
+      <attribute name="title">
+       <string>产品工时对比</string>
+      </attribute>
+     </widget>
+     <widget class="ExamineApproveMain" name="approval">
+      <attribute name="title">
+       <string>审批</string>
       </attribute>
      </widget>
     </widget>
@@ -111,6 +126,30 @@
    <class>database</class>
    <extends>QWidget</extends>
    <header>database/database.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>VideoMainTrial</class>
+   <extends>QWidget</extends>
+   <header>video/videotrial/VideoMainTrial.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>PwhContrastMain</class>
+   <extends>QWidget</extends>
+   <header>pwh_contrast/PwhContrastMain.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ExamineApproveMain</class>
+   <extends>QWidget</extends>
+   <header>approval/ExamineApproveMain.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>PwhManagementMain</class>
+   <extends>QWidget</extends>
+   <header>pwh_quota/PwhManagementMain.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

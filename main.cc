@@ -7,10 +7,12 @@
 #include <QQmlApplicationEngine>
 #include <boost/filesystem.hpp>
 #include <boost/range/adaptors.hpp>
-
-#include "video/VideoMainTrial.h"
-#include <QDebug>
 #include <HttpIoManipulator.h>
+#include "utils/OpenTreeDialog.h"
+#include <QFile>
+#include <QJsonDocument>
+#include <QDebug>
+
 using namespace std::chrono_literals;
 using namespace std::string_view_literals;
 
@@ -41,20 +43,12 @@ void set_style ()
 int main(int argc, char *argv[])
 {
     QApplication app (argc, argv);
-    app.setAttribute (Qt::AA_DontCreateNativeWidgetSiblings, true);
     set_style ();
 
-//    StdMain w;
-//    w.setIoManipulator (std::make_shared<HttpIoManipulator> ("192.168.56.3"));
-//    w.resize (1366, 768);
-//    w.show ();
-
-//    StdMain w;
-//    w.resize (1366, 768);
-//    w.show ();
-    VideoMainTrial w;
-    w.show();
-
+    StdMain w;
+    w.setIoManipulator (std::make_shared<HttpIoManipulator> ("172.16.2.173",8080));
+    w.resize (1366, 768);
+    w.show ();
 
     return app.exec();
 }

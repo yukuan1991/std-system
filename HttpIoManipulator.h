@@ -10,6 +10,8 @@ public:
     void sendForApproval (const QStringList & path, const QVariant & data) override;
     QVariant pullData (const QString & type) override;
     bool pushData (const QString & type, const QVariant & data) override;
+    bool addNode (const QStringList & path, const QString & name, const QString & dataFamily, const QString & dataType, const QVariant & data) override;
+    bool delNode (const QStringList & path, const QString & dataFamily) override;
 private:
     not_null<const char*> ip_;
     uint16_t port_;

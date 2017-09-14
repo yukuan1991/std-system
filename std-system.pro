@@ -1,4 +1,4 @@
-QT += qml quick widgets core gui quickwidgets avwidgets charts xlsx
+QT += qml quick widgets core gui quickwidgets avwidgets charts xlsx printsupport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 CONFIG -= c++11
@@ -48,12 +48,34 @@ SOURCES += main.cc \
     tcp.cc \
     utils/JsonTree.cc \
     product-family/ProductFamilyWidget.cc \
-    database/database.cc\
-    video/VideoTrialRibbon.cpp \
-    video/FormWidget.cpp \
-    video/VideoAnalysis.cc \
-    video/VideoFormModel.cc \
-    video/VideoMainTrial.cc
+    database/database.cc \
+    video/videotrial/FormWidget.cpp \
+    video/videotrial/VideoAnalysis.cc \
+    video/videotrial/VideoFormModel.cc \
+    video/videotrial/VideoMainTrial.cc \
+    video/videotrial/VideoTrialRibbon.cc \
+    pwh_contrast/PwhContrastMain.cc \
+    utils/data_veryfication.cpp \
+    utils/Qt-Utils/openaf.cc \
+    pwh_contrast/ribbon/PwhContrastRibbon.cc \
+    pwh_contrast/PieView.cc \
+    pwh_contrast/production_management_button_tree_dlg.cpp \
+    pwh_contrast/PwhContrast.cc \
+    pwh_contrast/PwhListWidget.cc \
+    pwh_contrast/StatView.cc \
+    utils/model/product_info_model.cpp \
+    utils/model/product_structure_model.cpp \
+    utils/SaveTreeDialog.cpp\
+    approval/ExamineApproveMain.cpp \
+    utils/OpenTreeDialog.cpp \
+    pwh_quota/ribbon/PwhManagementRibbon.cc \
+    pwh_quota/AddtoStdDatabaseDlg.cpp \
+    pwh_quota/DetailedInfoTable.cpp \
+    pwh_quota/ModifyProductDlg.cpp \
+    pwh_quota/PwhManagement.cc \
+    pwh_quota/PwhManagementMain.cc \
+    pwh_quota/ReportTableWidget.cpp
+
 
 RESOURCES += qml.qrc
 
@@ -82,7 +104,9 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 DISTFILES += \
     mod/mod.data \
     most/most.data \
-    database/test.json
+    database/test.json \
+    approval/test.json \
+    approval/2.vaf
 
 FORMS += \
     StdMain.ui \
@@ -105,10 +129,23 @@ FORMS += \
     most/most_data_widget.ui \
     video/VideoMainMassive.ui \
     product-family/productfamilywidget.ui \
-    database/database.ui\
-    video/FormWidget.ui \
-    video/VideoAnalysis.ui \
-    video/VideoMainTrial.ui
+    database/database.ui \
+    video/videotrial/FormWidget.ui \
+    video/videotrial/VideoAnalysis.ui \
+    video/videotrial/VideoMainTrial.ui \
+    pwh_contrast/pwhcontrastmain.ui \
+    pwh_contrast/production_management_button_tree_dlg.ui \
+    pwh_contrast/pwhcontrast.ui \
+    pwh_contrast/StatView.ui \
+    utils/SaveTreeDialog.ui\
+    approval/ExamineApproveMain.ui \
+    utils/OpenTreeDialog.ui \
+    pwh_quota/addtostddatabasedlg.ui \
+    pwh_quota/modifyproductdlg.ui \
+    pwh_quota/pwhmanagement.ui \
+    pwh_quota/pwhmanagementmain.ui \
+    pwh_quota/ReportTableWidget.ui
+
 
 HEADERS += \
     StdMain.h \
@@ -162,12 +199,34 @@ HEADERS += \
     tcp.h \
     utils/JsonTree.h \
     product-family/ProductFamilyWidget.h \
-    database/database.h\
-    video/VideoTrialRibbon.h \
-    video/FormWidget.h \
-    video/VideoAnalysis.h \
-    video/VideoFormModel.h \
-    video/VideoMainTrial.h
+    database/database.h \
+    video/videotrial/FormWidget.h \
+    video/videotrial/VideoAnalysis.h \
+    video/videotrial/VideoFormModel.h \
+    video/videotrial/VideoMainTrial.h \
+    video/videotrial/VideoTrialRibbon.h \
+    pwh_contrast/PwhContrastMain.h \
+    utils/data_veryfication.h \
+    utils/Qt-Utils/openaf.h \
+    pwh_contrast/ribbon/PwhContrastRibbon.h \
+    pwh_contrast/PieView.h \
+    pwh_contrast/production_management_button_tree_dlg.h \
+    pwh_contrast/PwhContrast.h \
+    pwh_contrast/PwhListWidget.h \
+    pwh_contrast/StatView.h \
+    utils/model/product_info_model.h \
+    utils/model/product_structure_model.h \
+    utils/SaveTreeDialog.h\
+    approval/ExamineApproveMain.h \
+    utils/OpenTreeDialog.h \
+    pwh_quota/ribbon/PwhManagementRibbon.h \
+    pwh_quota/AddtoStdDatabaseDlg.h \
+    pwh_quota/DetailedInfoTable.h \
+    pwh_quota/ModifyProductDlg.h \
+    pwh_quota/PwhManagement.h \
+    pwh_quota/PwhManagementMain.h \
+    pwh_quota/ReportTableWidget.h
+
 
 QMAKE_CXXFLAGS += -Wextra
 QMAKE_CXXFLAGS += -Wno-deprecated-declarations
