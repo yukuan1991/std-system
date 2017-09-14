@@ -1,12 +1,12 @@
-﻿#include "database.h"
-#include "ui_database.h"
+﻿#include "approvalMain.h"
+#include "ui_approvalMain.h"
 #include <QFile>
 #include <QJsonDocument>
 #include <QDebug>
-
-database::database(QWidget *parent) :
+#include "utils/Qt-Utils/openaf.h"
+approvalMain::approvalMain(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::database)
+    ui(new Ui::approvalMain)
 {
     ui->setupUi(this);
     setTabeltColumnCount (6);
@@ -21,17 +21,19 @@ database::database(QWidget *parent) :
     connect (ui->treeWidget, &QTreeWidget::itemSelectionChanged, [this]
     {
         auto data = ui->treeWidget->currentSelectedData ();
-        qDebug() << QJsonDocument::fromVariant (data).toJson ().toStdString ().data ();
         load(data);
     });
+    connect (ui->agree, &QPushButton::clicked, this , &approvalMain::onClickAgreeButton);
+    connect (ui->refuse, &QPushButton::clicked, this , &approvalMain::onClickRefuseButton);
+
 }
 
-database::~database()
+approvalMain::~approvalMain()
 {
     delete ui;
 }
 
-bool database::setTableHorizontalHeader(QStringList &list)
+bool approvalMain::setTableHorizontalHeader(QStringList &list)
 {
     if(list.empty ())
     {
@@ -44,7 +46,20 @@ bool database::setTableHorizontalHeader(QStringList &list)
     }
 }
 
-bool database::setTabeltColumnCount(const int &col)
+bool approvalMain::setTabelRowCount(const int &row)
+{
+    if(row <= 0)
+    {
+        return false;
+    }
+    else
+    {
+        ui->tableWidget->setRowCount (row);
+        return true;
+    }
+}
+
+bool approvalMain::setTabeltColumnCount(const int &col)
 {
     if(col <= 0)
     {
@@ -57,7 +72,7 @@ bool database::setTabeltColumnCount(const int &col)
     }
 }
 
-bool database::setTableItemData(int &row, int &col, QTableWidgetItem *item)
+bool approvalMain::setTableItemData(int &row, int &col, QTableWidgetItem *item)
 {
     if(row <= 0 or col <= 0)
     {
@@ -70,7 +85,7 @@ bool database::setTableItemData(int &row, int &col, QTableWidgetItem *item)
     }
 }
 
-bool database::setTableItemIsEditable(const int &rowCount, const int &columnCount)
+bool approvalMain::setTableItemIsEditable(const int &rowCount, const int &columnCount)
 {
     bool flag = false;
     if(rowCount <= 0 or columnCount <= 0)
@@ -100,17 +115,46 @@ bool database::setTableItemIsEditable(const int &rowCount, const int &columnCoun
     return flag;
 }
 
-void database::load(const QVariant &data)
+void approvalMain::load(const QVariant &data)
 {
-    auto content = data.toMap ()["content"].toMap ();
-    auto tabel = content["table"].toList ();
- //   auto videoAdd = video["videoAdd"].toString ();
- //   ui->video_add->setText (videoAdd);
+    auto map = data.toMap ();
+    auto name = map["提交人"].toString();
+    auto dest = map["提交到"].toString();
+    auto type = map["类型"].toString();
+    auto content = map["content"].toMap ();
+    QVariantList table;
+    if(dest == "standard")
+    {
+         table = content["table"].toList ();
+    }
+    else
+    {
+        if(type == "视频分析(试产)")
+        {
+            table = readVaf (content).toList ();
+        }
+        else if(type == "视频分析(量产)")
+        {
+            table = readVaf (content).toList ();
+        }
+        else if(type == "mtm")
+        {
+            table = readPts (content).toList ();
+        }
+        else if(type == "most")
+        {
+            table = readPts (content).toList ();
+        }
+        else if(type == "mod")
+        {
+            table = readPts (content).toList ();
+        }
 
-    auto rowCount = tabel.size ();
+    }
+    auto rowCount = table.size ();
     setTabelRowCount (rowCount);
     int row = 0;
-    for(auto & it : tabel)
+    for(auto & it : table)
     {
         auto jobContent = it.toMap()["作业内容"].toString();
         auto basicTime = it.toMap ()["基本时间"].toString();
@@ -132,70 +176,28 @@ void database::load(const QVariant &data)
         ui->tableWidget->setItem(row, 5, newItem);
         row++;
     }
+    ui->man_name->setText (name);
+    ui->analysis_method->setText (type);
+    ui->submit->setText (dest);
     setTableItemIsEditable(rowCount,6);
 }
 
-QVariant database::intiData()
-{
-
-    QVariantMap video;
-    video["videoAdd"] = "fadfadfadfadfa";
-
-    QVariantList list;
-
-    QVariantMap map1;
-    map1["公司内部代码"] = "fadfadf";
-    map1["作业内容"] = "fadfadf";
-    map1["基本时间"] = "fadfadf";
-    map1["历史来源"] = "fadfadf";
-    map1["总编码"] = "fadfadf";
-    map1["开始时间"] = "fadfadf";
-    map1["结束时间"] = "fadfadf";
-    list.push_back (map1);
-
-    QVariantMap map2;
-
-    map2["公司内部代码"] = "ffa";
-    map2["作业内容"] = "z";
-    map2["基本时间"] = "zcx";
-    map2["历史来源"] = "fadfadf";
-    map2["总编码"] = "kjk";
-    map2["开始时间"] = "iyu";
-    map2["结束时间"] = "jmbnm";
-    list.push_back (map2);
-
-
-    QVariantMap totalMap;
-
-    totalMap ["video"] = video;
-    totalMap["list"] = list;
-
-    QVariantMap form;
-    form["form"] = totalMap;
-
-    return form;
-}
-
-void database::showEvent(QShowEvent *event)
+void approvalMain::showEvent(QShowEvent *event)
 {
     QWidget::showEvent (event);
     if (io != null)
     {
-        auto var = io->pullData ("standard");
+        auto var = io->pullData ("approv");
         ui->treeWidget->setTreeData (var);
     }
-
 }
 
-bool database::setTabelRowCount(const int &row)
+void approvalMain::onClickRefuseButton()
 {
-    if(row <= 0)
-    {
-        return false;
-    }
-    else
-    {
-        ui->tableWidget->setRowCount (row);
-        return true;
-    }
+    qDebug() << "refuse";
+}
+
+void approvalMain::onClickAgreeButton()
+{
+    qDebug() << "agree";
 }

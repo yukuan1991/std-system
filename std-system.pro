@@ -65,9 +65,9 @@ SOURCES += main.cc \
     pwh_contrast/StatView.cc \
     utils/model/product_info_model.cpp \
     utils/model/product_structure_model.cpp \
-    utils/SaveTreeDialog.cpp\
-    approval/ExamineApproveMain.cpp \
+    utils/SaveTreeDialog.cpp \
     utils/OpenTreeDialog.cpp \
+    approval/approvalMain.cc \
     pwh_quota/ribbon/PwhManagementRibbon.cc \
     pwh_quota/AddtoStdDatabaseDlg.cpp \
     pwh_quota/DetailedInfoTable.cpp \
@@ -139,8 +139,8 @@ FORMS += \
     pwh_contrast/pwhcontrast.ui \
     pwh_contrast/StatView.ui \
     utils/SaveTreeDialog.ui\
-    approval/ExamineApproveMain.ui \
     utils/OpenTreeDialog.ui \
+    approval/approvalMain.ui \
     pwh_quota/addtostddatabasedlg.ui \
     pwh_quota/modifyproductdlg.ui \
     pwh_quota/pwhmanagement.ui \
@@ -217,9 +217,9 @@ HEADERS += \
     pwh_contrast/StatView.h \
     utils/model/product_info_model.h \
     utils/model/product_structure_model.h \
-    utils/SaveTreeDialog.h\
-    approval/ExamineApproveMain.h \
+    utils/SaveTreeDialog.h \
     utils/OpenTreeDialog.h \
+    approval/approvalMain.h \
     pwh_quota/ribbon/PwhManagementRibbon.h \
     pwh_quota/AddtoStdDatabaseDlg.h \
     pwh_quota/DetailedInfoTable.h \

@@ -145,6 +145,15 @@ void most_main::file_save()
         return;
     }
 
+//    const auto saveDetail = dlg.dump ().toMap ();
+//    const auto path = saveDetail["path"].toStringList ();
+//    const auto name = saveDetail["name"].toString ();
+
+//    QByteArray arr (w->dump ().dump (4).data ());
+//    const auto variantData = QJsonDocument::fromJson (arr).toVariant ();
+
+//    io->addNode (path, name, "product", "most", variantData);
+
     const auto saveDetail = dlg.dump ().toMap ();
     const auto path = saveDetail["path"].toStringList ();
     const auto name = saveDetail["name"].toString ();
@@ -152,7 +161,27 @@ void most_main::file_save()
     QByteArray arr (w->dump ().dump (4).data ());
     const auto variantData = QJsonDocument::fromJson (arr).toVariant ();
 
-    io->addNode (path, name, "product", "most", variantData);
+    QVariantList list;
+    for (auto & it : path)
+    {
+        list << it;
+    }
+    QVariantMap map;
+    map ["path"] = list;
+    map ["file"] = "product";
+    map ["name"] = name;
+    map ["data"] = variantData;
+    map ["type"] = "most";
+
+    QVariantMap totalMap;
+    totalMap["raw"] = map;
+    totalMap["类型"] = "most";
+    totalMap["提交人"] = io->commiter ();
+    totalMap["提交到"] = "product";
+    totalMap["name"] = name;
+    totalMap["content"] = variantData;
+
+    io->doPost ("add-approv", totalMap);
 }
 
 void most_main::file_save_as()
