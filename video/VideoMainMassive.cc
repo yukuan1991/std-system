@@ -19,6 +19,7 @@
 #include <base/lang/not_null.h>
 #include <QInputDialog>
 #include "utils/OpenTreeDialog.h"
+#include "algorithm_utils.h"
 
 using namespace std;
 
@@ -185,6 +186,14 @@ void VideoMainMassive::on_task_man()
 
 void VideoMainMassive::video_import()
 {
+    auto w = current_sub_window ();
+    if (w == null)
+    {
+        return;
+    }
+
+    assert (io != null);
+
     const QString type = tr ("Video Files (*.mp4 *.mpg *.mod *.mov *.mkv *.wmv *.avi *.vid)");
     const auto file = QFileDialog::getOpenFileName (this, "打开视频", ".", type);
     if (file.isEmpty ())
@@ -192,37 +201,49 @@ void VideoMainMassive::video_import()
         return;
     }
 
-    QFileInfo info (file);
-    const auto src_name = info.fileName ();
-    QDir video_dir (".");
-
-    if (not video_dir.mkpath ("video_data"))
+    const auto sysFile = ::utf_to_sys (file.toStdString ());
+    const auto md5 = ::get_raw_md5 (sysFile.data ());
+    auto fileContent = file::read_all (sysFile.data ());
+    if (not fileContent)
     {
-        QMessageBox::information (this, "导入", "无法导入视频,数据路径创建失败");
+        QMessageBox::information (this, "导入", "文件打开失败无法导入视频");
         return;
     }
 
-    const auto dest_path = "video_data/" + src_name;
+    const auto fileBinary = ::move (fileContent.value ());
 
-    if (QFile::exists (dest_path))
-    {
-        QFile::remove (dest_path);
-    }
 
-    if (not QFile::copy (file, dest_path))
-    {
-        QMessageBox::information (this, "导入", "无法导入视频,拷贝文件失败");
-        return;
-    }
+    io->uploadVideo (fileBinary, md5);
 
-    auto w = current_sub_window ();
 
-    if (w == null)
-    {
-        return;
-    }
+    const auto videoPath = io->videoPrefix () + ::to_hex (md5).data ();
+    qDebug () << videoPath;
+    w->set_video_file (videoPath);
 
-    w->set_video_file (dest_path);
+    //QFileInfo info (file);
+    //const auto src_name = info.fileName ();
+    //QDir video_dir (".");
+
+    //if (not video_dir.mkpath ("video_data"))
+    //{
+    //    QMessageBox::information (this, "导入", "无法导入视频,数据路径创建失败");
+    //    return;
+    //}
+
+    //const auto dest_path = "video_data/" + src_name;
+
+    //if (QFile::exists (dest_path))
+    //{
+    //    QFile::remove (dest_path);
+    //}
+
+    //if (not QFile::copy (file, dest_path))
+    //{
+    //    QMessageBox::information (this, "导入", "无法导入视频,拷贝文件失败");
+    //    return;
+    //}
+
+    //auto w = current_sub_window ();
 }
 
 void VideoMainMassive::init_conn()

@@ -21,8 +21,10 @@ public:
     virtual QVariant pullData (const QString &) = 0;
     virtual QVariant doPost (const QString & api, const QVariant & data) = 0;
     virtual QVariant doGet (const QString & api, const QVariantMap & data = {}) = 0;
+    virtual QString videoPrefix () const = 0;
     virtual QString user () const { return "Krys"; }
     virtual void setUser (const QString & user) = 0;
+    virtual bool uploadVideo (const std::string & path, const std::string & md5) = 0;
     virtual ~IoManipulator ();
 
 };

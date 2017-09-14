@@ -75,7 +75,9 @@ SOURCES += main.cc \
     pwh_quota/PwhManagement.cc \
     pwh_quota/PwhManagementMain.cc \
     pwh_quota/ReportTableWidget.cpp \
-    LoginDialog.cc
+    LoginDialog.cc \
+    video/videotrial/VideoDelegate.cpp \
+    algorithm_utils.cpp
 
 
 RESOURCES += qml.qrc
@@ -228,7 +230,9 @@ HEADERS += \
     pwh_quota/PwhManagement.h \
     pwh_quota/PwhManagementMain.h \
     pwh_quota/ReportTableWidget.h \
-    LoginDialog.h
+    LoginDialog.h \
+    video/videotrial/VideoDelegate.h \
+    algorithm_utils.h
 
 
 QMAKE_CXXFLAGS += -Wextra

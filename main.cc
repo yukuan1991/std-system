@@ -68,6 +68,8 @@ int main (int argc, char * argv[])
 
     set_style ();
     auto io = std::make_shared<HttpIoManipulator> ("172.16.2.173", 8080);
+    io->setVideoIp ("172.16.2.173");
+    io->setVideoPort (8080);
 
     while (1)
     {
