@@ -1,4 +1,4 @@
-#include "ReportTableWidget.h"
+﻿#include "ReportTableWidget.h"
 #include "ui_ReportTableWidget.h"
 
 ReportTableWidget::ReportTableWidget(QWidget *parent) :
@@ -60,10 +60,6 @@ void ReportTableWidget::load(const QVariant &data)
     }
 
     const auto list = data.toMap()["table"].toList();
-    if(list.size() == 0)
-    {
-        return;
-    }
 
     ui->tableWidget->clear();
 

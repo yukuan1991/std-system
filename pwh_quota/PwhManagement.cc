@@ -166,8 +166,17 @@ void PwhManagement::onTreeWidgetClicked()
 
     if(type.isEmpty())
     {
-        traverseTreeWidget(content, fileList);
-        dataMap["table"] = fileList;
+        qDebug () << content;
+        if (content.toList ().isEmpty ())
+        {
+            //ui->reportWidget->load ({});
+            dataMap["table"] = QVariantList ();
+        }
+        else
+        {
+            traverseTreeWidget(content, fileList);
+            dataMap["table"] = fileList;
+        }
     }
     else
     {
