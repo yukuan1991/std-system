@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include <QWidget>
-#include "video/video_delegate.h"
+#include "video/videotrial/VideoDelegate.h"
 #include <QTableView>
 #include "utils/view/table_view.h"
 #include <memory>
@@ -78,7 +78,7 @@ private:
     const std::unique_ptr<video_form_split> model_des_ = std::make_unique<video_form_split> ();
     const std::unique_ptr<video_form_split> model_data_ = std::make_unique<video_form_split> ();
     const std::unique_ptr<video_form_split> model_result_ = std::make_unique<video_form_split> ();
-    const std::unique_ptr<video_delegate> des_delegate_ = std::make_unique<video_delegate> ();
+    const std::unique_ptr<VideoDelegate> des_delegate_ = std::make_unique<VideoDelegate> ();
 
     std::vector<QTableView*> views_;
     table_view* current_view_ = nullptr;

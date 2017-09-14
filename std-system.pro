@@ -74,7 +74,8 @@ SOURCES += main.cc \
     pwh_quota/ModifyProductDlg.cpp \
     pwh_quota/PwhManagement.cc \
     pwh_quota/PwhManagementMain.cc \
-    pwh_quota/ReportTableWidget.cpp
+    pwh_quota/ReportTableWidget.cpp \
+    video/videotrial/VideoDelegate.cpp
 
 
 RESOURCES += qml.qrc
@@ -225,7 +226,8 @@ HEADERS += \
     pwh_quota/ModifyProductDlg.h \
     pwh_quota/PwhManagement.h \
     pwh_quota/PwhManagementMain.h \
-    pwh_quota/ReportTableWidget.h
+    pwh_quota/ReportTableWidget.h \
+    video/videotrial/VideoDelegate.h
 
 
 QMAKE_CXXFLAGS += -Wextra
