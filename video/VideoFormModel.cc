@@ -36,6 +36,7 @@ void VideoFormModel::init()
 
     horizontalHeaderColumns_ << "测量时间" << "评比系数" << "基本时间" << "宽放率" << "标准工时" << "增值/非增值" << "操作类型";
     originDataColumns_ << "评比系数" << "宽放率" << "操作类型";
+    setColumnCount (19);
     setHorizontalHeaderLabels(horizontalHeaderColumns_);
 }
 

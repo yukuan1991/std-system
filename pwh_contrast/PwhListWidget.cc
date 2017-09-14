@@ -11,14 +11,15 @@ PwhListWidget::PwhListWidget(QWidget *parent)
 
 }
 
-void PwhListWidget::insert(const QVariant &data, int index)
+void PwhListWidget::insert(const QString& fileName, const QVariant &data, int index)
 {
     auto item = std::make_unique<QListWidgetItem> (this);
     auto chart = std::make_unique<StatView> (this);
     auto map = data.toMap();
     chart->load(map);
+    chart->setFileTitle(fileName);
 
-    item->setSizeHint(QSize(200, 200));
+    item->setSizeHint(QSize(200, 300));
 
     connect(chart.get(), &StatView::closeView, this , &PwhListWidget::close);
 

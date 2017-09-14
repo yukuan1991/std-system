@@ -18,13 +18,15 @@
 #include <QtPrintSupport/QPrinter>
 #include <QPainter>
 #include <QFileDialog>
+#include <QMessageBox>
 
 #include <QDebug>
 
 using ptr_func = std::vector<taskInfo>(*)(std::string_view);
 QMap<QString, ptr_func> map
 {
-    {"vaf" , readVaf},
+    {"vmaf" , readVaf},
+    {"vtaf", readVaf},
     {"modaf", readPts},
     {"mostaf", readPts},
     {"mtmaf", readPts}
@@ -55,8 +57,18 @@ void PwhContrast::initTreeData(const QVariant &data)
 void PwhContrast::load()
 {
     const auto selectedList = ui->tree_product->selectedItems();
-    if(selectedList.size() < 0)
+    if(selectedList.size() <= 0)
     {
+        QMessageBox::information(this, "提示", "请选中目录中的一个文件!");
+        return;
+    }
+
+    const auto item = selectedList.at(0);
+    const auto fileName = item->text(0);
+    const auto func = item->text(1);
+    if(func.isEmpty())
+    {
+        QMessageBox::information(this, "提示", "请选中目录下的一个文件！");
         return;
     }
 
@@ -69,22 +81,26 @@ void PwhContrast::load()
     std::vector<taskInfo> taskinfo;
     if(type == "视频分析法(量产)")
     {
-        taskinfo = (map["vaf"])(text);
+        taskinfo = (map["vmaf"])(text);
     }
-    else if(type == "modaf")
+    else if(type == "视频分析法(试产)")
+    {
+        taskinfo = (map["vtaf"])(text);
+    }
+    else if(type == "mod")
     {
         taskinfo = (map["modaf"])(text);
     }
-    else if(type == "mostaf")
+    else if(type == "most")
     {
         taskinfo = (map["mostaf"])(text);
     }
-    else if(type == "mtmaf")
+    else if(type == "mtm")
     {
         taskinfo = (map["mtmaf"])(text);
     }
 
-    if(!parseAnalysisFile(taskinfo))
+    if(!parseAnalysisFile(fileName, taskinfo))
     {
         QMessageBox::information(this, "添加文件", "添加文件失败，文件已损坏！");
     }
@@ -125,7 +141,7 @@ void PwhContrast::exportPDF()
 
 
 
-bool PwhContrast::parseAnalysisFile(const std::vector<taskInfo> &data)
+bool PwhContrast::parseAnalysisFile(const QString& fileName, const std::vector<taskInfo> &data)
 {
     QJsonDocument document;
     QJsonObject json;
@@ -159,7 +175,7 @@ bool PwhContrast::parseAnalysisFile(const std::vector<taskInfo> &data)
 
     document.setObject(json);
     const auto content = document.toVariant();
-    ui->listWidget->append(content);
+    ui->listWidget->append(fileName, content);
 
     return true;
 }

@@ -8,38 +8,6 @@ ReportTableWidget::ReportTableWidget(QWidget *parent) :
     ui->setupUi(this);
 
     ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
-
-    QVariantMap totalMap;
-
-    QVariantList list;
-    QVariantMap map1;
-    map1["作业内容"] = "焊锡";
-    map1["基本时间"] = 0.1;
-    map1["宽放率"] = "0.00%";
-    map1["标准时间"] = 0.1;
-    map1["增值/非增值"] = "增值";
-    map1["操作分类"] = "加工";
-
-    QVariantMap map2;
-    map2["作业内容"] = "xxx";
-    map2["基本时间"] = 0.2;
-    map2["宽放率"] = "0.00%";
-    map2["标准时间"] = 0.2;
-    map2["增值/非增值"] = "非增值";
-    map2["操作分类"] = "搬运";
-
-    QVariantMap map3;
-    map3["作业内容"] = "sdd";
-    map3["基本时间"] = 0.3;
-    map3["宽放率"] = "0.00%";
-    map3["标准时间"] = 0.3;
-    map3["增值/非增值"] = "增值";
-    map3["操作分类"] = "加工";
-
-    list << map1 << map2 << map3;
-
-    totalMap["table"] = list;
-    load(totalMap);
 }
 
 ReportTableWidget::~ReportTableWidget()
@@ -130,7 +98,6 @@ void ReportTableWidget::load(const QVariant &data)
         ui->tableWidget->item(i, 5)->setData(Qt::DisplayRole, type);
     }
 
-    const auto reportHeader = data.toMap()["报表名称"].toString();
     const auto productName = data.toMap()["所属产品名称"].toString();
     const auto processName = data.toMap()["所属工艺名称"].toString();
     const auto workStationNum = data.toMap()["工站号"].toString();
@@ -140,7 +107,6 @@ void ReportTableWidget::load(const QVariant &data)
     const auto measureFunc = data.toMap()["测量方法"].toString();
     const auto dataUnit = data.toMap()["数据单位"].toString();
 
-    ui->label_title->setText(reportHeader);
     ui->label_product_name->setText(productName);
     ui->label_process_name->setText(processName);
     ui->label_workStationNum->setText(workStationNum);

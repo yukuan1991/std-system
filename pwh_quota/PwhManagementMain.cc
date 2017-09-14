@@ -27,6 +27,7 @@ void PwhManagementMain::fileNew()
     {
         auto var = io->pullData ("product");
         w->initTreeWidget (var);
+        w->setIoManipulator(io);
     }
 }
 
@@ -88,8 +89,8 @@ void PwhManagementMain::reportHeader()
 void PwhManagementMain::initConn()
 {
     connect(ui->rib, &PwhManagementRibbon::file_new, this, &PwhManagementMain::fileNew);
-    connect(ui->rib, &PwhManagementRibbon::detailedInfoClicked, this, &PwhManagementMain::detailedInfo);
-    connect(ui->rib, &PwhManagementRibbon::modifyClicked, this, &PwhManagementMain::modifyClicked);
+//    connect(ui->rib, &PwhManagementRibbon::detailedInfoClicked, this, &PwhManagementMain::detailedInfo);
+//    connect(ui->rib, &PwhManagementRibbon::modifyClicked, this, &PwhManagementMain::modifyClicked);
     connect(ui->rib, &PwhManagementRibbon::addStdDatabaseClicked, this, &PwhManagementMain::addStdDatabase);
     connect(ui->rib, &PwhManagementRibbon::exportPDFClicked, this, &PwhManagementMain::exportPDF);
     connect(ui->rib, &PwhManagementRibbon::reportHeaderClicked, this, &PwhManagementMain::reportHeader);

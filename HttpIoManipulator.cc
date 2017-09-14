@@ -69,7 +69,7 @@ bool HttpIoManipulator::delNode(const QStringList &path, const QString &dataFami
 
     auto res = http_post (ip_, "/cgi-bin/del-node", QJsonDocument::fromVariant (map).toJson ().toStdString (), port_);
     qDebug () << res.data ();
-    return res == "success";
+    return res == "success" ;
 }
 
 QVariant HttpIoManipulator::doPost(const QString &api, const QVariant &data)

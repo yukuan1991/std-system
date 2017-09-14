@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <memory>
 #include "DetailedInfoTable.h"
+#include <memory>
+#include "IoManipulator.h"
 
 namespace Ui {
 class PwhManagement;
@@ -17,6 +19,8 @@ class PwhManagement : public QWidget
 public:
     explicit PwhManagement(QWidget *parent = 0);
     ~PwhManagement();
+
+    void setIoManipulator (std::shared_ptr<IoManipulator> io) { this->io = io; }
 public:
     void on_button_detail_clicked();
     void on_button_modify_clicked();
@@ -24,8 +28,10 @@ public:
     void on_button_exportDF_clicked();
     void on_button_reportHeader_clicked();
     void initTreeWidget(const QVariant& data);
+    void onTreeWidgetClicked();
 private:
     Ui::PwhManagement *ui;
+    std::shared_ptr<IoManipulator> io;
 };
 
 #endif // PWHMANAGEMENT_H

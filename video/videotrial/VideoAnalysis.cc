@@ -130,7 +130,6 @@ void VideoAnalysis::init_chart()
     effic_chart->setTitle ("增值/非增值");
     op_type_chart->setTitle ("操作类型");
 
-
     for (int i = 0; i < 2; i ++)
     {
         auto slice = new QPieSlice;
@@ -337,7 +336,6 @@ void VideoAnalysis::modify_invalid ()
     }
 }
 
-
 void VideoAnalysis::on_video_player_stepped_into_invalid(qint64, qint64 pos_out)
 {
     ui->video_player->set_position(pos_out);
@@ -394,14 +392,10 @@ void VideoAnalysis::on_button_setting_rows_clicked()
     }
 }
 
-
-
-
 void VideoAnalysis::on_paste()
 {
     ui->form->on_paste ();
 }
-
 
 void VideoAnalysis::set_task_count ()
 {
@@ -416,7 +410,6 @@ void VideoAnalysis::set_task_count ()
     if (dlg.exec () == QDialog::Accepted)
     {
         auto row = dlg.intValue ();
-//        ui->form->clear ();
         ui->form->set_row (row);
     }
 }
