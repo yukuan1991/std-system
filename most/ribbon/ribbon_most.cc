@@ -17,7 +17,7 @@ ribbon_most::ribbon_most(QWidget *parent)
         edit[0] = ::move (b);
 
         b.add ("改变作业项数", QPixmap ("png/作业项数.png"), add_row_);
-        b.set_title("行数变更");
+        b.set_title("更改操作");
 
         edit[1] = ::move (b);
 
@@ -38,18 +38,6 @@ ribbon_most::ribbon_most(QWidget *parent)
         add_tab(setting, "设置");
     }
 
-    {
-        std::array<ui_group, 1> help;
-
-        button_cell b;
-        b.add ("帮助", QPixmap ("png/帮助.png"), help_);
-        b.set_title("联系我们");
-
-        help[0] = ::move(b);
-
-        add_tab(help, "帮助");
-    }
-
     connect(this, &ribbon_most::set_enabled, cut_, &ribbon_tool::setEnabled);
     connect(this, &ribbon_most::set_enabled, copy_, &ribbon_tool::setEnabled);
     connect(this, &ribbon_most::set_enabled, paste_, &ribbon_tool::setEnabled);
@@ -58,7 +46,6 @@ ribbon_most::ribbon_most(QWidget *parent)
     connect(this, &ribbon_most::set_enabled, measure_date_, &ribbon_tool::setEnabled);
     connect(this, &ribbon_most::set_enabled, measure_man_, &ribbon_tool::setEnabled);
     connect(this, &ribbon_most::set_enabled, task_man_, &ribbon_tool::setEnabled);
-
 
     connect(cut_, &ribbon_tool::clicked, this, &ribbon_most::cut);
     connect(copy_, &ribbon_tool::clicked, this, &ribbon_most::copy);
@@ -69,6 +56,4 @@ ribbon_most::ribbon_most(QWidget *parent)
     connect(measure_date_, &ribbon_tool::clicked, this, &ribbon_most::measure_date);
     connect(measure_man_, &ribbon_tool::clicked, this, &ribbon_most::measure_man);
     connect(task_man_, &ribbon_tool::clicked, this, &ribbon_most::task_man);
-
-    connect(help_, &ribbon_tool::clicked, this, &ribbon_most::help);
 }

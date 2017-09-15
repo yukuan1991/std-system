@@ -32,7 +32,10 @@ VideoMainTrial::VideoMainTrial(QWidget *parent)
     ui->setupUi(this);
     ui->mdi->setViewMode (QMdiArea::TabbedView);
     init_conn ();
+    mdi_changed(nullptr);
     setStyle (QStyleFactory::create ("fusion"));
+
+    connect(ui->mdi, &QMdiArea::subWindowActivated, this, &VideoMainTrial::mdi_changed);
 }
 
 VideoMainTrial::~VideoMainTrial()
@@ -212,14 +215,11 @@ void VideoMainTrial::init_conn()
     connect (ui->video_ribbon, &VideoTrialRibbon::invalid_timespan, [this] { apply_to_current (&VideoAnalysis::modify_invalid); });
     connect (ui->video_ribbon, &VideoTrialRibbon::paste, [this] { apply_to_current (&VideoAnalysis::on_paste); });
     connect (ui->video_ribbon, &ribbon::file_save, this, &VideoMainTrial::on_save);
-    connect (ui->video_ribbon, &ribbon::file_saveas, this, &VideoMainTrial::on_save_as);
     connect (ui->video_ribbon, &ribbon::file_open, this, &VideoMainTrial::on_open);
-    connect (ui->video_ribbon, &ribbon::file_exit, this, &VideoMainTrial::close);
     connect (ui->video_ribbon, &VideoTrialRibbon::export_data, this, &VideoMainTrial::exportXlsx);
     connect (ui->video_ribbon, &VideoTrialRibbon::measure_date, this, &VideoMainTrial::on_measure_date);
     connect (ui->video_ribbon, &VideoTrialRibbon::measure_man, this, &VideoMainTrial::on_measure_man);
     connect (ui->video_ribbon, &VideoTrialRibbon::task_man, this, &VideoMainTrial::on_task_man);
-//    connect (ui->video_ribbon, &ribbon::change_example_cycle, this, &VideoMainTrial::on_example_cycle);
 }
 
 void VideoMainTrial::change_task_count()

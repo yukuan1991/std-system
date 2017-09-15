@@ -13,6 +13,8 @@ PwhManagementMain::PwhManagementMain(QWidget *parent) :
     ui->mdi->setViewMode(QMdiArea::TabbedView);
 
     initConn();
+    mdi_changed(nullptr);
+
 }
 
 PwhManagementMain::~PwhManagementMain()
@@ -88,12 +90,18 @@ void PwhManagementMain::reportHeader()
 
 void PwhManagementMain::initConn()
 {
+    connect(ui->mdi, &QMdiArea::subWindowActivated, this, &PwhManagementMain::mdi_changed);
     connect(ui->rib, &PwhManagementRibbon::file_new, this, &PwhManagementMain::fileNew);
 //    connect(ui->rib, &PwhManagementRibbon::detailedInfoClicked, this, &PwhManagementMain::detailedInfo);
 //    connect(ui->rib, &PwhManagementRibbon::modifyClicked, this, &PwhManagementMain::modifyClicked);
     connect(ui->rib, &PwhManagementRibbon::addStdDatabaseClicked, this, &PwhManagementMain::addStdDatabase);
     connect(ui->rib, &PwhManagementRibbon::exportPDFClicked, this, &PwhManagementMain::exportPDF);
     connect(ui->rib, &PwhManagementRibbon::reportHeaderClicked, this, &PwhManagementMain::reportHeader);
+}
+
+void PwhManagementMain::mdi_changed(QMdiSubWindow *window)
+{
+    ui->rib->mdi_active(window != nullptr);
 }
 
 not_null<PwhManagement *> PwhManagementMain::createWindow()

@@ -11,6 +11,7 @@ class PwhContrastMain;
 }
 
 class PwhContrast;
+class QMdiSubWindow;
 class PwhContrastMain : public QWidget
 {
     Q_OBJECT
@@ -29,6 +30,7 @@ private:
     void exportPDF();
 private:
     void initConn();
+    void mdi_changed (QMdiSubWindow *window);
 private:
     not_null<PwhContrast*> createWindow();
     PwhContrast* activeWindow();

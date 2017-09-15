@@ -29,12 +29,12 @@ VideoTrialRibbon::VideoTrialRibbon(QWidget *parent)
 
         button_cell b;
         b.add ("导入", QPixmap ("png/导入.png"), import_);
-        b.set_title("第一类");
+        b.set_title("视频源");
 
         edit[0] = ::move (b);
 
         b.add ("无效时间", QPixmap ("png/无效时间.png"), inactive_time_);
-        b.set_title("第二类");
+        b.set_title("视频编辑");
         edit[1] = ::move (b);
         add_tab(edit, "视频");
     }
@@ -65,21 +65,21 @@ VideoTrialRibbon::VideoTrialRibbon(QWidget *parent)
         add_tab(help, "报表");
     }
 
-    connect(this, &VideoTrialRibbon::set_enabled, cut_, &ribbon_tool::setEnabled);
-    connect(this, &VideoTrialRibbon::set_enabled, copy_, &ribbon_tool::setEnabled);
-    connect(this, &VideoTrialRibbon::set_enabled, paste_, &ribbon_tool::setEnabled);
-    connect(this, &VideoTrialRibbon::set_enabled, del_, &ribbon_tool::setEnabled);
+    connect(this, &VideoTrialRibbon::mdi_active, cut_, &ribbon_tool::setEnabled);
+    connect(this, &VideoTrialRibbon::mdi_active, copy_, &ribbon_tool::setEnabled);
+    connect(this, &VideoTrialRibbon::mdi_active, paste_, &ribbon_tool::setEnabled);
+    connect(this, &VideoTrialRibbon::mdi_active, del_, &ribbon_tool::setEnabled);
 
-    connect(this, &VideoTrialRibbon::set_enabled, add_row_, &ribbon_tool::setEnabled);
+    connect(this, &VideoTrialRibbon::mdi_active, add_row_, &ribbon_tool::setEnabled);
 
-    connect(this, &VideoTrialRibbon::set_enabled, import_, &ribbon_tool::setEnabled);
-    connect(this, &VideoTrialRibbon::set_enabled, inactive_time_, &ribbon_tool::setEnabled);
+    connect(this, &VideoTrialRibbon::mdi_active, import_, &ribbon_tool::setEnabled);
+    connect(this, &VideoTrialRibbon::mdi_active, inactive_time_, &ribbon_tool::setEnabled);
 
-    connect(this, &VideoTrialRibbon::set_enabled, measure_date_, &ribbon_tool::setEnabled);
-    connect(this, &VideoTrialRibbon::set_enabled, measure_man_, &ribbon_tool::setEnabled);
-    connect(this, &VideoTrialRibbon::set_enabled, task_man_, &ribbon_tool::setEnabled);
+    connect(this, &VideoTrialRibbon::mdi_active, measure_date_, &ribbon_tool::setEnabled);
+    connect(this, &VideoTrialRibbon::mdi_active, measure_man_, &ribbon_tool::setEnabled);
+    connect(this, &VideoTrialRibbon::mdi_active, task_man_, &ribbon_tool::setEnabled);
 
-    connect(this, &VideoTrialRibbon::set_enabled, export_, &ribbon_tool::setEnabled);
+    connect(this, &VideoTrialRibbon::mdi_active, export_, &ribbon_tool::setEnabled);
 
     connect(cut_, &ribbon_tool::clicked, this, &VideoTrialRibbon::cut);
     connect(copy_, &ribbon_tool::clicked, this, &VideoTrialRibbon::copy);

@@ -16,6 +16,7 @@ PwhContrastMain::PwhContrastMain(QWidget *parent) :
     ui->mdi->setViewMode(QMdiArea::TabbedView);
 
     initConn();
+    mdi_changed(nullptr);
 }
 
 PwhContrastMain::~PwhContrastMain()
@@ -78,6 +79,7 @@ void PwhContrastMain::exportPDF()
 
 void PwhContrastMain::initConn()
 {
+    connect(ui->mdi, &QMdiArea::subWindowActivated, this, &PwhContrastMain::mdi_changed);
     connect(ui->rib, &ribbon::file_new, this, &PwhContrastMain::fileNew);
 
     connect(ui->rib, &PwhContrastRibbon::importAnalysisFile, this, &PwhContrastMain::load);
@@ -85,6 +87,11 @@ void PwhContrastMain::initConn()
 //    connect(ui->rib, &PwhContrastRibbon::downChart, this, &PwhContrastMain::downChart);
     connect(ui->rib, &PwhContrastRibbon::exportPDF, this, &PwhContrastMain::exportPDF);
 
+}
+
+void PwhContrastMain::mdi_changed(QMdiSubWindow *window)
+{
+    ui->rib->mdi_active(window != nullptr);
 }
 
 not_null<PwhContrast *> PwhContrastMain::createWindow()

@@ -29,4 +29,7 @@ void PwhContrastRibbon::init()
 //    connect(up_chart_, &ribbon_tool::clicked, this, &PwhContrastRibbon::upChart);
 //    connect(down_chart_, &ribbon_tool::clicked, this, &PwhContrastRibbon::downChart);
     connect(export_pdf_, &ribbon_tool::clicked, this, &PwhContrastRibbon::exportPDF);
+
+    connect(this, &PwhContrastRibbon::mdi_active, import_file_, &ribbon_tool::setEnabled);
+    connect(this, &PwhContrastRibbon::mdi_active, export_pdf_, &ribbon_tool::setEnabled);
 }

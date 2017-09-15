@@ -30,12 +30,12 @@ video_ribbon::video_ribbon(QWidget * parent)
 
         button_cell b;
         b.add ("导入", QPixmap ("png/导入.png"), import_);
-        b.set_title("第一类");
+        b.set_title("视频源");
 
         edit[0] = ::move (b);
 
         b.add ("无效时间", QPixmap ("png/无效时间.png"), inactive_time_);
-        b.set_title("第二类");
+        b.set_title("视频编辑");
         edit[1] = ::move (b);
         add_tab(edit, "视频");
     }

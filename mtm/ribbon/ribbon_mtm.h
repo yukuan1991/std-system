@@ -11,7 +11,6 @@ signals:
     void paste();
     void del();
     void add_row();
-    void help();
     void measure_date();
     void measure_man();
     void task_man();
@@ -20,7 +19,6 @@ public:
 private:
     ribbon_tool *cut_, *copy_, *paste_, *del_;
     ribbon_tool *add_row_;
-    ribbon_tool *help_;
     ribbon_tool *measure_date_, *measure_man_, *task_man_;
 };
 

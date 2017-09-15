@@ -10,7 +10,7 @@ class PwhManagementMain;
 }
 
 class PwhManagement;
-
+class QMdiSubWindow;
 class PwhManagementMain : public QWidget
 {
     Q_OBJECT
@@ -30,6 +30,7 @@ private:
     void reportHeader();
 private:
     void initConn();
+    void mdi_changed (QMdiSubWindow *window);
 private:
     not_null<PwhManagement*> createWindow();
     PwhManagement* activeWindow();

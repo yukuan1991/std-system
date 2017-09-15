@@ -41,8 +41,6 @@ void most_main::init_conn()
     connect (ui->widget_ribbon, &ribbon::file_new, this, &most_main::file_new);
     connect (ui->widget_ribbon, &ribbon::file_open, this, &most_main::file_open);
     connect (ui->widget_ribbon, &ribbon::file_save, this, &most_main::file_save);
-    connect (ui->widget_ribbon, &ribbon::file_saveas, this, &most_main::file_save_as);
-    connect (ui->widget_ribbon, &ribbon::file_exit, this, &most_main::close);
 
     connect(ui->widget_ribbon, &ribbon_most::copy, this, &most_main::copy);
     connect(ui->widget_ribbon, &ribbon_most::cut, this, &most_main::cut);
@@ -52,8 +50,6 @@ void most_main::init_conn()
     connect(ui->widget_ribbon, &ribbon_most::measure_date, this, &most_main::on_measure_date);
     connect(ui->widget_ribbon, &ribbon_most::measure_man, this, &most_main::on_measure_man);
     connect(ui->widget_ribbon, &ribbon_most::task_man, this, &most_main::on_task_man);
-
-    connect(ui->widget_ribbon, &ribbon_most::help, this, &most_main::help_advice);
 
     connect(ui->mdi, &QMdiArea::subWindowActivated, this, &most_main::set_button_enabled);
 

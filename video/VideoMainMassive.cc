@@ -256,9 +256,7 @@ void VideoMainMassive::init_conn()
     connect (ui->video_rib, &video_ribbon::paste, [this] { apply_to_current (&video_analysis::on_paste); });
 
     connect (ui->video_rib, &ribbon::file_save, this, &VideoMainMassive::on_save);
-    connect (ui->video_rib, &ribbon::file_saveas, this, &VideoMainMassive::on_save_as);
     connect (ui->video_rib, &ribbon::file_open, this, &VideoMainMassive::on_open);
-    connect (ui->video_rib, &ribbon::file_exit, this, &VideoMainMassive::close);
 
     connect (ui->video_rib, &video_ribbon::export_data, this, &VideoMainMassive::export_xlsx);
     connect (ui->video_rib, &video_ribbon::measure_date, this, &VideoMainMassive::on_measure_date);
