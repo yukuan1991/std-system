@@ -53,6 +53,9 @@
       <attribute name="verticalHeaderMinimumSectionSize">
        <number>20</number>
       </attribute>
+      <attribute name="verticalHeaderStretchLastSection">
+       <bool>true</bool>
+      </attribute>
      </widget>
      <widget class="table_view" name="table_data">
       <property name="selectionMode">

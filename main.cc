@@ -67,8 +67,8 @@ int main (int argc, char * argv[])
     QApplication app (argc, argv);
 
     set_style ();
-    auto io = std::make_shared<HttpIoManipulator> ("172.16.2.173", 8080);
-    io->setVideoIp ("172.16.2.173");
+    auto io = std::make_shared<HttpIoManipulator> ("127.0.0.1", 8080);
+    io->setVideoIp ("127.0.0.1");
     io->setVideoPort (8080);
 
     while (1)

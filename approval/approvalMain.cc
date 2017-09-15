@@ -194,10 +194,34 @@ void approvalMain::showEvent(QShowEvent *event)
 
 void approvalMain::onClickRefuseButton()
 {
-    qDebug() << "refuse";
+    auto items = ui->treeWidget->selectedItems ();
+    if (items.empty ())
+    {
+        return;
+    }
+
+    ui->treeWidget->selectedItems ();
+    auto row = ui->treeWidget->selectionModel ()->selectedIndexes ()[0].row ();
+
+    QVariantMap map;
+    map ["index"] = row;
+    map ["accept"] = true;
+    io->doPost ("do-approv", map);
+    ui->treeWidget->setTreeData (io->pullData ("approv"));
 }
 
 void approvalMain::onClickAgreeButton()
 {
-    qDebug() << "agree";
+    auto items = ui->treeWidget->selectedItems ();
+    if (items.empty ())
+    {
+        return;
+    }
+    ui->treeWidget->selectedItems ();
+    auto row = ui->treeWidget->selectionModel ()->selectedIndexes ()[0].row ();
+    QVariantMap map;
+    map ["index"] = row;
+    map ["accept"] = true;
+    io->doPost ("do-approv", map);
+    ui->treeWidget->setTreeData (io->pullData ("approv"));
 }
