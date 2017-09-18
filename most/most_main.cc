@@ -141,18 +141,11 @@ void most_main::file_save()
         return;
     }
 
-//    const auto saveDetail = dlg.dump ().toMap ();
-//    const auto path = saveDetail["path"].toStringList ();
-//    const auto name = saveDetail["name"].toString ();
-
-//    QByteArray arr (w->dump ().dump (4).data ());
-//    const auto variantData = QJsonDocument::fromJson (arr).toVariant ();
-
-//    io->addNode (path, name, "product", "most", variantData);
-
     const auto saveDetail = dlg.dump ().toMap ();
     const auto path = saveDetail["path"].toStringList ();
     const auto name = saveDetail["name"].toString ();
+
+    ui->mdi->activeSubWindow()->setWindowTitle(name);
 
     QByteArray arr (w->dump ().dump (4).data ());
     const auto variantData = QJsonDocument::fromJson (arr).toVariant ();

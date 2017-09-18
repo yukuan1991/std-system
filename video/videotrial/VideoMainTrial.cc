@@ -400,6 +400,8 @@ void VideoMainTrial::on_save()
     const auto path = saveDetail["path"].toStringList ();
     const auto name = saveDetail["name"].toString ();
 
+    ui->mdi->activeSubWindow()->setWindowTitle(name);
+
     const auto variantData = w->dump ();
 
     QVariantList list;

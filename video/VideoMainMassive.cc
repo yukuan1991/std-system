@@ -444,6 +444,8 @@ void VideoMainMassive::on_save()
     const auto path = saveDetail["path"].toStringList ();
     const auto name = saveDetail["name"].toString ();
 
+    ui->mdi->activeSubWindow()->setWindowTitle(name);
+
     QByteArray arr (w->dump ().dump (4).data ());
     const auto variantData = QJsonDocument::fromJson (arr).toVariant ();
 

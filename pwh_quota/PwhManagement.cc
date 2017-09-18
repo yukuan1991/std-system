@@ -21,6 +21,7 @@ PwhManagement::PwhManagement(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    setWindowTitle("未命名");
     QVariantList list;
     list << "名称" << "类型";
     ui->treeWidget->setTreeHeader (list);
@@ -159,6 +160,8 @@ void PwhManagement::onTreeWidgetClicked()
         return;
     }
     const auto item = items.at(0);
+    const auto title = item->text(0);
+    setWindowTitle(title);
     const auto type = item->text(1);
 
     QVariantList fileList;

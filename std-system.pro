@@ -109,7 +109,8 @@ DISTFILES += \
     most/most.data \
     database/test.json \
     approval/test.json \
-    approval/2.vaf
+    approval/2.vaf \
+    mtm/mtm.data
 
 FORMS += \
     StdMain.ui \

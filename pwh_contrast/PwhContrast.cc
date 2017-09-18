@@ -39,6 +39,7 @@ PwhContrast::PwhContrast(QWidget *parent) :
     ui->setupUi(this);
     setup_more_ui();
 
+    setWindowTitle("产品工时对比");
     QVariantList list;
     list << "名称" << "类型";
     ui->tree_product->setTreeHeader (list);
