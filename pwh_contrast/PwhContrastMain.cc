@@ -13,10 +13,11 @@ PwhContrastMain::PwhContrastMain(QWidget *parent) :
     ui(new Ui::PwhContrastMain)
 {
     ui->setupUi(this);
-    ui->mdi->setViewMode(QMdiArea::TabbedView);
+
+//    QVariant data = io->pullData("product");
+//    ui->contrastWidget->initTreeData(data);
 
     initConn();
-    mdi_changed(nullptr);
 }
 
 PwhContrastMain::~PwhContrastMain()
@@ -24,96 +25,35 @@ PwhContrastMain::~PwhContrastMain()
     delete ui;
 }
 
-void PwhContrastMain::fileNew()
-{
-    auto w = createWindow();
-    if (io != null)
-    {
-        auto var = io->pullData ("product");
-        w->initTreeData (var);
-    }
-}
-
 void PwhContrastMain::load()
 {
-    qDebug() << "addchart";
-    auto w = activeWindow();
-    if(w == nullptr)
-    {
-        return;
-    }
-    w->load();
+    ui->contrastWidget->load();
 }
 
-//void PwhContrastMain::upChart()
-//{
-//    qDebug() << "upchart";
-//    auto w = activeWindow();
-//    if(w == nullptr)
-//    {
-//        return;
-//    }
-//    w->upChart();
-//}
-
-//void PwhContrastMain::downChart()
-//{
-//    qDebug() << "downchart";
-//    auto w = activeWindow();
-//    if(w == nullptr)
-//    {
-//        return;
-//    }
-//    w->downChart();
-//}
 
 void PwhContrastMain::exportPDF()
 {
-    auto w = activeWindow();
-    if(w == nullptr)
-    {
-        return;
-    }
-    w->exportPDF();
+//    auto w = activeWindow();
+//    if(w == nullptr)
+//    {
+//        return;
+//    }
+//    w->exportPDF();
 }
 
 void PwhContrastMain::initConn()
 {
-    connect(ui->mdi, &QMdiArea::subWindowActivated, this, &PwhContrastMain::mdi_changed);
-    connect(ui->rib, &ribbon::file_new, this, &PwhContrastMain::fileNew);
-
-    connect(ui->rib, &PwhContrastRibbon::importAnalysisFile, this, &PwhContrastMain::load);
-//    connect(ui->rib, &PwhContrastRibbon::upChart, this, &PwhContrastMain::upChart);
-//    connect(ui->rib, &PwhContrastRibbon::downChart, this, &PwhContrastMain::downChart);
-    connect(ui->rib, &PwhContrastRibbon::exportPDF, this, &PwhContrastMain::exportPDF);
-
+    connect(ui->buttonImport, &QPushButton::clicked, this, &PwhContrastMain::load);
+    connect(this, &PwhContrastMain::setIo, this, &PwhContrastMain::initTreeDir);
+    //    connect(ui->rib, &PwhContrastRibbon::exportPDF, this, &PwhContrastMain::exportPDF);
 }
 
-void PwhContrastMain::mdi_changed(QMdiSubWindow *window)
+void PwhContrastMain::initTreeDir()
 {
-    ui->rib->mdi_active(window != nullptr);
-}
-
-not_null<PwhContrast *> PwhContrastMain::createWindow()
-{
-    auto pwh_win = make_unique<PwhContrast> ();
-    pwh_win->setAttribute(Qt::WA_DeleteOnClose);
-    auto w = ui->mdi->addSubWindow (pwh_win.get());
-
-    w->setWindowState(Qt::WindowMaximized);
-    return pwh_win.release();
-}
-
-PwhContrast *PwhContrastMain::activeWindow()
-{
-    if(QMdiSubWindow* active_window = ui->mdi->activeSubWindow())
+    if(io != nullptr)
     {
-        PwhContrast* w = dynamic_cast<PwhContrast*>(active_window->widget());
-        return w;
+        const auto data = io->pullData("product");
+        ui->contrastWidget->initTreeData(data);
     }
-    else
-    {
-        return nullptr;
-    }
-
 }
+
