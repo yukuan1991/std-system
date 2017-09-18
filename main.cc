@@ -61,14 +61,15 @@ void set_style ()
     qApp->setFont (QFont ("宋体", 11));
     qApp->setStyleSheet (QString::fromStdString (qss));
 }
+static const char * ip = "172.16.7.169";
 
 int main (int argc, char * argv[])
 {
     QApplication app (argc, argv);
 
     set_style ();
-    auto io = std::make_shared<HttpIoManipulator> ("172.16.7.169", 8080);
-    io->setVideoIp ("172.16.5.129");
+    auto io = std::make_shared<HttpIoManipulator> (::ip, 8080);
+    io->setVideoIp (::ip);
     io->setVideoPort (8080);
 
     while (1)

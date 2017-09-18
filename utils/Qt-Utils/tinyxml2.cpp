@@ -407,16 +407,19 @@ void XMLUtil::ConvertUTF32ToUTF8( unsigned long input, char* output, int* length
     switch (*length) {
         case 4:
             --output;
-            *output = (char)((input | BYTE_MARK) & BYTE_MASK);
+            *output = static_cast<char> (((input | BYTE_MARK) & BYTE_MASK));
             input >>= 6;
+            [[fallthrough]];
         case 3:
             --output;
-            *output = (char)((input | BYTE_MARK) & BYTE_MASK);
+            *output = static_cast<char> (((input | BYTE_MARK) & BYTE_MASK));
             input >>= 6;
+            [[fallthrough]];
         case 2:
             --output;
             *output = (char)((input | BYTE_MARK) & BYTE_MASK);
             input >>= 6;
+            [[fallthrough]];
         case 1:
             --output;
             *output = (char)(input | FIRST_BYTE_MARK[*length]);

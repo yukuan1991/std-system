@@ -228,7 +228,7 @@ QVariant pts_model::get_std(const QModelIndex &index, int role) const
 
 void pts_model::init_row(unsigned row)
 {
-    assert (row < rowCount ());
+    assert (static_cast<int> (row) < rowCount ());
     auto col = get_header_col (this, "数量*频次");
     if (col > 0)
     {
