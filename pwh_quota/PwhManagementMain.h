@@ -22,8 +22,6 @@ public:
 
     void setIoManipulator (std::shared_ptr<IoManipulator> io) { this->io = io; emit setIo(); }
 private:
-    void fileNew();
-private:
     void detailedInfo();
     void modifyClicked();
     void addStdDatabase();
@@ -32,10 +30,6 @@ private:
 private:
     void initConn();
     void initTreeDir();
-    void mdi_changed (QMdiSubWindow *window);
-private:
-    not_null<PwhManagement*> createWindow();
-    PwhManagement* activeWindow();
 private:
     Ui::PwhManagementMain *ui;
     std::shared_ptr<IoManipulator> io;

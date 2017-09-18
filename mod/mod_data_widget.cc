@@ -430,7 +430,7 @@ bool mod_data_widget::load_left(const json &left) try
 {
     QModelIndex index;
     left_model_->resize(left.size());
-    assert(left.size() == left_model_->rowCount());
+    assert(static_cast<int>(left.size()) == left_model_->rowCount());
 
     for(uint32_t i=0; i<left.size(); ++i)
     {
@@ -478,7 +478,7 @@ bool mod_data_widget::load_right(const json &right) try
 {
     QModelIndex index;
     right_model_->resize(right.size());
-    assert(right.size() == right_model_->rowCount());
+    assert(static_cast<int>(right.size()) == right_model_->rowCount());
 
     for(uint32_t i=0; i<right.size(); ++i)
     {

@@ -19,7 +19,8 @@ HttpIoManipulator::HttpIoManipulator(not_null<const char *> ip, uint16_t port)
 
 void HttpIoManipulator::sendForApproval(const QStringList &path, const QVariant &data)
 {
-
+    Q_UNUSED(path);
+    Q_UNUSED(data);
 }
 
 QVariant HttpIoManipulator::pullData(const QString &data)
