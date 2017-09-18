@@ -13,36 +13,49 @@
   <property name="windowTitle">
    <string>PwhManagementMain</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
-   <property name="spacing">
-    <number>0</number>
-   </property>
-   <property name="leftMargin">
-    <number>0</number>
-   </property>
-   <property name="topMargin">
-    <number>0</number>
-   </property>
-   <property name="rightMargin">
-    <number>0</number>
-   </property>
-   <property name="bottomMargin">
-    <number>0</number>
-   </property>
+  <layout class="QHBoxLayout" name="horizontalLayout">
    <item>
-    <widget class="PwhManagementRibbon" name="rib" native="true"/>
+    <widget class="PwhManagement" name="quotaWidget" native="true"/>
    </item>
    <item>
-    <widget class="QMdiArea" name="mdi"/>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QPushButton" name="buttonAddStdTime">
+       <property name="text">
+        <string>添加到标准工时</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="buttonSettingTitle">
+       <property name="text">
+        <string>表头设置</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="verticalSpacer">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>PwhManagementRibbon</class>
+   <class>PwhManagement</class>
    <extends>QWidget</extends>
-   <header>pwh_quota/ribbon/PwhManagementRibbon.h</header>
+   <header>pwh_quota/PwhManagement.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

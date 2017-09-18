@@ -45,4 +45,7 @@ void PwhManagementRibbon::initConn()
     connect(exportPDF_, &ribbon_tool::clicked, this, &PwhManagementRibbon::exportPDFClicked);
     connect(reportHeader_, &ribbon_tool::clicked, this, &PwhManagementRibbon::reportHeaderClicked);
 
+    connect(this, &PwhManagementRibbon::mdi_active, addStdDatabase_, &ribbon_tool::setEnabled);
+    connect(this, &PwhManagementRibbon::mdi_active, exportPDF_, &ribbon_tool::setEnabled);
+    connect(this, &PwhManagementRibbon::mdi_active, reportHeader_, &ribbon_tool::setEnabled);
 }

@@ -405,7 +405,7 @@ void VideoAnalysis::set_task_count ()
     dlg.setOkButtonText ("确 定");
     dlg.setCancelButtonText ("取 消");
     dlg.setInputMode (QInputDialog::IntInput);
-    dlg.setIntRange (0, video_form_model::max_rows);
+    dlg.setIntRange (1, video_form_model::max_rows);
 
     if (dlg.exec () == QDialog::Accepted)
     {

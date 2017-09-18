@@ -40,8 +40,6 @@ void mod_main::init_conn()
     connect (ui->widget_ribbon, &ribbon::file_new, this, &mod_main::file_new);
     connect (ui->widget_ribbon, &ribbon::file_open, this, &mod_main::file_open);
     connect (ui->widget_ribbon, &ribbon::file_save, this, &mod_main::file_save);
-    connect (ui->widget_ribbon, &ribbon::file_saveas, this, &mod_main::file_save_as);
-    connect (ui->widget_ribbon, &ribbon::file_exit, this, &mod_main::close);
 
     connect(ui->widget_ribbon, &ribbon_mod::copy, this, &mod_main::copy);
     connect(ui->widget_ribbon, &ribbon_mod::cut, this, &mod_main::cut);
@@ -51,8 +49,6 @@ void mod_main::init_conn()
     connect(ui->widget_ribbon, &ribbon_mod::measure_date, this, &mod_main::on_measure_date);
     connect(ui->widget_ribbon, &ribbon_mod::measure_man, this, &mod_main::on_measure_man);
     connect(ui->widget_ribbon, &ribbon_mod::task_man, this, &mod_main::on_task_man);
-
-    connect(ui->widget_ribbon, &ribbon_mod::help, this, &mod_main::help_advice);
 
     connect(ui->mdi, &QMdiArea::subWindowActivated, this, &mod_main::set_button_enabled);
 }
@@ -119,6 +115,8 @@ void mod_main::file_save()
     const auto saveDetail = dlg.dump ().toMap ();
     const auto path = saveDetail["path"].toStringList ();
     const auto name = saveDetail["name"].toString ();
+
+    ui->mdi->activeSubWindow()->setWindowTitle(name);
 
     QByteArray arr (w->dump ().dump (4).data ());
     const auto variantData = QJsonDocument::fromJson (arr).toVariant ();

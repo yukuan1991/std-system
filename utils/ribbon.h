@@ -25,8 +25,6 @@ signals:
     void file_new ();
     void file_open ();
     void file_save ();
-    void file_saveas ();
-    void file_exit ();
 
     void set_enabled(bool);
     void mdi_active (bool);

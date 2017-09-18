@@ -114,7 +114,7 @@ void table_view::on_copy_del(int flag)
             if (flag & OPERATION_DEL)
             {
                 qDebug() << "del";
-                model->setData (index, QString {}, paste_role);
+                model->setData (index, QString {});
             }
         }
         if (i != max_row)
@@ -123,7 +123,6 @@ void table_view::on_copy_del(int flag)
         }
     }
     board->setText (clip_data);
-    qDebug() << clip_data;
 }
 
 void table_view::on_paste()
@@ -178,8 +177,7 @@ void table_view::on_paste()
 
             auto index = model->index (current_row, current_col);
             qDebug() << data[i][j].data();
-//            model->setData (index, data[i][j].data (), Qt::UserRole + 100);
-            model->setData (index, data[i][j].data (), paste_role);
+            model->setData (index, data[i][j].data ());
         }
     }
 }

@@ -11,27 +11,23 @@ class PwhContrastMain;
 }
 
 class PwhContrast;
+class QMdiSubWindow;
 class PwhContrastMain : public QWidget
 {
     Q_OBJECT
+signals:
+    void setIo();
 public:
     explicit PwhContrastMain(QWidget *parent = 0);
     ~PwhContrastMain();
 
-    void setIoManipulator (std::shared_ptr<IoManipulator> io) { this->io = io; }
-
-private:
-    void fileNew();
+    void setIoManipulator (std::shared_ptr<IoManipulator> io) { this->io = io;  emit setIo(); }
 private:
     void load();
-    void upChart();
-    void downChart();
     void exportPDF();
 private:
     void initConn();
-private:
-    not_null<PwhContrast*> createWindow();
-    PwhContrast* activeWindow();
+    void initTreeDir();
 private:
     Ui::PwhContrastMain *ui;
     std::shared_ptr<IoManipulator> io;

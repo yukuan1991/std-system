@@ -48,8 +48,6 @@ void mtm_main::init_conn()
     connect (ui->widget_ribbon, &ribbon::file_new, this, &mtm_main::file_new);
     connect (ui->widget_ribbon, &ribbon::file_open, this, &mtm_main::file_open);
     connect (ui->widget_ribbon, &ribbon::file_save, this, &mtm_main::file_save);
-    connect (ui->widget_ribbon, &ribbon::file_saveas, this, &mtm_main::file_save_as);
-    connect (ui->widget_ribbon, &ribbon::file_exit, this, &mtm_main::close);
 
     connect(ui->widget_ribbon, &ribbon_mtm::copy, this, &mtm_main::copy);
     connect(ui->widget_ribbon, &ribbon_mtm::cut, this, &mtm_main::cut);
@@ -59,8 +57,6 @@ void mtm_main::init_conn()
     connect(ui->widget_ribbon, &ribbon_mtm::measure_date, this, &mtm_main::on_measure_date);
     connect(ui->widget_ribbon, &ribbon_mtm::measure_man, this, &mtm_main::on_measure_man);
     connect(ui->widget_ribbon, &ribbon_mtm::task_man, this, &mtm_main::on_task_man);
-
-    connect(ui->widget_ribbon, &ribbon_mtm::help, this, &mtm_main::help_advice);
 
     connect(ui->mdi, &QMdiArea::subWindowActivated, this, &mtm_main::set_button_enabled);
 
@@ -155,6 +151,8 @@ void mtm_main::file_save()
     const auto saveDetail = dlg.dump ().toMap ();
     const auto path = saveDetail["path"].toStringList ();
     const auto name = saveDetail["name"].toString ();
+
+    ui->mdi->activeSubWindow()->setWindowTitle(name);
 
     QByteArray arr (w->dump ().dump (4).data ());
     const auto variantData = QJsonDocument::fromJson (arr).toVariant ();

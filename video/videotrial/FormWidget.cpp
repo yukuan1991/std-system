@@ -134,7 +134,6 @@ QVariant FormWidget::taskData()
     }
 
     return taskList;
-
 }
 
 QVariant FormWidget::observationTime()

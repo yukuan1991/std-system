@@ -16,7 +16,7 @@ Rectangle
         {
             id: header
             headerHeight: 30
-            color: "lightgray"
+            color: "red"
         }
         LoginPanel
         {
