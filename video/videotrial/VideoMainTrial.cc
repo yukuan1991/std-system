@@ -213,7 +213,12 @@ void VideoMainTrial::init_conn()
     connect (ui->video_ribbon, &VideoTrialRibbon::import_data, this, &VideoMainTrial::video_import);
     connect (ui->video_ribbon, &VideoTrialRibbon::change_task_count, [this] { apply_to_current (&VideoAnalysis::set_task_count); });
     connect (ui->video_ribbon, &VideoTrialRibbon::invalid_timespan, [this] { apply_to_current (&VideoAnalysis::modify_invalid); });
+
+    connect (ui->video_ribbon, &VideoTrialRibbon::copy, [this] { apply_to_current(&VideoAnalysis::on_copy);});
+    connect (ui->video_ribbon, &VideoTrialRibbon::cut, [this] { apply_to_current(&VideoAnalysis::on_cut);});
     connect (ui->video_ribbon, &VideoTrialRibbon::paste, [this] { apply_to_current (&VideoAnalysis::on_paste); });
+    connect (ui->video_ribbon, &VideoTrialRibbon::del, [this] { apply_to_current(&VideoAnalysis::on_del);});
+
     connect (ui->video_ribbon, &ribbon::file_save, this, &VideoMainTrial::on_save);
     connect (ui->video_ribbon, &ribbon::file_open, this, &VideoMainTrial::on_open);
     connect (ui->video_ribbon, &VideoTrialRibbon::export_data, this, &VideoMainTrial::exportXlsx);

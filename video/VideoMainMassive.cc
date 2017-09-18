@@ -253,7 +253,11 @@ void VideoMainMassive::init_conn()
     connect (ui->video_rib, &video_ribbon::import_data, this, &VideoMainMassive::video_import);
     connect (ui->video_rib, &video_ribbon::change_task_count, [this] { apply_to_current (&video_analysis::set_task_count); });
     connect (ui->video_rib, &video_ribbon::invalid_timespan, [this] { apply_to_current (&video_analysis::modify_invalid); });
+
+    connect (ui->video_rib, &video_ribbon::copy, [this] { apply_to_current(&video_analysis::on_copy);});
+    connect (ui->video_rib, &video_ribbon::cut, [this] { apply_to_current(&video_analysis::on_cut); });
     connect (ui->video_rib, &video_ribbon::paste, [this] { apply_to_current (&video_analysis::on_paste); });
+    connect (ui->video_rib, &video_ribbon::del, [this] { apply_to_current(&video_analysis::on_del);});
 
     connect (ui->video_rib, &ribbon::file_save, this, &VideoMainMassive::on_save);
     connect (ui->video_rib, &ribbon::file_open, this, &VideoMainMassive::on_open);
