@@ -16,7 +16,7 @@ most_widget::most_widget(QWidget *parent) :
     ui->setupUi(this);
     init();
     //std::tie (kv_tmu_, most_data_) = read_tmu_data ();
-    std::tie (kv_tmu_, std::ignore, std::ignore, std::ignore) = read_tmu_data();
+    std::tie (kv_tmu_, most_data_, std::ignore, std::ignore) = read_tmu_data();
 }
 
 most_widget::~most_widget()

@@ -36,8 +36,6 @@ most_main::~most_main()
 
 void most_main::init_conn()
 {
-//    connect(ui->widget_ribbon, &ribbon_most::file_menu_triggered,
-//            [this] (const QString & s) { file_operations(s); });
     connect (ui->widget_ribbon, &ribbon::file_new, this, &most_main::file_new);
     connect (ui->widget_ribbon, &ribbon::file_open, this, &most_main::file_open);
     connect (ui->widget_ribbon, &ribbon::file_save, this, &most_main::file_save);
@@ -56,7 +54,6 @@ void most_main::init_conn()
     connect(ui->widget_ribbon, &ribbon_most::help, this, &most_main::help_advice);
 
     connect(ui->mdi, &QMdiArea::subWindowActivated, this, &most_main::set_button_enabled);
-
 }
 
 void most_main::set_button_enabled()
