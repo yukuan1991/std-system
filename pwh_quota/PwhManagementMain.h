@@ -14,12 +14,13 @@ class QMdiSubWindow;
 class PwhManagementMain : public QWidget
 {
     Q_OBJECT
-
+signals:
+    setIo();
 public:
     explicit PwhManagementMain(QWidget *parent = 0);
     ~PwhManagementMain();
 
-    void setIoManipulator (std::shared_ptr<IoManipulator> io) { this->io = io; }
+    void setIoManipulator (std::shared_ptr<IoManipulator> io) { this->io = io; emit setIo(); }
 private:
     void fileNew();
 private:
@@ -30,6 +31,7 @@ private:
     void reportHeader();
 private:
     void initConn();
+    void initTreeDir();
     void mdi_changed (QMdiSubWindow *window);
 private:
     not_null<PwhManagement*> createWindow();
