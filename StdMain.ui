@@ -30,7 +30,7 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="QTabWidget" name="tabWidget">
+    <widget class="MainTabWidget" name="tabWidget">
      <property name="tabPosition">
       <enum>QTabWidget::West</enum>
      </property>
@@ -150,6 +150,12 @@
    <class>PwhManagementMain</class>
    <extends>QWidget</extends>
    <header>pwh_quota/PwhManagementMain.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>MainTabWidget</class>
+   <extends>QTabWidget</extends>
+   <header>StdMain.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

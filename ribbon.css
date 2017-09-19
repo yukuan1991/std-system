@@ -139,3 +139,33 @@ ribbon_edit {
 video_main{
 background: #D7D7D7;
 }
+
+/*对StdMain主界面的TabBar的样式设置*/
+MainTabBar::tab{
+    min-width:30px;
+    max-width:30px;
+}
+
+MainTabBar::tab {
+    background: #D7D7D7;
+}
+
+MainTabBar::tab:selected, MainTabBar::tab:hover {
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+}
+MainTabBar::tab-bar {
+    border: 1px solid #BAC9DB;
+}
+
+MainTabBar::tab:selected{
+    border: 1px solid #BAC9DB;
+    background: white;
+    border-bottom-color: white;
+}
+
+MainTabBar::tab:hover:!selected{
+    border: 1px solid #ECECEC;
+}
+
+

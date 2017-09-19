@@ -61,7 +61,7 @@ void set_style ()
     qApp->setFont (QFont ("宋体", 11));
     qApp->setStyleSheet (QString::fromStdString (qss));
 }
-static const char * ip = "172.16.7.169";
+static const char * ip = "172.16.3.193";
 
 int main (int argc, char * argv[])
 {
